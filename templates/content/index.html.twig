@@ -1,0 +1,139 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Titre de la page</div></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-header">
+                    Utilisateurs inscrits
+                </div>
+                <div class="table-responsive">
+                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Nom</th>
+                                <th class="text-center">Ville</th>
+                                <th class="text-center">État</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center text-muted">1</td>
+                                <td>
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left">
+                                                    <img width="40" class="rounded-circle" src="{{ asset("img/avatars/default.jpg") }}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left flex2">
+                                                <div class="widget-heading">Corentin KREICHER</div>
+                                                <div class="widget-subheading opacity-7">Chef de projet</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">Clémery</td>
+                                <td class="text-center">
+                                    <div class="badge badge-success">Actif</div>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-primary btn-sm">Détails</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center text-muted">2</td>
+                                <td>
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left">
+                                                    <img width="40" class="rounded-circle" src="{{ asset("img/avatars/default.jpg") }}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left flex2">
+                                                <div class="widget-heading">Morgane DIDELOT</div>
+                                                <div class="widget-subheading opacity-7">Développeuse</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">Nancy</td>
+                                <td class="text-center">
+                                    <div class="badge badge-success">Active</div>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-primary btn-sm">Détails</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center text-muted">2</td>
+                                <td>
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left">
+                                                    <img width="40" class="rounded-circle" src="{{ asset("img/avatars/default.jpg") }}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left flex2">
+                                                <div class="widget-heading">Axel SCHLOSSER</div>
+                                                <div class="widget-subheading opacity-7">Développeur</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">Nancy</td>
+                                <td class="text-center">
+                                    <div class="badge badge-success">Actif</div>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-primary btn-sm">Détails</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center text-muted">2</td>
+                                <td>
+                                    <div class="widget-content p-0">
+                                        <div class="widget-content-wrapper">
+                                            <div class="widget-content-left mr-3">
+                                                <div class="widget-content-left">
+                                                    <img width="40" class="rounded-circle" src="{{ asset("img/avatars/default.jpg") }}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left flex2">
+                                                <div class="widget-heading">John DOE</div>
+                                                <div class="widget-subheading opacity-7">Agent</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">Paris</td>
+                                <td class="text-center">
+                                    <div class="badge badge-danger">Inactif</div>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-primary btn-sm">Détails</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
