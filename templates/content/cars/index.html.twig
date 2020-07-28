@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des véhicules{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Liste des véhicules</div></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-header">
+                    Utilisateurs inscrits
+                </div>
+                <div class="table-responsive">
+                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Nom</th>
+                                <th class="text-center">Modèle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center text-muted">1</td>
+                                <td>Peugeot</td>
+                                <td class="text-center">207</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
