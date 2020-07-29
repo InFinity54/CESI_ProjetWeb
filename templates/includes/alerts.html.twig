@@ -1,0 +1,17 @@
+<script>
+    toastr.options.escapeHtml = false;
+    toastr.options.preventDuplicates = true;
+    toastr.options.progressBar = true;
+    {% for message in app.flashes('success') %}
+    toastr.success("{{ message }}");
+    {% endfor %}
+    {% for message in app.flashes('danger') %}
+    toastr.error("{{ message }}");
+    {% endfor %}
+    {% for message in app.flashes('warning') %}
+    toastr.warning("{{ message }}");
+    {% endfor %}
+    {% for message in app.flashes('info') %}
+    toastr.info("{{ message }}");
+    {% endfor %}
+</script>

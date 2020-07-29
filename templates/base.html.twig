@@ -34,6 +34,8 @@
         </div>
 
         <script type="text/javascript" src="{{ asset("js/architectui.js") }}"></script>
+        <script src="{{ asset("vendors/js/toastr.min.js") }}"></script>
+        {% include "includes/alerts.html.twig" %}
         {% block js %}{% endblock %}
     </body>
 </html>
