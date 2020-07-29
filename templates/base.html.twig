@@ -10,6 +10,7 @@
         <meta name="description" content="This is an example dashboard created using build-in elements and components." />
         <meta name="msapplication-tap-highlight" content="no" />
         <link rel="stylesheet" type="text/css" href="{{ asset("css/architectui.css") }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset("css/custom.css") }}" />
         {% block css %}{% endblock %}
     </head>
     <body>
@@ -33,6 +34,7 @@
             </div>
         </div>
 
+        <script src="{{ asset("vendors/js/jquery.min.js") }}"></script>
         <script type="text/javascript" src="{{ asset("js/architectui.js") }}"></script>
         <script src="{{ asset("vendors/js/toastr.min.js") }}"></script>
         {% include "includes/alerts.html.twig" %}
