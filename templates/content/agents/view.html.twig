@@ -1,0 +1,64 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Agents > Détail d'un agent{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    Détail d'un agent
+                    <div class="page-title-subheading">
+                        DOE John
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Photo
+                </div>
+                <div class="card-body">
+                    <img src="{{ asset('img/avatars/default.jpg') }}" alt="" width="100%" height="auto" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-9">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Informations
+                </div>
+                <div class="card-body">
+                    <h6 class="font-weight-bold">DOE John</h6>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 mb-0">
+                            <p>
+                                Numéro de téléphone fixe : +33 6 12 34 56 89
+                                <br />
+                                Numéro de téléphone portable : +33 6 12 34 56 89
+                                <br />
+                                Numéro de fax : +33 6 12 34 56 89
+                            </p>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <p>
+                                Adresse e-mail : john@doe.com
+                                <br />
+                                Identifiant de connexion : jdoe
+                                <br />
+                                <span class="badge badge-danger">Désactivé</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
