@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des agences{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Liste des agences</div></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-header">
+                    Utilisateurs inscrits
+                </div>
+                <div class="table-responsive">
+                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Photo d’illustration</th>
+                                <th class="text-center">Nom</th>
+                                <th class="text-center">Adresse</th>
+                                <th class="text-center">Téléphone</th>
+                                <th class="text-center">Fax</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center"><img src="../public/img/agences/exemple.jpg"></td>
+                                <td class="text-center">Nancy</td>
+                                <td class="text-center">45 avenue des Caraïbes 54000 Nancy</td>
+                                <td class="text-center">03.43.25.51.63</td>
+                                <td class="text-center">03.43.25.51.62</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"><img src="../public/img/agences/exemple.jpg"></td>
+                                <td class="text-center">Metz</td>
+                                <td class="text-center">33 rue des champs 57000 Metz</td>
+                                <td class="text-center">03.58.69.54.87</td>
+                                <td class="text-center">03.58.69.54.86</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
