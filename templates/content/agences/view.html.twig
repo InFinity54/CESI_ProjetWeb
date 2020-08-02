@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Agences > Détail du véhicule immatriculé FS-483-AH{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    Détail d'une agence
+                    <div class="page-title-subheading">
+                        Nancy
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Photo
+                </div>
+                <div class="card-body">
+                    <img src="{{ asset('img/agences/exemple.jpg') }}" alt="" width="100%" height="auto" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-9">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Informations
+                </div>
+                <div class="card-body">
+                    <h6 class="font-weight-bold">Nancy</h6>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 mb-0">
+                            <p>
+                                45 avenue des Caraïbes
+                                <br />
+                                54000 Nancy
+                            </p>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <p>
+                                Numéro de téléphone : 03.43.25.51.63
+                                <br />
+                                Numéro de fax : 03.43.25.51.62
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
