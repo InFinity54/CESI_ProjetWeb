@@ -32,6 +32,19 @@
     <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
+                <li class="app-sidebar__heading">Gestion des agences</li>
+                <li>
+                    <a href="{{ path("agences_list") }}" {% if app.request.pathinfo == path("agences_list") %}class="mm-active"{% endif %}>
+                        <i class="metismenu-icon pe-7s-diamond"></i>
+                        Liste des agences
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path("agences_add") }}" {% if app.request.pathinfo == path("agences_add") %}class="mm-active"{% endif %}>
+                        <i class="metismenu-icon pe-7s-car"></i>
+                        Nouvelle agence
+                    </a>
+                </li>
                 <li class="app-sidebar__heading">Gestion des agents</li>
                 <li>
                     <a href="{{ path("agents_list") }}" {% if app.request.pathinfo == path("agents_list") %}class="mm-active"{% endif %}>
@@ -54,17 +67,10 @@
                         <i class="metismenu-icon fas fa-plus"></i> Nouveau véhicule
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Gestion des agences</li>
+                <li class="app-sidebar__heading">Gestion des statuts</li>
                 <li>
-                    <a href="/agences">
-                        <i class="metismenu-icon pe-7s-diamond"></i>
-                        Liste des agences
-                    </a>
-                </li>
-                <li>
-                    <a href="/agences/add">
-                        <i class="metismenu-icon pe-7s-car"></i>
-                        Nouvelle agence
+                    <a href="{{ path("status") }}" {% if app.request.pathinfo == path("status") %}class="mm-active"{% endif %}>
+                        <i class="metismenu-icon fas fa-car"></i> Liste des statuts
                     </a>
                 </li>
             </ul>

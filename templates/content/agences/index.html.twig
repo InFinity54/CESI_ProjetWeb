@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Liste des agences{% endblock %}
+{% block title %}Agences > Liste des agences{% endblock %}
 
 {% block css %}{% endblock %}
 
@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="main-card mb-3 card">
                 <div class="card-header">
-                    Utilisateurs inscrits
+                    Agences enregistrées
                 </div>
                 <div class="table-responsive">
                     <table class="align-middle mb-0 table table-borderless table-striped table-hover">
@@ -27,22 +27,39 @@
                                 <th class="text-center">Adresse</th>
                                 <th class="text-center">Téléphone</th>
                                 <th class="text-center">Fax</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-center"><img src="../public/img/agences/exemple.jpg"></td>
+                                <td class="text-center"><img width="150" class="rounded-circle" src="{{ asset("img/agences/exemple.jpg") }}" alt="" /></td>
                                 <td class="text-center">Nancy</td>
                                 <td class="text-center">45 avenue des Caraïbes 54000 Nancy</td>
                                 <td class="text-center">03.43.25.51.63</td>
                                 <td class="text-center">03.43.25.51.62</td>
+                                <td class="text-center">
+                                    <a href="{{ path("agences_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de cette agence">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path("agences_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer cette agence">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
-                                <td class="text-center"><img src="../public/img/agences/exemple.jpg"></td>
+                                <td class="text-center"><img width="150" class="rounded-circle" src="{{ asset("img/agences/exemple.jpg") }}" alt="" /></td>
                                 <td class="text-center">Metz</td>
                                 <td class="text-center">33 rue des champs 57000 Metz</td>
                                 <td class="text-center">03.58.69.54.87</td>
                                 <td class="text-center">03.58.69.54.86</td>
+                                <td class="text-center">
+                                    <a href="{{ path("agences_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de cette agence">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path("agences_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer cette agence">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
