@@ -1,0 +1,42 @@
+{% extends "login.html.twig" %}
+
+{% block title %}Mot de passé oublié{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto">
+        <div class="card-header">
+            Oubli de mot de passe
+        </div>
+        <div class="card-body">
+            <form method="post" action="{{ path("password_submit") }}">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>Pour réinitialiser votre mot de passe, saisissez l'adresse e-mail de votre compte. Si elle existe dans notre base de données, vous recevrez un nouveau mot de passe à cette adresse.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="position-relative form-group">
+                            <label for="email" class="">Votre adresse e-mail</label>
+                            <input name="email" id="email" placeholder="mon@email.fr" type="email" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-block">Récupérer mon compte</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center mt-2">
+                        <a href="{{ path("login") }}">Retour à la page de connexion</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

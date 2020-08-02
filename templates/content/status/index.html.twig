@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Satuts > Liste des statuts{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Liste des statuts</div></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card mb-3">
+                <div class="card-header justify-content-between">
+                    Statuts enregistrés
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Statut</th>
+                                    <th class="text-center">Nombre en circulation</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">Disponible</td>
+                                    <td class="text-center">64</td>
+                                    <td class="text-center">
+                                        <a href="{{ path("status_remove") }}" class="btn btn-danger btn-sm rounded-circle" title="Supprimer ce statut">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Prêté</td>
+                                    <td class="text-center">12</td>
+                                    <td class="text-center">
+                                        <a href="{{ path("status_remove") }}" class="btn btn-danger btn-sm rounded-circle" title="Supprimer ce statut">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Loué</td>
+                                    <td class="text-center">46</td>
+                                    <td class="text-center">
+                                        <a href="{{ path("status_remove") }}" class="btn btn-danger btn-sm rounded-circle" title="Supprimer ce statut">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">En démonstration</td>
+                                    <td class="text-center">23</td>
+                                    <td class="text-center">
+                                        <a href="{{ path("status_remove") }}" class="btn btn-danger btn-sm rounded-circle" title="Supprimer ce statut">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

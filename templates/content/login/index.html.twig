@@ -1,0 +1,45 @@
+{% extends "login.html.twig" %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="card mx-auto">
+        <div class="card-header">
+            Connexion
+        </div>
+        <div class="card-body">
+            <form method="post" action="{{ path("login_submit") }}">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="position-relative form-group">
+                            <label for="login" class="">Votre identifiant</label>
+                            <input name="login" id="login" placeholder="Identifiant" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="position-relative form-group">
+                            <label for="password" class="">Votre mot de passe</label>
+                            <input name="password" id="password" placeholder="Mot de passe" type="password" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-block">Me connecter</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center mt-2">
+                        <a href="{{ path("password") }}">Mot de passe oublié ?</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
