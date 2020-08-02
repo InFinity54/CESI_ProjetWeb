@@ -1,0 +1,119 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Véhicules > Liste des véhicules désactivés{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Liste des véhicules désactivés</div></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Filtrer la liste des véhicules
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="position-relative form-group">
+                                    <select type="select" id="marque" name="marque" class="custom-select" required>
+                                        <option value="" hidden>Marque</option>
+                                        <option value="Audi">Audi</option>
+                                        <option value="Ford">Ford</option>
+                                        <option value="Peugeot">Peugeot</option>
+                                        <option value="Renault">Renault</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <div class="position-relative form-group">
+                                    <select type="select" id="agence" name="agence" class="custom-select" required>
+                                        <option value="" hidden>Agence</option>
+                                        <option value="Limoges">Limoges</option>
+                                        <option value="Nancy">Nancy</option>
+                                        <option value="Marseille">Marseille</option>
+                                        <option value="Metz">Metz</option>
+                                        <option value="Paris">Paris</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <div class="position-relative form-group form-inline">
+                                    <label for="puissance">Puissance</label>
+                                    <input type="range" min="90" max="540" value="90" class="form-control-range" id="puissance" name="puissance" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-2">
+                                <div class="position-relative form-group">
+                                    <a href="{{ path("vehicles_list_search") }}" class="btn btn-block btn-primary">Filtrer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Véhicules désactivés
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Immatriculation</th>
+                                    <th class="text-center">Marque</th>
+                                    <th class="text-center">Modèle</th>
+                                    <th class="text-center">Date de fabrication</th>
+                                    <th class="text-center">Hauteur</th>
+                                    <th class="text-center">Largeur</th>
+                                    <th class="text-center">Poids</th>
+                                    <th class="text-center">Puissance</th>
+                                    <th class="text-center">Agence</th>
+                                    <th class="text-center">Statut</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">NM-842-ZP</td>
+                                    <td class="text-center">Renault</td>
+                                    <td class="text-center">Clio</td>
+                                    <td class="text-center">31/01/2013</td>
+                                    <td class="text-center">1,50 m</td>
+                                    <td class="text-center">2,03 m</td>
+                                    <td class="text-center">1,08 tonnes</td>
+                                    <td class="text-center">75 ch</td>
+                                    <td class="text-center">Marseille</td>
+                                    <td class="text-center"><span class="badge badge-dark">Désactivé</span></td>
+                                    <td class="text-center">
+                                        <a href="{{ path("vehicles_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{{ path("vehicles_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ path("vehicles_enable") }}" class="btn btn-success btn-sm rounded-circle" title="Activer ce véhicule">
+                                            <i class="fas fa-check"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

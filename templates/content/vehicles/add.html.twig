@@ -1,0 +1,149 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Véhicules > Ajouter un nouveau véhicule{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Ajout d'un nouveau véhicule</div></div>
+        </div>
+    </div>
+    <form method="post" action="{{ path("vehicles_add_submit") }}">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Informations de base
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="marque" class="">Marque</label>
+                                    <input name="marque" id="marque" placeholder="Marque" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="modele" class="">Modèle</label>
+                                    <input name="modele" id="modele" placeholder="Modèle" type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="immat" class="">Immatriculation</label>
+                                    <input name="immat" id="immat" placeholder="Immatriculation" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="datefabrication" class="">Date de fabrication</label>
+                                    <input name="datefabrication" id="datefabrication" type="date" class="form-control" value="2020-01-01" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                    <label for="agence" class="">Agence gérant le véhicule</label>
+                                    <div class="position-relative form-group">
+                                        <select type="select" id="agence" name="agence" class="custom-select" required>
+                                            <option value="" hidden>Agence</option>
+                                            <option value="Limoges">Limoges</option>
+                                            <option value="Nancy">Nancy</option>
+                                            <option value="Marseille">Marseille</option>
+                                            <option value="Metz">Metz</option>
+                                            <option value="Paris">Paris</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Détails techniques
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="hauteur" class="">Hauteur</label>
+                                    <div class="input-group">
+                                        <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="hauteur" name="hauteur" />
+                                        <div class="input-group-append"><span class="input-group-text">mètre(s)</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="largeur" class="">Largeur</label>
+                                    <div class="input-group">
+                                        <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="largeur" name="largeur" />
+                                        <div class="input-group-append"><span class="input-group-text">mètre(s)</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="poids" class="">Poids</label>
+                                    <div class="input-group">
+                                        <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="poids" name="poids" />
+                                        <div class="input-group-append"><span class="input-group-text">tonne(s)</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="puissance" class="">Puissance</label>
+                                    <div class="input-group">
+                                        <input placeholder="1" type="number" min="1" class="form-control" id="puissance" name="puissance" />
+                                        <div class="input-group-append"><span class="input-group-text">ch</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Finaliser l'ajout
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                    Le nouveau véhicule sera, par défaut, disponible. Il sera possible de modifier son statut après l'ajout.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                     <button type="submit" class="btn btn-block btn-primary">Ajouter le véhicule</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Véhicules > Détail du véhicule immatriculé FS-483-AH{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    Détail d'un véhicule
+                    <div class="page-title-subheading">
+                        Peugeot 207 | Immatriculation : FS-483-AH
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Photo
+                </div>
+                <div class="card-body">
+                    <img src="{{ asset('img/vehicles/FS-483-AH.jpg') }}" alt="" width="100%" height="auto" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-9">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Informations
+                </div>
+                <div class="card-body">
+                    <h6 class="font-weight-bold">Peugeot 207</h6>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 mb-0">
+                            <p>
+                                Immatriculation : FS-483-AH
+                                <br />
+                                Date de fabrication : 12/08/2007
+                            </p>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <p>
+                                Agence gérant le véhicule : Nancy
+                                <br />
+                                <span class="badge badge-warning">En démonstration</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    Détails techniques
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 mb-0">
+                            <p>
+                                Hauteur : 1,47 m
+                                <br />
+                                Largeur : 1,75 m
+                            </p>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <p>
+                                Poids : 1,156 tonnes
+                                <br />
+                                Puissance : 112 ch
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

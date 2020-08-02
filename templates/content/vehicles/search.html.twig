@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Véhicules > Recherche de véhicules{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Résultats de la recherche de véhicules</div></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Filtres appliqués à la liste
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span class="badge badge-dark mr-2">Marque : Peugeot</span>
+                            <span class="badge badge-dark mr-2">Agence : Nancy</span>
+                            <span class="badge badge-dark mr-2">Puissance : environ 112 ch</span>
+                            <a href="{{ path("vehicles_list") }}" class="btn btn-primary">Supprimer les filtres</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Véhicules correspondants à la recherche
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Immatriculation</th>
+                                    <th class="text-center">Marque</th>
+                                    <th class="text-center">Modèle</th>
+                                    <th class="text-center">Date de fabrication</th>
+                                    <th class="text-center">Hauteur</th>
+                                    <th class="text-center">Largeur</th>
+                                    <th class="text-center">Poids</th>
+                                    <th class="text-center">Puissance</th>
+                                    <th class="text-center">Agence</th>
+                                    <th class="text-center">Statut</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">FS-483-AH</td>
+                                    <td class="text-center">Peugeot</td>
+                                    <td class="text-center">207</td>
+                                    <td class="text-center">12/08/2007</td>
+                                    <td class="text-center">1,47 m</td>
+                                    <td class="text-center">1,75 m</td>
+                                    <td class="text-center">1,156 tonnes</td>
+                                    <td class="text-center">112 ch</td>
+                                    <td class="text-center">Nancy</td>
+                                    <td class="text-center"><span class="badge badge-warning">En démonstration</span></td>
+                                    <td class="text-center">
+                                        <a href="{{ path("vehicles_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{{ path("vehicles_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
