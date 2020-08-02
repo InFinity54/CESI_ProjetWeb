@@ -1,6 +1,6 @@
 {% extends "login.html.twig" %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Mot de passé oublié{% endblock %}
 
 {% block css %}{% endblock %}
 
@@ -9,34 +9,31 @@
 {% block body %}
     <div class="card mx-auto">
         <div class="card-header">
-            Connexion
+            Oubli de mot de passe
         </div>
         <div class="card-body">
-            <form method="post" action="{{ path("login_submit") }}">
+            <form method="post" action="{{ path("password_submit") }}">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="position-relative form-group">
-                            <label for="login" class="">Votre identifiant</label>
-                            <input name="login" id="login" placeholder="Identifiant" type="text" class="form-control" />
-                        </div>
+                        <p>Pour réinitialiser votre mot de passe, saisissez l'adresse e-mail de votre compte. Si elle existe dans notre base de données, vous recevrez un nouveau mot de passe à cette adresse.</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="position-relative form-group">
-                            <label for="password" class="">Votre mot de passe</label>
-                            <input name="password" id="password" placeholder="Mot de passe" type="password" class="form-control" />
+                            <label for="email" class="">Votre adresse e-mail</label>
+                            <input name="email" id="email" placeholder="mon@email.fr" type="email" class="form-control" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <button type="submit" class="btn btn-primary btn-block">Me connecter</button>
+                        <button type="submit" class="btn btn-primary btn-block">Récupérer mon compte</button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 text-center mt-2">
-                        <a href="{{ path("password") }}">Mot de passe oublié ?</a>
+                        <a href="{{ path("login") }}">Retour à la page de connexion</a>
                     </div>
                 </div>
             </form>
