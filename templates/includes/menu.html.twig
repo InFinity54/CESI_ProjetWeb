@@ -32,6 +32,17 @@
     <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
+                <li class="app-sidebar__heading">Gestion des agents</li>
+                <li>
+                    <a href="{{ path("agents_list") }}" {% if app.request.pathinfo == path("agents_list") %}class="mm-active"{% endif %}>
+                        <i class="metismenu-icon fas fa-users"></i> Liste des agents
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path("agents_add") }}" {% if app.request.pathinfo == path("agents_add") %}class="mm-active"{% endif %}>
+                        <i class="metismenu-icon fas fa-plus"></i> Nouvel agent
+                    </a>
+                </li>
                 <li class="app-sidebar__heading">Gestion des véhicules</li>
                 <li>
                     <a href="{{ path("vehicles_list") }}" {% if app.request.pathinfo == path("vehicles_list") %}class="mm-active"{% endif %}>
