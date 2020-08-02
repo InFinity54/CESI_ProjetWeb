@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Statuts > Ajouter un nouveau statut{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Ajout d'un nouveau statut</div></div>
+        </div>
+    </div>
+    <form method="post" action="{{ path("status_add_submit") }}">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Informations sur le statut
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="nom" class="">Nom du statut</label>
+                                    <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="couleur" class="">Couleur du statut</label>
+                                    <div class="position-relative form-group">
+                                        <select type="select" id="couleur" name="couleur" class="custom-select" required>
+                                            <option value="" hidden>Couleur</option>
+                                            <option value="danger">Rouge</option>
+                                            <option value="warning">Jaune</option>
+                                            <option value="success">Vert</option>
+                                            <option value="dark">Gris</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                     <button type="submit" class="btn btn-block btn-primary">Ajouter le véhicule</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

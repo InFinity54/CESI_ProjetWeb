@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Nom du site | {% block title %}{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Language" content="en" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+        <meta name="description" content="This is an example dashboard created using build-in elements and components." />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <link rel="stylesheet" type="text/css" href="{{ asset("css/architectui.css") }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset("css/login.css") }}" />
+        {% block css %}{% endblock %}
+    </head>
+    <body>
+        <div class="app-main h-100">
+            <div class="app-main__outer my-auto">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="app-header__logo mx-auto text-center">
+                                <div class="logo-src"></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="{{ asset("js/architectui.js") }}"></script>
+        {% block js %}{% endblock %}
+    </body>
+</html>
