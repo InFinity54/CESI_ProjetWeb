@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Agences > Ajouter une nouvelle agence{% endblock %}
+{% block title %}Agences > Édition d'une agence{% endblock %}
 
 {% block css %}{% endblock %}
 
@@ -9,10 +9,17 @@
 {% block body %}
     <div class="app-page-title">
         <div class="page-title-wrapper">
-            <div class="page-title-heading"><div>Ajout d'une agence</div></div>
+            <div class="page-title-heading">
+                <div>
+                    Édition d'une agence
+                    <div class="page-title-subheading">
+                        Nancy
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <form method="post" action="{{ path("agences_add_submit") }}">
+    <form method="post" action="{{ path("agences_edit_submit") }}">
         <div class="row">
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
@@ -24,7 +31,7 @@
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
                                     <label for="nom" class="">Nom de l'agence</label>
-                                    <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" />
+                                    <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" value="Nancy" />
                                 </div>
                             </div>
                         </div>
@@ -32,7 +39,7 @@
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
                                     <label for="adresse" class="">Adresse</label>
-                                    <input name="adresse" id="adresse" placeholder="Rue, Avenue, Boulevard..." type="text" class="form-control" />
+                                    <input name="adresse" id="adresse" placeholder="Rue, Avenue, Boulevard..." type="text" class="form-control" value="45 avenue des Caraïbes" />
                                 </div>
                             </div>
                         </div>
@@ -48,13 +55,13 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="codepostal" class="">Code postal</label>
-                                    <input name="codepostal" id="codepostal" placeholder="54000" type="number" min="1" class="form-control" />
+                                    <input name="codepostal" id="codepostal" placeholder="54000" type="number" min="1" class="form-control" value="54000" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="ville" class="">Ville</label>
-                                    <input name="ville" id="ville" placeholder="Nancy" type="text" class="form-control" />
+                                    <input name="ville" id="ville" placeholder="Nancy" type="text" class="form-control" value="Nancy" />
                                 </div>
                             </div>
                         </div>
@@ -64,7 +71,7 @@
                                     <label for="tel" class="">Numéro de téléphone</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="tel" name="tel" />
+                                        <input placeholder="601234578" type="number" class="form-control" id="tel" name="tel" value="343255163" />
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +80,7 @@
                                     <label for="fax" class="">Numéro de fax</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" />
+                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" value="343255162" />
                                     </div>
                                 </div>
                             </div>
@@ -86,13 +93,13 @@
             <div class="col-sm-12">
                 <div class="card mb-3">
                     <div class="card-header">
-                        Finaliser l'ajout
+                        Finaliser l'édition
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
-                                    <button type="submit" class="btn btn-block btn-primary">Ajouter l'agence</button>
+                                    <button type="submit" class="btn btn-block btn-primary">Enregistrer les modifications apportées à l'agence</button>
                                 </div>
                             </div>
                         </div>
