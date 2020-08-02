@@ -1,0 +1,121 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un nouvel agent{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Ajout d'un nouvel agent</div></div>
+        </div>
+    </div>
+    <form method="post" action="{{ path("agents_add_submit") }}">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Informations de base
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="nom" class="">Nom</label>
+                                    <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="prenom" class="">Prénom</label>
+                                    <input name="prenom" id="prenom" placeholder="Prénom" type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                <div class="position-relative form-group">
+                                    <label for="telfixe" class="">Numéro de téléphone fixe</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
+                                        <input placeholder="601234578" type="number" class="form-control" id="telfixe" name="telfixe" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <div class="position-relative form-group">
+                                    <label for="tel" class="">Numéro de téléphone portable</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
+                                        <input placeholder="601234578" type="number" class="form-control" id="tel" name="tel" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4">
+                                <div class="position-relative form-group">
+                                    <label for="fax" class="">Numéro de fax</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
+                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Informations d'identification
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="identifiant" class="">Identifiant de connexion</label>
+                                    <input name="identifiant" id="identifiant" placeholder="Identifiant" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="position-relative form-group">
+                                    <label for="email" class="">Adresse e-mail</label>
+                                    <input name="email" id="email" placeholder="adresse@email.fr" type="email" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Finaliser l'ajout
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                    Le nouvel agent verra son compte activé par défaut. Il sera possible de modifier son statut après l'ajout.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                    <button type="submit" class="btn btn-block btn-primary">Ajouter l'agent</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

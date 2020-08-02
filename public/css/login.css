@@ -1,0 +1,19 @@
+body
+{
+    background-color: #DDDDDD;
+}
+
+.app-header__logo
+{
+    width: auto;
+}
+
+.app-main .app-main__inner
+{
+    padding: 0 30px 0 30px;
+}
+
+.card
+{
+    width: 500px;
+}
