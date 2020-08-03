@@ -2,9 +2,22 @@
 
 {% block title %}Agences > Ajouter une nouvelle agence{% endblock %}
 
-{% block css %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/dropify.min.css") }}" />
+{% endblock %}
 
-{% block js %}{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{{ asset('vendors/js/dropify.min.js') }}"></script>
+    <script>
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Déposez une photo ou cliquez ici pour en sélectionner une',
+                'replace': 'Déposez une photo ou cliquez ici pour remplacer la photo',
+                'error':   'Une erreur est survenue. Veuillz réessayer plus tard.'
+            }
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
     <div class="app-page-title">
@@ -20,6 +33,14 @@
                         Informations sur l'agence
                     </div>
                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                    <label for="photo" class="">Photo de l'agence</label>
+                                    <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" />
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
