@@ -35,24 +35,14 @@
                 <li class="app-sidebar__heading">Gestion des agences</li>
                 <li>
                     <a href="{{ path("agences_list") }}" {% if app.request.pathinfo == path("agences_list") %}class="mm-active"{% endif %}>
-                        <i class="metismenu-icon fas fa-building"></i>
+                        <i class="metismenu-icon pe-7s-diamond"></i>
                         Liste des agences
                     </a>
                 </li>
                 <li>
                     <a href="{{ path("agences_add") }}" {% if app.request.pathinfo == path("agences_add") %}class="mm-active"{% endif %}>
-                        <i class="metismenu-icon fas fa-plus"></i> Nouvelle agence
-                    </a>
-                </li>
-                <li class="app-sidebar__heading">Gestion des agents</li>
-                <li>
-                    <a href="{{ path("agents_list") }}" {% if app.request.pathinfo == path("agents_list") %}class="mm-active"{% endif %}>
-                        <i class="metismenu-icon fas fa-users"></i> Liste des agents
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path("agents_add") }}" {% if app.request.pathinfo == path("agents_add") %}class="mm-active"{% endif %}>
-                        <i class="metismenu-icon fas fa-plus"></i> Nouvel agent
+                        <i class="metismenu-icon pe-7s-car"></i>
+                        Nouvelle agence
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Gestion des véhicules</li>
@@ -64,6 +54,17 @@
                 <li>
                     <a href="{{ path("vehicles_add") }}" {% if app.request.pathinfo == path("vehicles_add") %}class="mm-active"{% endif %}>
                         <i class="metismenu-icon fas fa-plus"></i> Nouveau véhicule
+                    </a>
+                </li>
+                <li class="app-sidebar__heading">Gestion des agents</li>
+                <li>
+                    <a href="{{ path("agents_list") }}" {% if app.request.pathinfo == path("agents_list") %}class="mm-active"{% endif %}>
+                        <i class="metismenu-icon fas fa-users"></i> Liste des agents
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path("agents_add") }}" {% if app.request.pathinfo == path("agents_add") %}class="mm-active"{% endif %}>
+                        <i class="metismenu-icon fas fa-plus"></i> Nouvel agent
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Gestion des statuts</li>
