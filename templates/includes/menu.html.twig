@@ -35,14 +35,13 @@
                 <li class="app-sidebar__heading">Gestion des agences</li>
                 <li>
                     <a href="{{ path("agences_list") }}" {% if app.request.pathinfo == path("agences_list") %}class="mm-active"{% endif %}>
-                        <i class="metismenu-icon pe-7s-diamond"></i>
+                        <i class="metismenu-icon fas fa-building"></i>
                         Liste des agences
                     </a>
                 </li>
                 <li>
                     <a href="{{ path("agences_add") }}" {% if app.request.pathinfo == path("agences_add") %}class="mm-active"{% endif %}>
-                        <i class="metismenu-icon pe-7s-car"></i>
-                        Nouvelle agence
+                        <i class="metismenu-icon fas fa-plus"></i> Nouvelle agence
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Gestion des agents</li>
