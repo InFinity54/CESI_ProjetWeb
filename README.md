@@ -1,6 +1,6 @@
 # Projet Web
 
-Dépôt Git du Projet Web, effectué durant le diplôme DevOps au CESI.
+Dépôt Git du Projet Web du CESI.
 
 ## Installation
 
