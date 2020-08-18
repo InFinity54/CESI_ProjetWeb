@@ -4,7 +4,9 @@
 
 {% block css %}{% endblock %}
 
-{% block js %}{% endblock %}
+{% block js %}
+    <script src="{{ asset("js/pages/login.js") }}"></script>
+{% endblock %}
 
 {% block body %}
     <div class="card mx-auto">
@@ -12,12 +14,22 @@
             Connexion
         </div>
         <div class="card-body">
-            <form method="post" action="{{ path("login_submit") }}">
+            <form method="post" id="login-form">
+                {% if error %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="alert alert-danger">
+                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="position-relative form-group">
-                            <label for="login" class="">Votre identifiant</label>
-                            <input name="login" id="login" placeholder="Identifiant" type="text" class="form-control" />
+                            <label for="username" class="">Votre identifiant</label>
+                            <input name="username" value="{{ last_username }}" id="username" placeholder="Identifiant" type="text" class="form-control" required />
                         </div>
                     </div>
                 </div>
@@ -25,7 +37,7 @@
                     <div class="col-sm-12">
                         <div class="position-relative form-group">
                             <label for="password" class="">Votre mot de passe</label>
-                            <input name="password" id="password" placeholder="Mot de passe" type="password" class="form-control" />
+                            <input name="password" id="password" placeholder="Mot de passe" type="password" class="form-control" required />
                         </div>
                     </div>
                 </div>
