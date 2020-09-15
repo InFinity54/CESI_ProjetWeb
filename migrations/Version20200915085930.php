@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200818103440 extends AbstractMigration
+final class Version20200915085930 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,12 +20,12 @@ final class Version20200818103440 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE agents ADD lastname VARCHAR(255) NOT NULL, ADD firstname VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE agent ADD is_activated TINYINT(1) NOT NULL');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE agents DROP lastname, DROP firstname');
+        $this->addSql('ALTER TABLE agent DROP is_activated');
     }
 }

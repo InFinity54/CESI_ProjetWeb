@@ -1,7 +1,7 @@
 <?php
 namespace App\Security;
 
-use App\Entity\Agents;
+use App\Entity\Agent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,17 +65,17 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(Agents::class)->findOneBy(['username' => $credentials['username']]);
+        $user = $this->entityManager->getRepository(Agent::class)->findOneBy(['username' => $credentials['username']]);
 
         if (!$user && $user === null)
         {
             throw new CustomUserMessageAuthenticationException("Identifiant ou mot de passe incorrect.");
         }
 
-        /*if (!$user->getIsActivated())
+        if (!$user->getIsActivated())
         {
             throw new CustomUserMessageAuthenticationException("Votre compte est désactivé.");
-        }*/
+        }
 
         return $user;
     }

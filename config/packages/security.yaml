@@ -4,9 +4,9 @@ security:
         users_in_memory: { memory: null }
         app_user_provider:
             entity:
-                class: App\Entity\Agents
+                class: App\Entity\Agent
     encoders:
-        App\Entity\Agents:
+        App\Entity\Agent:
             algorithm: 'bcrypt'
     firewalls:
         dev:

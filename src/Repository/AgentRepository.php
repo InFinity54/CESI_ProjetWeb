@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Agents;
+use App\Entity\Agent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Agents|null find($id, $lockMode = null, $lockVersion = null)
- * @method Agents|null findOneBy(array $criteria, array $orderBy = null)
- * @method Agents[]    findAll()
- * @method Agents[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Agent|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Agent|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Agent[]    findAll()
+ * @method Agent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AgentsRepository extends ServiceEntityRepository
+class AgentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Agents::class);
+        parent::__construct($registry, Agent::class);
     }
 
     // /**
-    //  * @return Agents[] Returns an array of Agents objects
+    //  * @return Agent[] Returns an array of Agent objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class AgentsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Agents
+    public function findOneBySomeField($value): ?Agent
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')

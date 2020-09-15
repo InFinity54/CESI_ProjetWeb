@@ -1,14 +1,14 @@
 <?php
 namespace App\Entity;
 
-use App\Repository\AgentsRepository;
+use App\Repository\AgentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=AgentsRepository::class)
+ * @ORM\Entity(repositoryClass=AgentRepository::class)
  */
-class Agents implements UserInterface
+class Agent implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -41,6 +41,11 @@ class Agents implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActivated;
 
     public function getUsername(): ?string
     {
@@ -109,6 +114,18 @@ class Agents implements UserInterface
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getIsActivated(): ?bool
+    {
+        return $this->isActivated;
+    }
+
+    public function setIsActivated(bool $isActivated): self
+    {
+        $this->isActivated = $isActivated;
 
         return $this;
     }
