@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Vehicle;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,7 +12,12 @@ class VehiclesController extends AbstractController
      */
     public function vehiclesList()
     {
-        return $this->render('content/vehicles/index.html.twig', []);
+        $manager = $this->getDoctrine()->getManager();
+        $vehicles = $manager->getRepository(Vehicle::class)->findBy(["isActivated" => true]);
+
+        return $this->render('content/vehicles/index.html.twig', [
+            "vehicles" => $vehicles
+        ]);
     }
 
     /**
@@ -19,7 +25,12 @@ class VehiclesController extends AbstractController
      */
     public function vehiclesListDisabled()
     {
-        return $this->render('content/vehicles/disabled.html.twig', []);
+        $manager = $this->getDoctrine()->getManager();
+        $vehicles = $manager->getRepository(Vehicle::class)->findBy(["isActivated" => false]);
+
+        return $this->render('content/vehicles/disabled.html.twig', [
+            "vehicles" => $vehicles
+        ]);
     }
 
     /**
