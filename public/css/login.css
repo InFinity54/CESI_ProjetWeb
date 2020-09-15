@@ -3,11 +3,6 @@ body
     background-color: #DDDDDD;
 }
 
-.app-header__logo
-{
-    width: auto;
-}
-
 .logo-src
 {
     height: 65px !important;
