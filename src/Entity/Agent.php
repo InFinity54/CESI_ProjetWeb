@@ -47,6 +47,31 @@ class Agent implements UserInterface
      */
     private $isActivated;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mobile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fax;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $fixe;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getUsername(): ?string
     {
         return $this->username;
@@ -126,6 +151,54 @@ class Agent implements UserInterface
     public function setIsActivated(bool $isActivated): self
     {
         $this->isActivated = $isActivated;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getMobile(): ?string
+    {
+        return $this->mobile;
+    }
+
+    public function setMobile(string $mobile): self
+    {
+        $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    public function getFax(): ?string
+    {
+        return $this->fax;
+    }
+
+    public function setFax(string $fax): self
+    {
+        $this->fax = $fax;
+
+        return $this;
+    }
+
+    public function getFixe(): ?string
+    {
+        return $this->fixe;
+    }
+
+    public function setFixe(string $fixe): self
+    {
+        $this->fixe = $fixe;
 
         return $this;
     }

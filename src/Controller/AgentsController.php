@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Agent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AgentsController extends AbstractController
@@ -11,11 +13,14 @@ class AgentsController extends AbstractController
      */
     public function agentsList()
     {
-        return $this->render('content/agents/index.html.twig', []);
+        $agents = $this->getDoctrine()->getRepository(Agent::class)->findAll();
+        return $this->render('content/agents/index.html.twig', [
+            "allAgents" => $agents
+        ]);
     }
 
     /**
-     * @Route("/agents/enable", name="agents_enable")
+     * @Route("/agents/enable/{id}", name="agents_enable")
      */
     public function agentsEnable()
     {
@@ -24,7 +29,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/agents/disable", name="agents_disable")
+     * @Route("/agents/disable/{id}", name="agents_disable")
      */
     public function agentsDisable()
     {
@@ -51,34 +56,63 @@ class AgentsController extends AbstractController
     /**
      * @Route("/agents/add/submit", name="agents_add_submit")
      */
-    public function agentsAddSubmit()
+    public function agentsAddSubmit(Request $request)
     {
+        $agents = new Agent();
+        $agents->setLastname($request->request->get("nom"));
+        $agents->setFirstname($request->request->get("prenom"));
+        $agents->setFixe($request->request->get("fixe"));
+        $agents->setMobile($request->request->get("mobile"));
+        $agents->setFax($request->request->get("fax"));
+        $agents->setUsername($request->request->get("identifiant"));
+        $agents->setPassword("test");
+        $agents->setRoles(["ROLE_USER"]);
+        $agents->setEmail($request->request->get("email"));
+        $agents->setIsActivated(true);
+        $this->getDoctrine()->getManager()->persist($agents);
+        $this->getDoctrine()->getManager()->flush();
+
         $this->addFlash("success", "L'agent a bien été ajouté.");
         return $this->redirectToRoute("agents_view");
     }
 
     /**
-     * @Route("/agents/view", name="agents_view")
+     * @Route("/agents/view/{id}", name="agents_view")
      */
-    public function agentsView()
+    public function agentsView(int $id)
     {
-        return $this->render('content/agents/view.html.twig', []);
+        $agent = $this->getDoctrine()->getRepository(Agent::class)->find($id);
+        return $this->render('content/agents/view.html.twig', [
+            "agent" => $agent
+        ]);
     }
 
     /**
-     * @Route("/agents/edit", name="agents_edit")
+     * @Route("/agents/edit/{id}", name="agents_edit")
      */
-    public function agentsEdit()
+    public function agentsEdit(int $id)
     {
-        return $this->render('content/agents/edit.html.twig', []);
+        $agent = $this->getDoctrine()->getRepository(Agent::class)->find($id);
+        return $this->render('content/agents/edit.html.twig', [
+            "agent" => $agent
+        ]);
     }
 
     /**
-     * @Route("/agents/edit/submit", name="agents_edit_submit")
+     * @Route("/agents/edit/{id}/submit", name="agents_edit_submit")
      */
-    public function agentsEditSubmit()
+    public function agentsEditSubmit(Request $request, int $id)
     {
+        $agent = $this->getDoctrine()->getRepository(Agent::class)->find($id);
+        $agent->setLastname($request->request->get("nom"));
+        $agent->setFirstname($request->request->get("prenom"));
+        $agent->setFixe($request->request->get("fixe"));
+        $agent->setMobile($request->request->get("mobile"));
+        $agent->setFax($request->request->get("fax"));
+        $agent->setEmail($request->request->get("email"));
+        $this->getDoctrine()->getManager()->persist($agent);
+        $this->getDoctrine()->getManager()->flush();
         $this->addFlash("success", "L'agent a bien été modifié.");
-        return $this->redirectToRoute("agents_view");
+        return $this->redirectToRoute("agents_view", ["id" => $id]);
     }
 }
