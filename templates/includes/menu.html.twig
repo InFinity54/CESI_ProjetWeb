@@ -72,6 +72,11 @@
                         <i class="metismenu-icon fas fa-align-justify"></i> Liste des statuts
                     </a>
                 </li>
+                <li>
+                    <a href="{{ path("status_add") }}" {% if app.request.pathinfo == path("status_add") %}class="mm-active"{% endif %}>
+                        <i class="metismenu-icon fas fa-plus"></i> Nouveau statut
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
