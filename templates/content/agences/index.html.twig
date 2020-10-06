@@ -31,36 +31,25 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {%for agence in agences %}
                             <tr>
                                 <td class="text-center"><img width="150" class="rounded-circle" src="{{ asset("img/agences/exemple.jpg") }}" alt="" /></td>
-                                <td class="text-center">Nancy</td>
-                                <td class="text-center">45 avenue des Caraïbes 54000 Nancy</td>
-                                <td class="text-center">03.43.25.51.63</td>
-                                <td class="text-center">03.43.25.51.62</td>
+                                <td class="text-center">{{ agence.getNomAg() }}</td>
+                                <td class="text-center">{{ agence.getAdresseAg() }} </br>
+                                {{ agence.getComplementAg() }} </br>
+                                {{ agence.getCodepostalAg() }} {{ agence.getVilleAg() }}</td>
+                                <td class="text-center">0{{ agence.getNumero() }}</td>
+                                <td class="text-center">0{{ agence.getFaxAg() }}</td>
                                 <td class="text-center">
-                                    <a href="{{ path("agences_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de cette agence">
+                                    <a href="{{ path("agences_view", { id: agence.id}) }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de cette agence">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ path("agences_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer cette agence">
+                                    <a href="{{ path("agences_edit", { id: agence.id}) }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer cette agence">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="text-center"><img width="150" class="rounded-circle" src="{{ asset("img/agences/exemple.jpg") }}" alt="" /></td>
-                                <td class="text-center">Metz</td>
-                                <td class="text-center">33 rue des champs 57000 Metz</td>
-                                <td class="text-center">03.58.69.54.87</td>
-                                <td class="text-center">03.58.69.54.86</td>
-                                <td class="text-center">
-                                    <a href="{{ path("agences_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de cette agence">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ path("agences_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer cette agence">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
