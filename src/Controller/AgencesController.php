@@ -45,7 +45,9 @@ class AgencesController extends AbstractController
         $this->getdoctrine()->getmanager()->flush();
         
         $this->addFlash("success", "L'agence a bien été ajoutée.");
-        return $this->redirectToRoute("agences_view");
+        return $this->redirectToRoute("agences_view", [
+            "id" => $agence->getId()
+        ]);
     }
 
     /**
@@ -86,6 +88,6 @@ class AgencesController extends AbstractController
         $this->getdoctrine()->getmanager()->flush();
 
         $this->addFlash("success", "L'agence a bien été modifiée.");
-        return $this->redirectToRoute("agences_view", array('id' => $id));
+        return $this->redirectToRoute("agences_view", ['id' => $id]);
     }
 }
