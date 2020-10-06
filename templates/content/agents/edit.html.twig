@@ -26,13 +26,13 @@
                 <div>
                     Édition d'un agent
                     <div class="page-title-subheading">
-                        DOE John
+                        {{ agent.lastname }} {{ agent.firstname }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <form method="post" action="{{ path("agents_edit_submit") }}">
+    <form method="post" action="{{ path("agents_edit_submit", {id:agent.id}) }}">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-3">
@@ -52,13 +52,13 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="nom" class="">Nom</label>
-                                    <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" value="DOE" />
+                                    <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" value="{{ agent.lastname }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="prenom" class="">Prénom</label>
-                                    <input name="prenom" id="prenom" placeholder="Prénom" type="text" class="form-control" value="John" />
+                                    <input name="prenom" id="prenom" placeholder="Prénom" type="text" class="form-control" value="{{ agent.firstname }}" />
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                                     <label for="telfixe" class="">Numéro de téléphone fixe</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="telfixe" name="telfixe" value="612345789" />
+                                        <input placeholder="601234578" type="number" class="form-control" id="fixe" name="fixe" value="{{ agent.fixe }}" />
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                                     <label for="tel" class="">Numéro de téléphone portable</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="tel" name="tel" value="612345789" />
+                                        <input placeholder="601234578" type="number" class="form-control" id="mobile" name="mobile" value="{{ agent.mobile }}" />
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                     <label for="fax" class="">Numéro de fax</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" value="612345789" />
+                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" value="{{ agent.fax }}" />
                                     </div>
                                 </div>
                             </div>
@@ -106,13 +106,13 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="identifiant" class="">Identifiant de connexion</label>
-                                    <input name="identifiant" id="identifiant" placeholder="Identifiant" type="text" class="form-control" value="jdoe" />
+                                    <input name="identifiant" id="identifiant" placeholder="Identifiant" type="text" class="form-control" value="{{ agent.username }}" readonly/>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="email" class="">Adresse e-mail</label>
-                                    <input name="email" id="email" placeholder="adresse@email.fr" type="email" class="form-control" value="john@doe.com" />
+                                    <input name="email" id="email" placeholder="adresse@email.fr" type="email" class="form-control" value="{{ agent.email }}" />
                                 </div>
                             </div>
                         </div>

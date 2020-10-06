@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Agent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,14 @@ class HomeController extends AbstractController
             return $this->redirectToRoute("login");
         }
 
-        return $this->render('content/index.html.twig', []);
+        $agentsTotal = $this->getDoctrine()->getManager()->getRepository(Agent::class)->count([]);
+        $agents = $this->getDoctrine()->getManager()->getRepository(Agent::class)->getMostRecentAgents();
+
+        return $this->render('content/index.html.twig', [
+            "agents" => [
+                "count" => $agentsTotal,
+                "list" => $agents
+            ]
+        ]);
     }
 }

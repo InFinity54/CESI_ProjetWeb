@@ -19,6 +19,15 @@ class AgentRepository extends ServiceEntityRepository
         parent::__construct($registry, Agent::class);
     }
 
+    public function getMostRecentAgents()
+    {
+        return $this->createQueryBuilder("a")
+            ->orderBy("a.dateInscription", "desc")
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Agent[] Returns an array of Agent objects
     //  */
