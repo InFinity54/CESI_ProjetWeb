@@ -36,11 +36,9 @@
                                 <div class="position-relative form-group">
                                     <select type="select" id="agence" name="agence" class="custom-select" required>
                                         <option value="" hidden>Agence</option>
-                                        <option value="Limoges">Limoges</option>
-                                        <option value="Nancy">Nancy</option>
-                                        <option value="Marseille">Marseille</option>
-                                        <option value="Metz">Metz</option>
-                                        <option value="Paris">Paris</option>
+                                        {%for agence in agences %}
+                                            <option value="{{ agence.getId() }}">{{ agence.getNomAg() }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -99,7 +97,7 @@
                                     <td class="text-center">{{ vehicle.width}} m</td>
                                     <td class="text-center">{{ vehicle.weight }} tonnes</td>
                                     <td class="text-center">{{ vehicle.power }} ch</td>
-                                    <td class="text-center">grhtrhth</td>
+                                    <td class="text-center">{{ vehicle.getAgence().getNomAg() }}</td>
                                     <td class="text-center"><span class="badge badge-dark">grhtrqhrts</span></td>
                                     <td class="text-center">
                                         <a href="{{ path("vehicles_view", {id: vehicle.numberplate}) }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">

@@ -82,11 +82,10 @@
                                     <label for="agence" class="">Agence gérant le véhicule</label>
                                     <div class="position-relative form-group">
                                         <select type="select" id="agence" name="agence" class="custom-select" required>
-                                            <option value="Limoges">Limoges</option>
-                                            <option value="Nancy" selected>Nancy</option>
-                                            <option value="Marseille">Marseille</option>
-                                            <option value="Metz">Metz</option>
-                                            <option value="Paris">Paris</option>
+                                            <option value="" hidden>{{ vehicle.getAgence().getNomAg() }}</option>
+                                            {%for agence in agences %}
+                                                <option value="{{ agence.getId() }}">{{ agence.getNomAg() }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>

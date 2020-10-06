@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Agence;
+use App\Entity\Vehicle;
 
 class AgencesController extends AbstractController
 {
@@ -56,7 +57,8 @@ class AgencesController extends AbstractController
     public function agencesView(int $id)
     {
         $agence = $this->getDoctrine()->getRepository(Agence::class)->find($id);
-        return $this->render('content/agences/view.html.twig', ['agence' => $agence]);
+        $vehicles = $this->getDoctrine()->getRepository(Vehicle::class)->findByAgence([$id]);
+        return $this->render('content/agences/view.html.twig', ['agence' => $agence, 'vehicles' => $vehicles]);
     }
 
     /**
