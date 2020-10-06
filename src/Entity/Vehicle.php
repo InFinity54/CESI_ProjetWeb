@@ -60,6 +60,12 @@ class Vehicle
      */
     private $photo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Agence::class, inversedBy="vehicles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $agence;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -181,6 +187,18 @@ class Vehicle
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getAgence(): ?Agence
+    {
+        return $this->agence;
+    }
+
+    public function setAgence(?Agence $agence): self
+    {
+        $this->agence = $agence;
 
         return $this;
     }
