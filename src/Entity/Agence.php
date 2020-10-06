@@ -57,7 +57,7 @@ class Agence
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $image_ag;
+    private $image_ag = "default.png";
 
     /**
      * @ORM\OneToMany(targetEntity=Vehicle::class, mappedBy="agence")

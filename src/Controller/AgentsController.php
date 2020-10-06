@@ -115,14 +115,19 @@ class AgentsController extends AbstractController
     public function agentsEditSubmit(Request $request, int $id)
     {
         $agent = $this->getDoctrine()->getRepository(Agent::class)->find($id);
+
         $agent->setLastname($request->request->get("nom"));
         $agent->setFirstname($request->request->get("prenom"));
         $agent->setFixe($request->request->get("fixe"));
         $agent->setMobile($request->request->get("mobile"));
         $agent->setFax($request->request->get("fax"));
         $agent->setEmail($request->request->get("email"));
+
+        
+
         $this->getDoctrine()->getManager()->persist($agent);
         $this->getDoctrine()->getManager()->flush();
+
         $this->addFlash("success", "L'agent a bien été modifié.");
         return $this->redirectToRoute("agents_view", ["id" => $id]);
     }

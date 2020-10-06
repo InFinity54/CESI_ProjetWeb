@@ -32,7 +32,6 @@ class AgencesController extends AbstractController
     public function agencesAddSubmit(Request $request, AgencePictureUploader $imageUploader)
     {
         $agence = new Agence();
-        $agence->setImageAg('salut');
         $agence->setNomAg($request->request->get('nom'));
         $agence->setAdresseAg($request->request->get('adresse'));
         $agence->setComplementAg($request->request->get('adressecomp'));
