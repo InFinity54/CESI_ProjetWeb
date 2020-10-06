@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Agences > Détail du véhicule immatriculé FS-483-AH{% endblock %}
+{% block title %}Agences > Détail agence{% endblock %}
 
 {% block css %}{% endblock %}
 
@@ -11,7 +11,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div>
-                    Détail d'une agence
+                    Détail de l'agence
                     <div class="page-title-subheading">
                         Nancy
                     </div>
@@ -36,20 +36,22 @@
                     Informations
                 </div>
                 <div class="card-body">
-                    <h6 class="font-weight-bold">Nancy</h6>
+                    <h6 class="font-weight-bold">{{ agence.getNomAg() }}</h6>
                     <div class="row">
                         <div class="col-sm-12 col-md-6 mb-0">
                             <p>
-                                45 avenue des Caraïbes
+                                {{ agence.getAdresseAg() }}
+                                <br/>
+                                {{ agence.getComplementAg() }}
                                 <br />
-                                54000 Nancy
+                                {{ agence.getCodepostalAg() }} {{ agence.getVilleAg() }}
                             </p>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <p>
-                                Numéro de téléphone : 03.43.25.51.63
+                                Numéro de téléphone : 0{{ agence.getNumero() }}
                                 <br />
-                                Numéro de fax : 03.43.25.51.62
+                                Numéro de fax : 0{{ agence.getFaxAg() }}
                             </p>
                         </div>
                     </div>
