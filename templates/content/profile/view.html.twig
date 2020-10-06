@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Agents > Détail d'un agent{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    Votre profil
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <a href="{{ path('profile_edit') }}" class="btn btn-block btn-primary">Modifier mon profil</a>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    Photo
+                </div>
+                <div class="card-body">
+                    <img src="{{ asset('img/avatars/default.jpg') }}" alt="" width="100%" height="auto" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-9">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Informations
+                </div>
+                <div class="card-body">
+                    <h6 class="font-weight-bold">{{ profile.lastname }} {{ profile.firstname }}</h6>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 mb-0">
+                            <p>
+                                Numéro de téléphone fixe : {{ profile.fixe }}
+                                <br />
+                                Numéro de téléphone portable : {{ profile.mobile }}
+                                <br />
+                                Numéro de fax : {{ profile.fax }}
+                            </p>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <p>
+                                Adresse e-mail : {{ profile.email }}
+                                <br />
+                                Identifiant de connexion : {{ profile.username }}
+                                <br />
+                                {% if profile.isActivated %}
+                                <span class="badge badge-success">Actif</span>
+                                {% else %}
+                                <span class="badge badge-danger">Désactivé</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
