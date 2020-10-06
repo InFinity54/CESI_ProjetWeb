@@ -13,7 +13,7 @@
                 <div>
                     Détail d'un véhicule
                     <div class="page-title-subheading">
-                        Peugeot 207 | Immatriculation : FS-483-AH
+                        Peugeot 207 | Immatriculation : {{ vehicle.numberplate }}
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     Photo
                 </div>
                 <div class="card-body">
-                    <img src="{{ asset('img/vehicles/FS-483-AH.jpg') }}" alt="" width="100%" height="auto" />
+                    <img src="{{ asset('img/vehicles/' ~ vehicle.photo) }}" alt="" width="100%" height="auto" />
                 </div>
             </div>
         </div>
@@ -36,20 +36,20 @@
                     Informations
                 </div>
                 <div class="card-body">
-                    <h6 class="font-weight-bold">Peugeot 207</h6>
+                    <h6 class="font-weight-bold">{{ vehicle.brand }} {{ vehicle.model }}</h6>
                     <div class="row">
                         <div class="col-sm-12 col-md-6 mb-0">
                             <p>
-                                Immatriculation : FS-483-AH
+                                Immatriculation : {{ vehicle.numberplate }}
                                 <br />
-                                Date de fabrication : 12/08/2007
+                                Date de fabrication : {{ vehicle.manufactureDate|date("d/m/Y") }}
                             </p>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <p>
-                                Agence gérant le véhicule : Nancy
+                                Agence gérant le véhicule : Ville non géré
                                 <br />
-                                <span class="badge badge-warning">En démonstration</span>
+                                <span class="badge badge-dark">Statut non géré</span>
                             </p>
                         </div>
                     </div>
@@ -63,16 +63,16 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 mb-0">
                             <p>
-                                Hauteur : 1,47 m
+                                Hauteur : {{ vehicle.height }} m
                                 <br />
-                                Largeur : 1,75 m
+                                Largeur : {{ vehicle.width }} m
                             </p>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <p>
-                                Poids : 1,156 tonnes
+                                Poids : {{ vehicle.weight }} tonnes
                                 <br />
-                                Puissance : 112 ch
+                                Puissance : {{ vehicle.power }} ch
                             </p>
                         </div>
                     </div>

@@ -19,6 +19,15 @@ class VehicleRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicle::class);
     }
 
+    public function getMostRecentVehicles()
+    {
+        return $this->createQueryBuilder("v")
+            ->orderBy("v.manufacture_date", "desc")
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Vehicle[] Returns an array of Vehicle objects
     //  */

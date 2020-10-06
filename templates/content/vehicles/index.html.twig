@@ -74,136 +74,46 @@
                     <div class="table-responsive">
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
-                                <tr>
-                                    <th class="text-center">Immatriculation</th>
-                                    <th class="text-center">Marque</th>
-                                    <th class="text-center">Modèle</th>
-                                    <th class="text-center">Date de fabrication</th>
-                                    <th class="text-center">Hauteur</th>
-                                    <th class="text-center">Largeur</th>
-                                    <th class="text-center">Poids</th>
-                                    <th class="text-center">Puissance</th>
-                                    <th class="text-center">Agence</th>
-                                    <th class="text-center">Statut</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
+                            <tr>
+                                <th class="text-center">Immatriculation</th>
+                                <th class="text-center">Marque</th>
+                                <th class="text-center">Modèle</th>
+                                <th class="text-center">Date de fabrication</th>
+                                <th class="text-center">Hauteur</th>
+                                <th class="text-center">Largeur</th>
+                                <th class="text-center">Poids</th>
+                                <th class="text-center">Puissance</th>
+                                <th class="text-center">Agence</th>
+                                <th class="text-center">Statut</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
                             </thead>
                             <tbody>
+                            {% for vehicle in vehicles %}
                                 <tr>
-                                    <td class="text-center">FS-483-AH</td>
-                                    <td class="text-center">Peugeot</td>
-                                    <td class="text-center">207</td>
-                                    <td class="text-center">12/08/2007</td>
-                                    <td class="text-center">1,47 m</td>
-                                    <td class="text-center">1,75 m</td>
-                                    <td class="text-center">1,156 tonnes</td>
-                                    <td class="text-center">112 ch</td>
-                                    <td class="text-center">Nancy</td>
-                                    <td class="text-center"><span class="badge badge-warning">En démonstration</span></td>
+                                    <td class="text-center">{{ vehicle.numberplate }}</td>
+                                    <td class="text-center">{{ vehicle.brand }}</td>
+                                    <td class="text-center">{{ vehicle.model }}</td>
+                                    <td class="text-center">{{ vehicle.manufactureDate|date("d/m/Y") }}</td>
+                                    <td class="text-center">{{ vehicle.height}} m</td>
+                                    <td class="text-center">{{ vehicle.width}} m</td>
+                                    <td class="text-center">{{ vehicle.weight }} tonnes</td>
+                                    <td class="text-center">{{ vehicle.power }} ch</td>
+                                    <td class="text-center">grhtrhth</td>
+                                    <td class="text-center"><span class="badge badge-dark">grhtrqhrts</span></td>
                                     <td class="text-center">
-                                        <a href="{{ path("vehicles_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
+                                        <a href="{{ path("vehicles_view", {id: vehicle.numberplate}) }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ path("vehicles_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
+                                        <a href="{{ path("vehicles_edit", {id: vehicle.numberplate}) }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="{{ path("vehicles_disable") }}" class="btn btn-danger btn-sm rounded-circle" title="Désactiver ce véhicule">
+                                        <a href="{{ path("vehicles_disable", {id: vehicle.numberplate}) }}" class="btn btn-danger btn-sm rounded-circle" title="Désactiver ce véhicule">
                                             <i class="fas fa-times"></i>
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="text-center">GP-638-XG</td>
-                                    <td class="text-center">Peugeot</td>
-                                    <td class="text-center">3008</td>
-                                    <td class="text-center">02/03/2018</td>
-                                    <td class="text-center">1,62 m</td>
-                                    <td class="text-center">1,84 m</td>
-                                    <td class="text-center">1,25 tonnes</td>
-                                    <td class="text-center">130 ch</td>
-                                    <td class="text-center">Metz</td>
-                                    <td class="text-center"><span class="badge badge-success">Disponible</span></td>
-                                    <td class="text-center">
-                                        <a href="{{ path("vehicles_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ path("vehicles_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ path("vehicles_disable") }}" class="btn btn-danger btn-sm rounded-circle" title="Désactiver ce véhicule">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">HZ-409-ZT</td>
-                                    <td class="text-center">Audi</td>
-                                    <td class="text-center">R8</td>
-                                    <td class="text-center">14/04/2016</td>
-                                    <td class="text-center">1,24 m</td>
-                                    <td class="text-center">1,94 m</td>
-                                    <td class="text-center">1,64 tonnes</td>
-                                    <td class="text-center">540 ch</td>
-                                    <td class="text-center">Paris</td>
-                                    <td class="text-center"><span class="badge badge-dark">Définitivement indisponible</span></td>
-                                    <td class="text-center">
-                                        <a href="{{ path("vehicles_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ path("vehicles_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ path("vehicles_disable") }}" class="btn btn-danger btn-sm rounded-circle" title="Désactiver ce véhicule">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">JP-585-RV</td>
-                                    <td class="text-center">Renault</td>
-                                    <td class="text-center">Captur</td>
-                                    <td class="text-center">27/11/2019</td>
-                                    <td class="text-center">1,57 m</td>
-                                    <td class="text-center">1,78 m</td>
-                                    <td class="text-center">1,173 tonnes</td>
-                                    <td class="text-center">90 ch</td>
-                                    <td class="text-center">Limoges</td>
-                                    <td class="text-center"><span class="badge badge-danger">En réparation</span></td>
-                                    <td class="text-center">
-                                        <a href="{{ path("vehicles_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ path("vehicles_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ path("vehicles_disable") }}" class="btn btn-danger btn-sm rounded-circle" title="Désactiver ce véhicule">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">FT-444-FW</td>
-                                    <td class="text-center">Ford</td>
-                                    <td class="text-center">Fiesta</td>
-                                    <td class="text-center">17/09/2009</td>
-                                    <td class="text-center">1,48 m</td>
-                                    <td class="text-center">1,97 m</td>
-                                    <td class="text-center">1,102 tonnes</td>
-                                    <td class="text-center">97 ch</td>
-                                    <td class="text-center">Marseille</td>
-                                    <td class="text-center"><span class="badge badge-warning">En location</span></td>
-                                    <td class="text-center">
-                                        <a href="{{ path("vehicles_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ path("vehicles_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ path("vehicles_disable") }}" class="btn btn-danger btn-sm rounded-circle" title="Désactiver ce véhicule">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
