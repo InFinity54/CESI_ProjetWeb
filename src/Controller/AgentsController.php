@@ -13,7 +13,7 @@ class AgentsController extends AbstractController
      */
     public function agentsList()
     {
-        $agents = $this->getDoctrine()->getRepository(Agent::class)->findAll();
+        $agents = $this->getDoctrine()->getRepository(Agent::class)->findBy(["isActivated"=>true]);
         return $this->render('content/agents/index.html.twig', [
             "allAgents" => $agents
         ]);
@@ -22,8 +22,12 @@ class AgentsController extends AbstractController
     /**
      * @Route("/agents/enable/{id}", name="agents_enable")
      */
-    public function agentsEnable()
+    public function agentsEnable(int $id)
     {
+        $agent = $this->getDoctrine()->getRepository(Agent::class)->find($id);
+        $agent->setIsActivated(true);
+        $this->getDoctrine()->getManager()->persist($agent);
+        $this->getDoctrine()->getManager()->flush();
         $this->addFlash("success", "L'agent a bien été activé.");
         return $this->redirectToRoute("agents_list");
     }
@@ -31,8 +35,12 @@ class AgentsController extends AbstractController
     /**
      * @Route("/agents/disable/{id}", name="agents_disable")
      */
-    public function agentsDisable()
+    public function agentsDisable(int $id)
     {
+        $agent = $this->getDoctrine()->getRepository(Agent::class)->find($id);
+        $agent->setIsActivated(false);
+        $this->getDoctrine()->getManager()->persist($agent);
+        $this->getDoctrine()->getManager()->flush();
         $this->addFlash("success", "L'agent a bien été désactivé.");
         return $this->redirectToRoute("agents_disabled");
     }
@@ -42,7 +50,10 @@ class AgentsController extends AbstractController
      */
     public function agentsDisabled()
     {
-        return $this->render('content/agents/disabled.html.twig', []);
+        $agents = $this->getDoctrine()->getRepository(Agent::class)->findBy(["isActivated"=>false]);
+        return $this->render('content/agents/disabled.html.twig', [
+            "allAgents" => $agents
+        ]);
     }
 
     /**

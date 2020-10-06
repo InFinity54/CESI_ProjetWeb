@@ -67,6 +67,11 @@ class Agent implements UserInterface
      */
     private $fixe;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateInscription;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -199,6 +204,18 @@ class Agent implements UserInterface
     public function setFixe(string $fixe): self
     {
         $this->fixe = $fixe;
+
+        return $this;
+    }
+
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $dateInscription): self
+    {
+        $this->dateInscription = $dateInscription;
 
         return $this;
     }
