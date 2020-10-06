@@ -13,7 +13,7 @@ class ProfileController extends AbstractController
      */
     public function agentEditProfil()
     {
-        return $this->render('content/profile/index.html.twig', []);
+        return $this->render('content/profile/edit.html.twig', []);
     }
 
     /**
