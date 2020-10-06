@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Vehicle;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,15 @@ class HomeController extends AbstractController
             return $this->redirectToRoute("login");
         }
 
-        return $this->render('content/index.html.twig', []);
+        $manager = $this->getDoctrine()->getManager();
+        $vehiclesTotal = $manager->getRepository(Vehicle::class)->count([]);
+        $vehicles = $manager->getRepository(Vehicle::class)->getMostRecentVehicles();
+
+        return $this->render('content/index.html.twig', [
+            "vehicles" => [
+                "count" => $vehiclesTotal,
+                "list" => $vehicles
+            ]
+        ]);
     }
 }

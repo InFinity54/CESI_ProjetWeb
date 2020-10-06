@@ -21,7 +21,7 @@
                         <div class="widget-subheading"></div>
                     </div>
                     <div class="widget-content-right">
-                        <div class="widget-numbers text-white"><span>59</span></div>
+                        <div class="widget-numbers text-white"><span>{{ vehicles.count }}</span></div>
                     </div>
                 </div>
             </div>
@@ -60,46 +60,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">FS-483-AH</td>
-                                    <td class="text-center">Peugeot</td>
-                                    <td class="text-center">207</td>
-                                    <td class="text-center">12/08/2007</td>
-                                    <td class="text-center">Nancy</td>
-                                    <td class="text-center"><span class="badge badge-warning">En démonstration</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">GP-638-XG</td>
-                                    <td class="text-center">Peugeot</td>
-                                    <td class="text-center">3008</td>
-                                    <td class="text-center">02/03/2018</td>
-                                    <td class="text-center">Metz</td>
-                                    <td class="text-center"><span class="badge badge-success">Disponible</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">HZ-409-ZT</td>
-                                    <td class="text-center">Audi</td>
-                                    <td class="text-center">R8</td>
-                                    <td class="text-center">14/04/2016</td>
-                                    <td class="text-center">Paris</td>
-                                    <td class="text-center"><span class="badge badge-dark">Définitivement indisponible</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">JP-585-RV</td>
-                                    <td class="text-center">Renault</td>
-                                    <td class="text-center">Captur</td>
-                                    <td class="text-center">27/11/2019</td>
-                                    <td class="text-center">Limoges</td>
-                                    <td class="text-center"><span class="badge badge-danger">En réparation</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">FT-444-FW</td>
-                                    <td class="text-center">Ford</td>
-                                    <td class="text-center">Fiesta</td>
-                                    <td class="text-center">17/09/2009</td>
-                                    <td class="text-center">Marseille</td>
-                                    <td class="text-center"><span class="badge badge-warning">En location</span></td>
-                                </tr>
+                                {% if vehicles.list|length > 0 %}
+                                    {% for vehicle in vehicles.list %}
+                                        <tr>
+                                            <td class="text-center">{{ vehicle.numberplate }}</td>
+                                            <td class="text-center">{{ vehicle.brand }}</td>
+                                            <td class="text-center">{{ vehicle.model }}</td>
+                                            <td class="text-center">{{ vehicle.manufactureDate|date("d/m/Y") }}</td>
+                                            <td class="text-center">Ville non gérée</td>
+                                            <td class="text-center"><span class="badge badge-dark">Statuts non gérés</span></td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
                             </tbody>
                         </table>
                     </div>
