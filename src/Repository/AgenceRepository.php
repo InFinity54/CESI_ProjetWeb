@@ -2,34 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Agent;
+use App\Entity\Agence;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Agent|null find($id, $lockMode = null, $lockVersion = null)
- * @method Agent|null findOneBy(array $criteria, array $orderBy = null)
- * @method Agent[]    findAll()
- * @method Agent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Agence|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Agence|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Agence[]    findAll()
+ * @method Agence[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AgentRepository extends ServiceEntityRepository
+class AgenceRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Agent::class);
-    }
-
-    public function getMostRecentAgents()
-    {
-        return $this->createQueryBuilder("a")
-            ->orderBy("a.dateInscription", "desc")
-            ->setMaxResults(5)
-            ->getQuery()
-            ->getResult();
+        parent::__construct($registry, Agence::class);
     }
 
     // /**
-    //  * @return Agent[] Returns an array of Agent objects
+    //  * @return Agence[] Returns an array of Agence objects
     //  */
     /*
     public function findByExampleField($value)
@@ -46,7 +37,7 @@ class AgentRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Agent
+    public function findOneBySomeField($value): ?Agence
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')

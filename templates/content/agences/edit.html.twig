@@ -26,13 +26,13 @@
                 <div>
                     Édition d'une agence
                     <div class="page-title-subheading">
-                        Nancy
+                        {{ agence.getNomAg() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <form method="post" action="{{ path("agences_edit_submit") }}">
+    <form method="post" action="{{ path("agences_edit_submit", {id: agence.id}) }}">
         <div class="row">
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
@@ -52,7 +52,7 @@
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
                                     <label for="nom" class="">Nom de l'agence</label>
-                                    <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" value="Nancy" />
+                                    <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" value="{{ agence.getNomAg() }}" />
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
                                     <label for="adresse" class="">Adresse</label>
-                                    <input name="adresse" id="adresse" placeholder="Rue, Avenue, Boulevard..." type="text" class="form-control" value="45 avenue des Caraïbes" />
+                                    <input name="adresse" id="adresse" placeholder="Rue, Avenue, Boulevard..." type="text" class="form-control" value="{{ agence.getAdresseAg() }}" />
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
                                     <label for="adressecomp" class="">Complément d'adresse</label>
-                                    <input name="adressecomp" id="adressecomp" placeholder="Étage, Immeuble..." type="text" class="form-control" />
+                                    <input name="adressecomp" id="adressecomp" placeholder="Étage, Immeuble..." type="text" class="form-control" value="{{ agence.getComplementAg() }}" />
                                 </div>
                             </div>
                         </div>
@@ -76,13 +76,13 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="codepostal" class="">Code postal</label>
-                                    <input name="codepostal" id="codepostal" placeholder="54000" type="number" min="1" class="form-control" value="54000" />
+                                    <input name="codepostal" id="codepostal" placeholder="54000" type="number" min="1" class="form-control" value="{{ agence.getCodepostalAg() }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="ville" class="">Ville</label>
-                                    <input name="ville" id="ville" placeholder="Nancy" type="text" class="form-control" value="Nancy" />
+                                    <input name="ville" id="ville" placeholder="Nancy" type="text" class="form-control" value="{{ agence.getVilleAg() }}" />
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                     <label for="tel" class="">Numéro de téléphone</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="tel" name="tel" value="343255163" />
+                                        <input placeholder="601234578" type="number" class="form-control" id="tel" name="tel" value="{{ agence.getNumero() }}" />
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                                     <label for="fax" class="">Numéro de fax</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" value="343255162" />
+                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" value="{{ agence.getFaxAg() }}" />
                                     </div>
                                 </div>
                             </div>

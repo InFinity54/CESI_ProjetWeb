@@ -29,42 +29,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">Disponible</td>
-                                    <td class="text-center">64</td>
-                                    <td class="text-center">
-                                        <a href="{{ path("status_remove") }}" class="btn btn-danger btn-sm rounded-circle" title="Supprimer ce statut">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">Prêté</td>
-                                    <td class="text-center">12</td>
-                                    <td class="text-center">
-                                        <a href="{{ path("status_remove") }}" class="btn btn-danger btn-sm rounded-circle" title="Supprimer ce statut">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">Loué</td>
-                                    <td class="text-center">46</td>
-                                    <td class="text-center">
-                                        <a href="{{ path("status_remove") }}" class="btn btn-danger btn-sm rounded-circle" title="Supprimer ce statut">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">En démonstration</td>
-                                    <td class="text-center">23</td>
-                                    <td class="text-center">
-                                        <a href="{{ path("status_remove") }}" class="btn btn-danger btn-sm rounded-circle" title="Supprimer ce statut">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                {% for status in allstatus %}
+                                    <tr>
+                                        <td class="text-center">{{ status.name }}</td>
+                                        <td class="text-center">0</td>
+                                        <td class="text-center"><a href="{{ path("status_remove", {id:status.id}) }}" class="btn btn-danger btn-sm rounded-circle"><i class="fas fa-trash"></i></a></td>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

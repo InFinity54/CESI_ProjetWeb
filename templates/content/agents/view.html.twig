@@ -13,7 +13,7 @@
                 <div>
                     Détail d'un agent
                     <div class="page-title-subheading">
-                        DOE John
+                        {{ agent.lastname }} {{ agent.firstname }}
                     </div>
                 </div>
             </div>
@@ -36,24 +36,28 @@
                     Informations
                 </div>
                 <div class="card-body">
-                    <h6 class="font-weight-bold">DOE John</h6>
+                    <h6 class="font-weight-bold">{{ agent.lastname }} {{ agent.firstname }}</h6>
                     <div class="row">
                         <div class="col-sm-12 col-md-6 mb-0">
                             <p>
-                                Numéro de téléphone fixe : +33 6 12 34 56 89
+                                Numéro de téléphone fixe : {{ agent.fixe }}
                                 <br />
-                                Numéro de téléphone portable : +33 6 12 34 56 89
+                                Numéro de téléphone portable : {{ agent.mobile }}
                                 <br />
-                                Numéro de fax : +33 6 12 34 56 89
+                                Numéro de fax : {{ agent.fax }}
                             </p>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <p>
-                                Adresse e-mail : john@doe.com
+                                Adresse e-mail : {{ agent.email }}
                                 <br />
-                                Identifiant de connexion : jdoe
+                                Identifiant de connexion : {{ agent.username }}
                                 <br />
+                                {% if agent.isActivated %}
+                                <span class="badge badge-success">Actif</span>
+                                {% else %}
                                 <span class="badge badge-danger">Désactivé</span>
+                                {% endif %}
                             </p>
                         </div>
                     </div>

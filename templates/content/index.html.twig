@@ -34,7 +34,7 @@
                         <div class="widget-subheading"></div>
                     </div>
                     <div class="widget-content-right">
-                        <div class="widget-numbers text-white"><span>6</span></div>
+                        <div class="widget-numbers text-white"><span>{{ agents.count }}</span></div>
                     </div>
                 </div>
             </div>
@@ -93,6 +93,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        {% for agent in agents.list %}
                             <tr>
                                 <td>
                                     <div class="widget-content p-0">
@@ -103,50 +104,19 @@
                                                 </div>
                                             </div>
                                             <div class="widget-content-left flex2">
-                                                <div class="widget-heading">DIDELOT Morgane</div>
+                                                <div class="widget-heading">{{ agent.lastname }} {{ agent.firstname }}</div>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center">mdidelot</td>
+                                <td class="text-center">{{ agent.username }}</td>
+                                {% if agent.isActivated  %}
                                 <td class="text-center"><span class="badge badge-success">Actif</span></td>
+                                {% else %}
+                                <td class="text-center"><span class="badge badge-danger">Désactivé</span></td>
+                                {% endif %}
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-3">
-                                                <div class="widget-content-left">
-                                                    <img width="40" class="rounded-circle" src="{{ asset("img/avatars/default.jpg") }}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="widget-content-left flex2">
-                                                <div class="widget-heading">KREICHER Corentin</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-center">ckreicher</td>
-                                <td class="text-center"><span class="badge badge-success">Actif</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-3">
-                                                <div class="widget-content-left">
-                                                    <img width="40" class="rounded-circle" src="{{ asset("img/avatars/default.jpg") }}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="widget-content-left flex2">
-                                                <div class="widget-heading">SCHLOSSER Axel</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-center">aschlosser</td>
-                                <td class="text-center"><span class="badge badge-success">Actif</span></td>
-                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
