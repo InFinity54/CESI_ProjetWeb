@@ -26,13 +26,13 @@
                 <div>
                     Édition d'un véhicule
                     <div class="page-title-subheading">
-                        Peugeot 207 | Immatriculation : FS-483-AH
+                        {{ vehicle.brand }} {{ vehicle.model }} | Immatriculation : {{ vehicle.numberplate }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <form method="post" action="{{ path("vehicles_edit_submit") }}">
+    <form method="post" action="{{ path("vehicles_edit_submit", { id: vehicle.numberplate }) }}">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-3">
@@ -44,7 +44,7 @@
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
                                     <label for="photo" class="">Photo</label>
-                                    <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" data-default-file="{{ asset("img/vehicles/FS-483-AH.jpg") }}" />
+                                    <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" data-default-file="{{ asset("img/vehicles/" ~ vehicle.photo) }}" />
                                 </div>
                             </div>
                         </div>
@@ -52,13 +52,13 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="marque" class="">Marque</label>
-                                    <input name="marque" id="marque" placeholder="Marque" type="text" class="form-control" value="Peugeot" />
+                                    <input name="marque" id="marque" placeholder="Marque" type="text" class="form-control" value="{{ vehicle.brand }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="modele" class="">Modèle</label>
-                                    <input name="modele" id="modele" placeholder="Modèle" type="text" class="form-control" value="207" />
+                                    <input name="modele" id="modele" placeholder="Modèle" type="text" class="form-control" value="{{ vehicle.model }}" />
                                 </div>
                             </div>
                         </div>
@@ -66,13 +66,13 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="immat" class="">Immatriculation</label>
-                                    <input name="immat" id="immat" placeholder="Immatriculation" type="text" class="form-control" value="FS-483-AH" />
+                                    <input name="immat" id="immat" placeholder="Immatriculation" type="text" class="form-control" value="{{ vehicle.numberplate }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="datefabrication" class="">Date de fabrication</label>
-                                    <input name="datefabrication" id="datefabrication" type="date" class="form-control" value="2007-08-12" />
+                                    <input name="datefabrication" id="datefabrication" type="date" class="form-control" value="{{ vehicle.manufactureDate|date("Y-m-d") }}" />
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                 <div class="position-relative form-group">
                                     <label for="hauteur" class="">Hauteur</label>
                                     <div class="input-group">
-                                        <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="hauteur" name="hauteur" value="1,47" />
+                                        <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="hauteur" name="hauteur" value="{{ vehicle.height }}" />
                                         <div class="input-group-append"><span class="input-group-text">mètre(s)</span></div>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                 <div class="position-relative form-group">
                                     <label for="largeur" class="">Largeur</label>
                                     <div class="input-group">
-                                        <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="largeur" name="largeur" value="1,75" />
+                                        <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="largeur" name="largeur" value="{{ vehicle.width }}" />
                                         <div class="input-group-append"><span class="input-group-text">mètre(s)</span></div>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                                 <div class="position-relative form-group">
                                     <label for="poids" class="">Poids</label>
                                     <div class="input-group">
-                                        <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="poids" name="poids" value="1,156" />
+                                        <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="poids" name="poids" value="{{ vehicle.weight }}" />
                                         <div class="input-group-append"><span class="input-group-text">tonne(s)</span></div>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
                                 <div class="position-relative form-group">
                                     <label for="puissance" class="">Puissance</label>
                                     <div class="input-group">
-                                        <input placeholder="1" type="number" min="1" class="form-control" id="puissance" name="puissance" value="112" />
+                                        <input placeholder="1" type="number" min="1" class="form-control" id="puissance" name="puissance" value="{{ vehicle.power }}" />
                                         <div class="input-group-append"><span class="input-group-text">ch</span></div>
                                     </div>
                                 </div>
