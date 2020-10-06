@@ -81,4 +81,21 @@ class AgentsController extends AbstractController
         $this->addFlash("success", "L'agent a bien été modifié.");
         return $this->redirectToRoute("agents_view");
     }
+
+    /**
+     * @Route("/agents/edit_profil", name="agents_edit_profil")
+     */
+    public function agentEditProfil()
+    {
+        return $this->render('content/agents/edit_profil.html.twig', []);
+    }
+
+    /**
+     * @Route("/agents/edit_profil/submit", name="agents_edit_profil_submit")
+     */
+    public function agentEditProfilSubmit()
+    {
+        $this->addFlash("success", "Le profil a bien été modifié.");
+        return $this->redirectToRoute("agents_view");
+    }
 }
