@@ -84,6 +84,21 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                    <label for="statut" class="">Statut actuel du véhicule</label>
+                                    <div class="position-relative form-group">
+                                        <select type="select" id="statut" name="statut" class="custom-select" required>
+                                            <option value="" hidden>Statut</option>
+                                            {% for state in status %}
+                                            <option value="{{ state.id }}">{{ state.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
