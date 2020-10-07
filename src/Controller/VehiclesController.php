@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Status;
 use App\Entity\Vehicle;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -84,7 +85,12 @@ class VehiclesController extends AbstractController
      */
     public function vehiclesAdd()
     {
-        return $this->render('content/vehicles/add.html.twig', []);
+        $manager = $this->getDoctrine()->getManager();
+        $status = $manager->getRepository(Status::class)->findAll();
+
+        return $this->render('content/vehicles/add.html.twig', [
+            "status" => $status
+        ]);
     }
 
     /**
@@ -104,6 +110,7 @@ class VehiclesController extends AbstractController
         $vehicle->setWeight($request->request->get("poids"));
         $vehicle->setPower($request->request->get("puissance"));
         $vehicle->setPhoto("");
+        $vehicle->setStatus($manager->getRepository(Status::class)->find($request->request->get("statut")));
         $vehicle->setIsActivated(true);
 
         $manager->persist($vehicle);
@@ -138,12 +145,15 @@ class VehiclesController extends AbstractController
      */
     public function vehiclesEdit(string $id)
     {
-        $vehicle = $this->getDoctrine()->getRepository(Vehicle::class)->find($id);
+        $manager = $this->getDoctrine()->getManager();
+        $vehicle = $manager->getRepository(Vehicle::class)->find($id);
+        $status = $manager->getRepository(Status::class)->findAll();
 
         if ($vehicle)
         {
             return $this->render('content/vehicles/edit.html.twig', [
-                "vehicle" => $vehicle
+                "vehicle" => $vehicle,
+                "status" => $status
             ]);
         }
 
@@ -168,6 +178,7 @@ class VehiclesController extends AbstractController
             $vehicle->setWidth($request->request->get("largeur"));
             $vehicle->setWeight($request->request->get("poids"));
             $vehicle->setPower($request->request->get("puissance"));
+            $vehicle->setStatus($manager->getRepository(Status::class)->find($request->request->get("statut")));
 
             $manager->persist($vehicle);
             $manager->flush();
