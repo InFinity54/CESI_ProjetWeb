@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Vehicle;
+use App\Entity\Agence;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +17,11 @@ class VehiclesController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
         $vehicles = $manager->getRepository(Vehicle::class)->findBy(["isActivated" => true]);
+        $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
 
         return $this->render('content/vehicles/index.html.twig', [
-            "vehicles" => $vehicles
+            "vehicles" => $vehicles,
+            "agences" => $agences
         ]);
     }
 
@@ -29,9 +32,11 @@ class VehiclesController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
         $vehicles = $manager->getRepository(Vehicle::class)->findBy(["isActivated" => false]);
+        $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
 
         return $this->render('content/vehicles/disabled.html.twig', [
-            "vehicles" => $vehicles
+            "vehicles" => $vehicles,
+            "agences" => $agences
         ]);
     }
 
@@ -84,7 +89,8 @@ class VehiclesController extends AbstractController
      */
     public function vehiclesAdd()
     {
-        return $this->render('content/vehicles/add.html.twig', []);
+        $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
+        return $this->render('content/vehicles/add.html.twig', ['agences' => $agences ]);
     }
 
     /**
@@ -105,6 +111,7 @@ class VehiclesController extends AbstractController
         $vehicle->setPower($request->request->get("puissance"));
         $vehicle->setPhoto("");
         $vehicle->setIsActivated(true);
+        $vehicle->setAgence($manager->getRepository(Agence::class)->find($request->request->get("agence")));
 
         $manager->persist($vehicle);
         $manager->flush();
@@ -121,11 +128,13 @@ class VehiclesController extends AbstractController
     public function vehiclesView(string $id)
     {
         $vehicle = $this->getDoctrine()->getRepository(Vehicle::class)->find($id);
+        $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
         
         if ($vehicle)
         {
             return $this->render('content/vehicles/view.html.twig', [
-                "vehicle" => $vehicle
+                "vehicle" => $vehicle,
+                "agences" => $agences
             ]);
         }
 
@@ -139,11 +148,13 @@ class VehiclesController extends AbstractController
     public function vehiclesEdit(string $id)
     {
         $vehicle = $this->getDoctrine()->getRepository(Vehicle::class)->find($id);
+        $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
 
         if ($vehicle)
         {
             return $this->render('content/vehicles/edit.html.twig', [
-                "vehicle" => $vehicle
+                "vehicle" => $vehicle,
+                "agences" => $agences
             ]);
         }
 
@@ -158,6 +169,7 @@ class VehiclesController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
         $vehicle = $manager->getRepository(Vehicle::class)->find($id);
+        $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
 
         if ($vehicle)
         {
@@ -168,6 +180,7 @@ class VehiclesController extends AbstractController
             $vehicle->setWidth($request->request->get("largeur"));
             $vehicle->setWeight($request->request->get("poids"));
             $vehicle->setPower($request->request->get("puissance"));
+            $vehicle->setAgence($manager->getRepository(Agence::class)->find($request->request->get("agence")));
 
             $manager->persist($vehicle);
             $manager->flush();

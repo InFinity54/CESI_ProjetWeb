@@ -13,7 +13,7 @@
                 <div>
                     Détail de l'agence
                     <div class="page-title-subheading">
-                        Nancy
+                        {{ agence.getNomAg() }}
                     </div>
                 </div>
             </div>
@@ -55,6 +55,51 @@
                             </p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Liste des véhicules de l'agence
+                </div>
+                <div class="table-responsive">
+                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Photo</th>
+                                <th class="text-center">Plaque d'immatriculation</th>
+                                <th class="text-center">Marque</th>
+                                <th class="text-center">Modéle</th>
+                                <th class="text-center">Date de fabrication</th>
+                                <th class="text-center">Hauteur</th>
+                                <th class="text-center">Largeur</th>
+                                <th class="text-center">Poids</th>
+                                <th class="text-center">Puissance</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {%for vehicle in vehicles %}
+                            <tr>
+                                <td class="text-center"><img width="150" class="rounded-circle" src="{{ asset("img/agences/exemple.jpg") }}" alt="" /></td>
+                                <td class="text-center">{{ vehicle.getNumberplate() }}</td>
+                                <td class="text-center">{{ vehicle.getBrand() }}</td>
+                                <td class="text-center">{{ vehicle.getModel() }}</td>
+                                <td class="text-center">{{ vehicle.manufactureDate|date("d/m/Y") }}</td>
+                                <td class="text-center">{{ vehicle.getHeight() }}</td>
+                                <td class="text-center">{{ vehicle.getWidth() }}</td>
+                                <td class="text-center">{{ vehicle.getWeight() }}</td>
+                                <td class="text-center">{{ vehicle.getPower() }}</td>
+                                <td class="text-center">
+                                    <a href="{{ path("agences_view", { id: vehicle.agence.id}) }}" class="btn btn-primary btn-sm rounded-circle" title="Voir l'historique du véhicules">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
