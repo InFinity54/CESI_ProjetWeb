@@ -62,12 +62,12 @@ class Vehicle
     private $agence;
 
     /**
-
      * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="vehicles")
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
 
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $photos;

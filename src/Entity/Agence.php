@@ -45,12 +45,12 @@ class Agence
     private $ville_ag;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $numero;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $fax_ag;
 
@@ -134,24 +134,24 @@ class Agence
         return $this;
     }
 
-    public function getNumero(): ?int
+    public function getNumero(): ?string
     {
         return $this->numero;
     }
 
-    public function setNumero(int $numero): self
+    public function setNumero(string $numero): self
     {
         $this->numero = $numero;
 
         return $this;
     }
 
-    public function getFaxAg(): ?int
+    public function getFaxAg(): ?string
     {
         return $this->fax_ag;
     }
 
-    public function setFaxAg(int $fax_ag): self
+    public function setFaxAg(string $fax_ag): self
     {
         $this->fax_ag = $fax_ag;
 

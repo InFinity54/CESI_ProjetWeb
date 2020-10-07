@@ -16,9 +16,9 @@ class VehiclePictureUploader
         $this->slugger = $slugger;
     }
 
-    public function upload(UploadedFile $file, string $vehicleid)
+    public function upload(UploadedFile $file, string $vehicleid, int $photoNumber)
     {
-        $fileName = "vehicle".$vehicleid.".".$file->guessExtension();
+        $fileName = "vehicle".$vehicleid."_".$photoNumber.".".$file->guessExtension();
 
         try {
             $file->move($this->getTargetDirectory(), $fileName);

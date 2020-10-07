@@ -2,9 +2,13 @@
 
 {% block title %}Agents > Détail d'un agent{% endblock %}
 
-{% block css %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/fotorama.css") }}" />
+{% endblock %}
 
-{% block js %}{% endblock %}
+{% block js %}
+    <script src="{{ asset("vendors/js/fotorama.js") }}"></script>
+{% endblock %}
 
 {% block body %}
     <div class="app-page-title">
@@ -26,7 +30,9 @@
                     Photo
                 </div>
                 <div class="card-body">
-                    <img src="{{ asset('img/agents/' ~ agent.photo) }}" alt="" width="100%" height="auto" />
+                    <div class="fotorama w-100" data-width="100%" data-height="200" data-allowfullscreen="true" data-nav="thumbs">
+                        <img src="{{ asset('img/agents/' ~ agent.photo) }}" alt="" width="100%" height="auto" />
+                    </div>
                 </div>
             </div>
         </div>

@@ -55,11 +55,14 @@ class VehiclesController extends AbstractController
      */
     public function vehiclesEnable(string $id)
     {
-        $vehicle = $this->getDoctrine()->getRepository(Vehicle::class)->find($id);
+        $manager = $this->getDoctrine()->getManager();
+        $vehicle = $manager->getRepository(Vehicle::class)->find($id);
 
         if ($vehicle)
         {
             $vehicle->setIsActivated(true);
+            $manager->persist($vehicle);
+            $manager->flush();
             $this->addFlash("success", "Le véhicule a été activé.");
             return $this->redirectToRoute("vehicles_list");
         }
@@ -73,11 +76,14 @@ class VehiclesController extends AbstractController
      */
     public function vehiclesDisable(string $id)
     {
-        $vehicle = $this->getDoctrine()->getRepository(Vehicle::class)->find($id);
+        $manager = $this->getDoctrine()->getManager();
+        $vehicle = $manager->getRepository(Vehicle::class)->find($id);
 
         if ($vehicle)
         {
             $vehicle->setIsActivated(false);
+            $manager->persist($vehicle);
+            $manager->flush();
             $this->addFlash("success", "Le véhicule a été désactivé.");
             return $this->redirectToRoute("vehicles_list");
         }
@@ -126,17 +132,20 @@ class VehiclesController extends AbstractController
         $manager->persist($vehicle);
         $manager->flush();
 
-        $vehiclephoto = $imageUploader->upload($request->files->get("photo"), $vehicle->getNumberplate());
+        if ($request->files->get("photo") !== null)
+        {
+            $vehiclephoto = $imageUploader->upload($request->files->get("photo"), $vehicle->getNumberplate(), count($vehicle->getPhotos()));
 
-        if ($vehiclephoto)
-        {
-            $vehicle->setPhotos([$vehiclephoto]);
-            $manager->persist($vehicle);
-            $manager->flush();
-        }
-        else
-        {
-            $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo du véhicule.");
+            if ($vehiclephoto)
+            {
+                $vehicle->setPhotos([$vehiclephoto]);
+                $manager->persist($vehicle);
+                $manager->flush();
+            }
+            else
+            {
+                $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo du véhicule.");
+            }
         }
 
         $this->addFlash("success", "Le véhicule a bien été ajouté.");
@@ -150,7 +159,9 @@ class VehiclesController extends AbstractController
      */
     public function vehiclesAddPhoto(string $id)
     {
-        return $this->render('content/vehicles/addphoto.html.twig', []);
+        return $this->render('content/vehicles/addphoto.html.twig', [
+            "vehicleid" => $id
+        ]);
     }
 
     /**
@@ -163,20 +174,23 @@ class VehiclesController extends AbstractController
 
         if ($vehicle)
         {
-            $vehiclephoto = $imageUploader->upload($request->files->get("photo"), $vehicle->getId());
+            if ($request->files->get("photo") !== null)
+            {
+                $vehiclephoto = $imageUploader->upload($request->files->get("photo"), $vehicle->getNumberplate(), count($vehicle->getPhotos()) + 1);
 
-            if ($vehiclephoto)
-            {
-                $photos = $vehicle->getPhotos();
-                $photos[] = $vehiclephoto;
-                $vehicle->setPhotos($photos);
-                $manager->persist($vehicle);
-                $manager->flush();
-                $this->addFlash("success", "La photo a bien été ajoutée au véhicule.");
-            }
-            else
-            {
-                $this->addFlash("danger", "Une erreur est survenue durant l'envoi de la photo du véhicule.");
+                if ($vehiclephoto)
+                {
+                    $photos = $vehicle->getPhotos();
+                    $photos[] = $vehiclephoto;
+                    $vehicle->setPhotos($photos);
+                    $manager->persist($vehicle);
+                    $manager->flush();
+                    $this->addFlash("success", "La photo a bien été ajoutée au véhicule.");
+                }
+                else
+                {
+                    $this->addFlash("danger", "Une erreur est survenue durant l'envoi de la photo du véhicule.");
+                }
             }
         }
 
@@ -235,7 +249,6 @@ class VehiclesController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
         $vehicle = $manager->getRepository(Vehicle::class)->find($id);
-        $vehiclephoto = $imageUploader->upload($request->files->get("photo"), $vehicle->getId());
         $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
 
         if ($vehicle)
@@ -250,17 +263,22 @@ class VehiclesController extends AbstractController
             $vehicle->setStatus($manager->getRepository(Status::class)->find($request->request->get("statut")));
             $vehicle->setAgence($manager->getRepository(Agence::class)->find($request->request->get("agence")));
 
-            if ($vehiclephoto)
+            if ($request->files->get("photo") !== null)
             {
-                $photos = $vehicle->getPhotos();
-                $photos[] = $vehiclephoto;
-                $vehicle->setPhotos($photos);
-                $manager->persist($vehicle);
-                $manager->flush();
-            }
-            else
-            {
-                $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo du véhicule.");
+                $vehiclephoto = $imageUploader->upload($request->files->get("photo"), $vehicle->getNumberplate(), count($vehicle->getPhotos()) + 1);
+
+                if ($vehiclephoto)
+                {
+                    $photos = $vehicle->getPhotos();
+                    $photos[] = $vehiclephoto;
+                    $vehicle->setPhotos($photos);
+                    $manager->persist($vehicle);
+                    $manager->flush();
+                }
+                else
+                {
+                    $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo du véhicule.");
+                }
             }
 
             $manager->persist($vehicle);

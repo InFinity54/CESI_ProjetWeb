@@ -43,8 +43,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
-                                    <label for="photo" class="">Photo</label>
-                                    <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" data-default-file="{{ asset("img/vehicles/" ~ vehicle.photo) }}" />
+                                    <label for="photo" class="">Ajouter une nouvelle photo</label>
+                                    <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" />
                                 </div>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                     <div class="position-relative form-group">
                                         <select type="select" id="statut" name="statut" class="custom-select" required>
                                             {% for state in status %}
-                                                <option value="{{ state.id }}" {% if vehicle.status.id is same as(state.id) %}selected{% endfor %}>{{ state.name }}</option>
+                                                <option value="{{ state.id }}" {% if vehicle.status.id is same as(state.id) %}selected{% endif %}>{{ state.name }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
