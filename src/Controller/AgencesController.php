@@ -48,14 +48,13 @@ class AgencesController extends AbstractController
         if ($agenceimage)
         {
             $agence->setImageAg($agenceimage);
+            $this->getdoctrine()->getmanager()->persist($agence);
+            $this->getdoctrine()->getmanager()->flush();
         }
         else
         {
             $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agence.");
         }
-
-        $this->getdoctrine()->getmanager()->persist($agence);
-        $this->getdoctrine()->getmanager()->flush();
         
         $this->addFlash("success", "L'agence a bien été ajoutée.");
         return $this->redirectToRoute("agences_view", [
@@ -87,30 +86,36 @@ class AgencesController extends AbstractController
     public function agencesEditSubmit(int $id, Request $request, AgencePictureUploader $imageUploader)
     {
         $agence = $this->getDoctrine()->getRepository(Agence::class)->find($id);
-        $agenceimage = $imageUploader->upload($request->files->get("photo"), $id);
 
-        $agence->setImageAg($agenceimage);
-        $agence->setNomAg($request->request->get('nom'));
-        $agence->setAdresseAg($request->request->get('adresse'));
-        $agence->setComplementAg($request->request->get('adressecomp'));
-        $agence->setCodepostalAg($request->request->get('codepostal'));
-        $agence->setVilleAg($request->request->get('ville'));
-        $agence->setNumero($request->request->get('tel'));
-        $agence->setFaxAg($request->request->get('fax'));
-
-        if ($agenceimage)
+        if ($agence)
         {
+            $agenceimage = $imageUploader->upload($request->files->get("photo"), $id);
+
             $agence->setImageAg($agenceimage);
-        }
-        else
-        {
-            $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agence.");
+            $agence->setNomAg($request->request->get('nom'));
+            $agence->setAdresseAg($request->request->get('adresse'));
+            $agence->setComplementAg($request->request->get('adressecomp'));
+            $agence->setCodepostalAg($request->request->get('codepostal'));
+            $agence->setVilleAg($request->request->get('ville'));
+            $agence->setNumero($request->request->get('tel'));
+            $agence->setFaxAg($request->request->get('fax'));
+
+            if ($agenceimage)
+            {
+                $agence->setImageAg($agenceimage);
+                $this->getdoctrine()->getmanager()->persist($agence);
+                $this->getdoctrine()->getmanager()->flush();
+            }
+            else
+            {
+                $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agence.");
+            }
+
+            $this->addFlash("success", "L'agence a bien été modifiée.");
+            return $this->redirectToRoute("agences_view", ['id' => $id]);
         }
 
-        $this->getdoctrine()->getmanager()->persist($agence);
-        $this->getdoctrine()->getmanager()->flush();
-
-        $this->addFlash("success", "L'agence a bien été modifiée.");
-        return $this->redirectToRoute("agences_view", ['id' => $id]);
+        $this->addFlash("danger", "L'agence demandée n'existe pas. Modification impossible.");
+        return $this->redirectToRoute("agences_list");
     }
 }
