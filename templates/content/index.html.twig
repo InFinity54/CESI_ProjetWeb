@@ -68,7 +68,7 @@
                                             <td class="text-center">{{ vehicle.model }}</td>
                                             <td class="text-center">{{ vehicle.manufactureDate|date("d/m/Y") }}</td>
                                             <td class="text-center">Ville non gérée</td>
-                                            <td class="text-center"><span class="badge badge-dark">Statuts non gérés</span></td>
+                                            <td class="text-center"><span class="badge badge-{{ vehicle.status.color }}">{{ vehicle.status.name }}</span></td>
                                         </tr>
                                     {% endfor %}
                                 {% endif %}
