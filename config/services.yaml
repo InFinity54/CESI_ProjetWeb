@@ -25,3 +25,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Service\AgencePictureUploader:
+        arguments:
+            $targetDirectory: '%kernel.project_dir%/public/img/agences/'
+    App\Service\AgentPictureUploader:
+        arguments:
+            $targetDirectory: '%kernel.project_dir%/public/img/agents/'
+    App\Service\VehiclePictureUploader:
+        arguments:
+            $targetDirectory: '%kernel.project_dir%/public/img/vehicles/'
