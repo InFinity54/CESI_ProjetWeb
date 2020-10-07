@@ -33,7 +33,7 @@
                         <tbody>
                         {%for agence in agences %}
                             <tr>
-                                <td class="text-center"><img width="150" class="rounded-circle" src="{{ asset("img/agences/exemple.jpg") }}" alt="" /></td>
+                                <td class="text-center"><img width="150" class="rounded-circle" src="{{ asset("img/agences/" ~ agence.imageAg) }}" alt="" /></td>
                                 <td class="text-center">{{ agence.getNomAg() }}</td>
                                 <td class="text-center">{{ agence.getAdresseAg() }} </br>
                                 {{ agence.getComplementAg() }} </br>

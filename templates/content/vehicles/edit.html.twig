@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <form method="post" action="{{ path("vehicles_edit_submit", { id: vehicle.numberplate }) }}">
+    <form method="post" action="{{ path("vehicles_edit_submit", { id: vehicle.numberplate }) }}" enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-3">

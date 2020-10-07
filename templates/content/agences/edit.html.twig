@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <form method="post" action="{{ path("agences_edit_submit", {id: agence.id}) }}">
+    <form method="post" action="{{ path("agences_edit_submit", {id: agence.id}) }}" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
@@ -44,7 +44,7 @@
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
                                     <label for="photo" class="">Photo de l'agence</label>
-                                    <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" data-default-file="{{ asset("img/agences/exemple.jpg") }}" />
+                                    <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" data-default-file="{{ asset("img/agences/" ~ agence.imageAg) }}" />
                                 </div>
                             </div>
                         </div>

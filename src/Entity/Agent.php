@@ -72,6 +72,11 @@ class Agent implements UserInterface
      */
     private $dateInscription;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $photo = "default.jpg";
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,7 +115,7 @@ class Agent implements UserInterface
 
     public function setRoles(array $roles): self
     {
-        $this->roles = implode(";", $roles);
+        $this->roles = implode(";", array_unique($roles));
         return $this;
     }
 
@@ -216,6 +221,18 @@ class Agent implements UserInterface
     public function setDateInscription(\DateTimeInterface $dateInscription): self
     {
         $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }
