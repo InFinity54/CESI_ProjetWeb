@@ -115,7 +115,7 @@ class Agent implements UserInterface
 
     public function setRoles(array $roles): self
     {
-        $this->roles = implode(";", $roles);
+        $this->roles = implode(";", array_unique($roles));
         return $this;
     }
 

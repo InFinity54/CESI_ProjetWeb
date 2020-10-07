@@ -56,20 +56,15 @@ class Vehicle
     private $isActivated;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $photo;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Agence::class, inversedBy="vehicles")
      * @ORM\JoinColumn(nullable=false)
      */
     private $agence;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $photos;
 
     public function getNumberplate(): ?string
     {
@@ -179,18 +174,6 @@ class Vehicle
         return $this;
     }
 
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(string $photo): self
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
     public function getAgence(): ?Agence
     {
         return $this->agence;
@@ -200,6 +183,18 @@ class Vehicle
     {
         $this->agence = $agence;
 
+        return $this;
+    }
+
+    public function getPhotos(): array
+    {
+        $photos = explode(";", $this->photos);
+        return array_unique($photos);
+    }
+
+    public function setPhotos(array $photos): self
+    {
+        $this->photos = implode(";", array_unique($photos));
         return $this;
     }
 }

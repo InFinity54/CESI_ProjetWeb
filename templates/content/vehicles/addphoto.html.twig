@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Véhicules > Ajouter une photo à un véhicule{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/dropify.min.css") }}" />
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ asset('vendors/js/dropify.min.js') }}"></script>
+    <script>
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Déposez une photo ou cliquez ici pour en sélectionner une',
+                'replace': 'Déposez une photo ou cliquez ici pour remplacer la photo',
+                'error':   'Une erreur est survenue. Veuillz réessayer plus tard.'
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Ajout d'une nouvelle photo pour un véhicule</div></div>
+        </div>
+    </div>
+    <form method="post" action="{{ path("vehicles_addphoto_submit") }}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Photo
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                    <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="position-relative form-group">
+                                     <button type="submit" class="btn btn-block btn-primary">Ajouter le véhicule</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

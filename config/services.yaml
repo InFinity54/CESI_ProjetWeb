@@ -31,3 +31,6 @@ services:
     App\Service\AgentPictureUploader:
         arguments:
             $targetDirectory: '%kernel.project_dir%/public/img/agents/'
+    App\Service\VehiclePictureUploader:
+        arguments:
+            $targetDirectory: '%kernel.project_dir%/public/img/vehicles/'

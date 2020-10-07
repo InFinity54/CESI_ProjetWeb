@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class AgentPictureUploader
+class VehiclePictureUploader
 {
     private $targetDirectory;
     private $slugger;
@@ -16,9 +16,9 @@ class AgentPictureUploader
         $this->slugger = $slugger;
     }
 
-    public function upload(UploadedFile $file, int $agentid)
+    public function upload(UploadedFile $file, string $vehicleid)
     {
-        $fileName = "agent".$agentid.".".$file->guessExtension();
+        $fileName = "vehicle".$vehicleid.".".$file->guessExtension();
 
         try {
             $file->move($this->getTargetDirectory(), $fileName);
