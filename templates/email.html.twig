@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>VGest | {% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <p style="text-align: center;"><img src="{{ absolute_url(asset("img/VGest_Logo.png")) }}" alt="VGest" /></p>
+        <p><strong>Bonjour {{ agent.fullname }}</strong></p>
+        <br /><br />
+        {% block body %}{% endblock %}
+        <br /><br />
+        <p>
+            Cordialement,
+            <br />
+            L'équipe VGest.
+        </p>
+    </body>
+</html>
