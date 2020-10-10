@@ -90,7 +90,13 @@
                                 <tbody>
                                     {% for vehicle in vehicles %}
                                         <tr>
-                                            <td class="text-center"><img width="150" class="rounded-circle" src="{{ asset("img/agences/exemple.jpg") }}" alt="" /></td>
+                                            <td class="text-center">
+                                                {% if vehicle.photos|length > 0 %}
+                                                    <img src="{{ asset("img/vehicles/" ~ vehicle.photos|first) }}" alt="" width="150px" height="auto" class="rounded-circle" />
+                                                {% else %}
+                                                    Pas de photo
+                                                {% endif %}
+                                            </td>
                                             <td class="text-center">{{ vehicle.getNumberplate() }}</td>
                                             <td class="text-center">{{ vehicle.getBrand() }}</td>
                                             <td class="text-center">{{ vehicle.getModel() }}</td>
