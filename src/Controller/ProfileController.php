@@ -11,13 +11,19 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ProfileController extends AbstractController
 {
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     /**
      * @Route("/profile", name="profile")
      */
     public function profile()
     {
         $user = $this->getDoctrine()->getRepository(Agent::class)->findBy(["username" => $this->getUser()->getUsername()])[0];
-        //au dd($user);
         return $this->render('content/profile/view.html.twig', [
             "profile" => $user
         ]);
@@ -63,5 +69,38 @@ class ProfileController extends AbstractController
 
         $this->addFlash("success", "Votre profil a bien été modifié.");
         return $this->redirectToRoute("profile");
+    }
+
+    /**
+     * @Route("/profile/password", name="profile_password")
+     */
+    public function profilePassword()
+    {
+        $user = $this->getDoctrine()->getRepository(Agent::class)->findBy(["username" => $this->getUser()->getUsername()])[0];
+        return $this->render('content/profile/password.html.twig', []);
+    }
+
+    /**
+     * @Route("/profile/password/submit", name="profile_password_submit")
+     */
+    public function profilePasswordSubmit(Request $request)
+    {
+        $user = $this->getDoctrine()->getRepository(Agent::class)->findBy(["username" => $this->getUser()->getUsername()])[0];
+        $oldPassword = $request->request->get("oldpwd");
+        $newPassword = $request->request->get("newpwd");
+
+        if ($this->passwordEncoder->isPasswordValid($user, $oldPassword))
+        {
+            $user->setPassword($this->passwordEncoder->encodePassword($user, $newPassword));
+
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash("success", "Votre mot de passe a bien été modifié.");
+            return $this->redirectToRoute("profile");
+        }
+
+        $this->addFlash("danger", "Votre mot de passe actuel est incorrect.");
+        return $this->redirectToRoute("profile_password");
     }
 }
