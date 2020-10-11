@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Accès refusé{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Erreur</div></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Accès refusé
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ asset("img/errors/403.png") }}" alt="" width="40%" height="auto" />
+                    <p>
+                        Vous ne disposez pas des droits nécessaires pour accéder à cette page.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

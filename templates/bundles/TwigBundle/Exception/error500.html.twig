@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Erreur serveur{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Erreur</div></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Erreur serveur
+                </div>
+                <div class="card-body text-center">
+                    <img src="{{ asset("img/errors/500.png") }}" alt="" width="40%" height="auto" />
+                    <p>
+                        Le serveur a rencontré un problème lors du traitement de votre demande.
+                        <br />
+                        Veuillez réessayer plus tard.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
