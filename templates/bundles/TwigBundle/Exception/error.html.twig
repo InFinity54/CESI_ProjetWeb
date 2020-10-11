@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block js %}{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading"><div>Erreur</div></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Erreur inconnue
+                </div>
+                <div class="card-body text-center">
+                    <p><img src="{{ asset("img/errors/unknown.png") }}" alt="" width="200px" height="auto" /></p>
+                    <p>Une erreur est survenue, et il ne nous est pas possible d'afficher cette page pour le moment. Nous vous présentons nos excuses pour la gêne occasionnée.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
