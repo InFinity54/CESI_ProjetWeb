@@ -31,7 +31,7 @@
                             <tbody>
                                 {% for status in allstatus %}
                                     <tr>
-                                        <td class="text-center">{{ status.name }}</td>
+                                        <td class="text-center"><span class="badge badge-{{ status.color }}">{{ status.name }}</span></td>
                                         <td class="text-center">0</td>
                                         <td class="text-center"><a href="{{ path("status_remove", {id:status.id}) }}" class="btn btn-danger btn-sm rounded-circle"><i class="fas fa-trash"></i></a></td>
                                     </tr>
