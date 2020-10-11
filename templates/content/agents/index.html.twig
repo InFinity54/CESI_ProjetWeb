@@ -22,29 +22,35 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Identité</th>
-                                <th class="text-center">Nom d'utilisateur</th>
-                                <th class="text-center">Statut</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for agent in allAgents  %}
+                    {% if allAgents|length > 0 %}
+                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                            <thead>
                                 <tr>
-                                    <td class="text-center">{{ agent.lastname }} {{ agent.firstname }}</td>
-                                    <td class="text-center">{{ agent.username }}</td>
-                                    <td class="text-center"><span class="badge badge-success">Actif</span></td>
-                                    <td class="text-center"><a href="{{ path("agents_view", {id:agent.id}) }}" class="btn btn-primary btn-sm rounded-circle"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ path("agents_edit", {id:agent.id}) }}" class="btn btn-primary btn-sm rounded-circle"><i class="fas fa-edit"></i></a>
-                                        <a href="{{ path("agents_disable", {id:agent.id}) }}" class="btn btn-danger btn-sm rounded-circle"><i class="fas fa-times"></i></a>
-                                    </td>
+                                    <th class="text-center">Photo</th>
+                                    <th class="text-center">Identité</th>
+                                    <th class="text-center">Nom d'utilisateur</th>
+                                    <th class="text-center">Statut</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {% for agent in allAgents  %}
+                                    <tr>
+                                        <td class="text-center"><img src="{{ asset("img/agents/" ~ agent.photo) }}" alt="" class="rounded-circle" width="50px" height="auto" /></td>
+                                        <td class="text-center">{{ agent.lastname }} {{ agent.firstname }}</td>
+                                        <td class="text-center">{{ agent.username }}</td>
+                                        <td class="text-center"><span class="badge badge-success">Activé</span></td>
+                                        <td class="text-center"><a href="{{ path("agents_view", {id:agent.id}) }}" class="btn btn-primary btn-sm rounded-circle"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ path("agents_edit", {id:agent.id}) }}" class="btn btn-primary btn-sm rounded-circle"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ path("agents_disable", {id:agent.id}) }}" class="btn btn-danger btn-sm rounded-circle"><i class="fas fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="text-center">Aucun agent n'est actuellement activé.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
