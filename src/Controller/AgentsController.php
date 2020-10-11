@@ -3,13 +3,24 @@ namespace App\Controller;
 
 use App\Entity\Agent;
 use App\Service\AgentPictureUploader;
+use App\Service\PasswordGenerator;
 use DateTime;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AgentsController extends AbstractController
 {
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     /**
      * @Route("/agents", name="agents_list")
      */
@@ -160,6 +171,47 @@ class AgentsController extends AbstractController
         }
 
         $this->addFlash("danger", "L'agent demandé n'existe pas. Modification impossible.");
+        return $this->redirectToRoute("agents_list");
+    }
+
+    /**
+     * @Route("/agents/password/{id}", name="agents_password")
+     */
+    public function agentsPassword(int $id, Swift_Mailer $mailer)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $agent = $manager->getRepository(Agent::class)->find($id);
+
+        if ($agent)
+        {
+            $newPassword = PasswordGenerator::generate();
+
+            $agent->setPassword($this->passwordEncoder->encodePassword($agent, $newPassword));
+            $manager->persist($agent);
+            $manager->flush();
+
+            $email = (new Swift_Message())
+                ->setFrom(["noreply@projetweb.infinity54.fr" => "VGest"])
+                ->setTo([$agent->getEmail() => $agent->getFirstname()." ".strtoupper($agent->getLastname())])
+                ->setSubject("Réinitialisation de votre mot de passe")
+                ->setBody(
+                    $this->renderView('emails/forgotpassword.html.twig', [
+                        "agent" => [
+                            "fullname" => $agent->getFirstname()." ".strtoupper($agent->getLastname()),
+                            "username" => $agent->getUsername()
+                        ],
+                        "newpassword" => $newPassword
+                    ]),
+                    'text/html'
+                )
+            ;
+            $mailer->send($email);
+
+            $this->addFlash("success", "Le mot de passe de l'agent a bien été réinitialisé.");
+            return $this->redirectToRoute("agents_list");
+        }
+
+        $this->addFlash("danger", "L'agent n'existe plus. Réinitialisation du mot de passe impossible.");
         return $this->redirectToRoute("agents_list");
     }
 }

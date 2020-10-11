@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Agent;
+use App\Service\PasswordGenerator;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -48,13 +49,13 @@ class PasswordController extends AbstractController
 
         if ($agent)
         {
-            $newPassword = $this->generatePassword();
+            $newPassword = PasswordGenerator::generate();
 
             $agent->setPassword($this->passwordEncoder->encodePassword($agent, $newPassword));
             $manager->persist($agent);
             $manager->flush();
 
-            $email = (new Swift_Message('Hello Email'))
+            $email = (new Swift_Message())
                 ->setFrom(["noreply@projetweb.infinity54.fr" => "VGest"])
                 ->setTo([$agent->getEmail() => $agent->getFirstname()." ".strtoupper($agent->getLastname())])
                 ->setSubject("Réinitialisation de votre mot de passe")
@@ -77,18 +78,5 @@ class PasswordController extends AbstractController
 
         $this->addFlash("danger", "Aucun compte possédant cette adresse e-mail n'a été trouvé.");
         return $this->redirectToRoute("password");
-    }
-
-    private function generatePassword($length = 10)
-    {
-        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        $count = mb_strlen($chars);
-
-        for ($i = 0, $result = ''; $i < $length; $i++) {
-            $index = random_int(0, $count - 1);
-            $result .= mb_substr($chars, $index, 1);
-        }
-
-        return $result;
     }
 }

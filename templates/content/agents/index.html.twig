@@ -42,6 +42,7 @@
                                         <td class="text-center"><span class="badge badge-success">Activé</span></td>
                                         <td class="text-center"><a href="{{ path("agents_view", {id:agent.id}) }}" class="btn btn-primary btn-sm rounded-circle"><i class="fas fa-eye"></i></a>
                                             <a href="{{ path("agents_edit", {id:agent.id}) }}" class="btn btn-primary btn-sm rounded-circle"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ path("agents_password", {id:agent.id}) }}" class="btn btn-warning btn-sm rounded-circle"><i class="fas fa-key"></i></a>
                                             <a href="{{ path("agents_disable", {id:agent.id}) }}" class="btn btn-danger btn-sm rounded-circle"><i class="fas fa-times"></i></a>
                                         </td>
                                     </tr>
