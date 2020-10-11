@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class PasswordController extends AbstractController
 {
     private $passwordEncoder;
-    private $vgestLogo;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
