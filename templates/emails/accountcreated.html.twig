@@ -1,0 +1,21 @@
+{% extends "email.html.twig" %}
+
+{% block title %}Votre compte VGest{% endblock %}
+
+{% block body %}
+    <p>
+        Un compte utilisateur vous a été créé sur VGest.
+    </p>
+    <br /><br />
+    <p>
+        Voici les identifiants de connexion associés à votre compte.
+        <br />
+        Identifant : {{ agent.username }}
+        <br />
+        Mot de passe : {{ newpassword }}
+    </p>
+    <br /><br />
+    <p>
+        Il est fortement recommandé de modifier votre mot de passe depuis votre profil dès votre première connexion, pour des raisons de sécurité.
+    </p>
+{% endblock %}

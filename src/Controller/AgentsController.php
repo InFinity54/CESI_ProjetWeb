@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Agent;
 use App\Service\AgentPictureUploader;
 use App\Service\PasswordGenerator;
+use App\Service\UsernameGenerator;
 use DateTime;
 use Swift_Mailer;
 use Swift_Message;
@@ -80,16 +81,19 @@ class AgentsController extends AbstractController
     /**
      * @Route("/agents/add/submit", name="agents_add_submit")
      */
-    public function agentsAddSubmit(Request $request, AgentPictureUploader $imageUploader)
+    public function agentsAddSubmit(Request $request, AgentPictureUploader $imageUploader, Swift_Mailer $mailer)
     {
+        $username = UsernameGenerator::generate($request->request->get("prenom"), $request->request->get("nom"));
+        $password = PasswordGenerator::generate();
+
         $agent = new Agent();
         $agent->setLastname($request->request->get("nom"));
         $agent->setFirstname($request->request->get("prenom"));
         $agent->setFixe($request->request->get("fixe"));
         $agent->setMobile($request->request->get("mobile"));
         $agent->setFax($request->request->get("fax"));
-        $agent->setUsername($request->request->get("identifiant"));
-        $agent->setPassword("test");
+        $agent->setUsername($username);
+        $agent->setPassword($password);
         $agent->setRoles(["ROLE_USER"]);
         $agent->setEmail($request->request->get("email"));
         $agent->setIsActivated(true);
@@ -108,6 +112,23 @@ class AgentsController extends AbstractController
         {
             $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agent.");
         }
+
+        $email = (new Swift_Message())
+            ->setFrom(["noreply@projetweb.infinity54.fr" => "VGest"])
+            ->setTo([$agent->getEmail() => $agent->getFirstname()." ".strtoupper($agent->getLastname())])
+            ->setSubject("Votre compte VGest")
+            ->setBody(
+                $this->renderView('emails/accountcreated.html.twig', [
+                    "agent" => [
+                        "fullname" => $agent->getFirstname()." ".strtoupper($agent->getLastname()),
+                        "username" => $username
+                    ],
+                    "newpassword" => $password
+                ]),
+                'text/html'
+            )
+        ;
+        $mailer->send($email);
 
         $this->addFlash("success", "L'agent a bien été ajouté.");
         return $this->redirectToRoute("agents_view", [
