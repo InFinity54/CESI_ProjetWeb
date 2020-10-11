@@ -51,11 +51,11 @@
                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th class="text-center">Photo</th>
                                     <th class="text-center">Immatriculation</th>
                                     <th class="text-center">Marque</th>
                                     <th class="text-center">Modèle</th>
                                     <th class="text-center">Date de fabrication</th>
-                                    <th class="text-center">Agence</th>
                                     <th class="text-center">Statut</th>
                                 </tr>
                             </thead>
@@ -63,11 +63,17 @@
                                 {% if vehicles.list|length > 0 %}
                                     {% for vehicle in vehicles.list %}
                                         <tr>
+                                            <td class="text-center">
+                                                {% if vehicle.photos|length > 0 %}
+                                                    <img src="{{ asset("img/vehicles/" ~ vehicle.photos|first) }}" alt="" width="100px" height="auto" class="rounded-circle" />
+                                                {% else %}
+                                                    Pas de photo
+                                                {% endif %}
+                                            </td>
                                             <td class="text-center">{{ vehicle.numberplate }}</td>
                                             <td class="text-center">{{ vehicle.brand }}</td>
                                             <td class="text-center">{{ vehicle.model }}</td>
                                             <td class="text-center">{{ vehicle.manufactureDate|date("d/m/Y") }}</td>
-                                            <td class="text-center">{{ vehicle.getAgence().getNomAg() }}</td>
                                             <td class="text-center"><span class="badge badge-{{ vehicle.status.color }}">{{ vehicle.status.name }}</span></td>                         
                                         </tr>
                                     {% endfor %}
