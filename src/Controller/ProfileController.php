@@ -46,7 +46,6 @@ class ProfileController extends AbstractController
     public function profileEditSubmit(Request $request, AgentPictureUploader $imageUploader)
     {
         $user = $this->getDoctrine()->getRepository(Agent::class)->findBy(["username" => $this->getUser()->getUsername()])[0];
-        $userphoto = $imageUploader->upload($request->files->get("photo"), $user->getId());
 
         $user->setLastname($request->request->get("nom"));
         $user->setFirstname($request->request->get("prenom"));
@@ -55,13 +54,18 @@ class ProfileController extends AbstractController
         $user->setFax($request->request->get("fax"));
         $user->setEmail($request->request->get("email"));
 
-        if ($userphoto)
+        if ($request->files->get("photo"))
         {
-            $user->setPhoto($userphoto);
-        }
-        else
-        {
-            $this->addFlash("warning", "Une erreur est survenue durant l'envoi de votre photo de profil.");
+            $userphoto = $imageUploader->upload($request->files->get("photo"), $user->getId());
+
+            if ($userphoto)
+            {
+                $user->setPhoto($userphoto);
+            }
+            else
+            {
+                $this->addFlash("warning", "Une erreur est survenue durant l'envoi de votre photo de profil.");
+            }
         }
 
         $this->getDoctrine()->getManager()->persist($user);
