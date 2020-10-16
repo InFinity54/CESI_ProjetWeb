@@ -11,7 +11,9 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <link rel="stylesheet" type="text/css" href="{{ asset("css/architectui.css") }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset("css/custom.css") }}" />
-        {% block css %}{% endblock %}
+        {% block css %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
     </head>
     <body>
         <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
@@ -38,6 +40,8 @@
         <script type="text/javascript" src="{{ asset("js/architectui.js") }}"></script>
         <script src="{{ asset("vendors/js/toastr.min.js") }}"></script>
         {% include "includes/alerts.html.twig" %}
-        {% block js %}{% endblock %}
+        {% block js %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>

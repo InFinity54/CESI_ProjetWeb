@@ -37,7 +37,7 @@ yarn install
 yarn encore production
 ```
 
-Il faudra aussi modifier le fichier _.env_ pour mettre la valeur de la variable _APP_ENV_ à _prod_. Le serveur de Symfony n'est plus nécessaire en environnement de production. En cas d'erreur lors de l'installation ou de l'utilisation, voir la section "Erreurs connues".
+Il faudra aussi modifier le fichier _.env_ pour mettre la valeur de la variable _APP_ENV_ à _prod_. Il sera aussi nécessaire de modifier _NODE_ENV_ et _dev_ en, respectivement, _NODE_PROD_ et _prod_ au début du fichier _webpack.config.js_. Le serveur de Symfony n'est plus nécessaire en environnement de production. En cas d'erreur lors de l'installation ou de l'utilisation, voir la section "Erreurs connues".
 
 ## Erreurs connues
 ### Unrecognized options "dir_name, namespace" under "doctrine_migrations"
