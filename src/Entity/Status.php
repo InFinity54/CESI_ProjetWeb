@@ -10,7 +10,30 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=StatusRepository::class)
- * @ApiResource
+ * @ApiResource(
+ *     collectionOperations={
+ *          "GET"={
+ *              "path"="/status"
+ *          },
+ *          "POST"={
+ *              "path"="/status"
+ *          }
+ *     },
+ *     itemOperations={
+ *          "GET"={
+ *              "path"="/status/{id}"
+ *          },
+ *          "PUT"={
+ *              "path"="/status/{id}"
+ *          },
+ *          "DELETE"={
+ *              "path"="/status/{id}"
+ *          },
+ *          "PATCH"={
+ *              "path"="/status/{id}"
+ *          },
+ *     }
+ * )
  */
 class Status
 {

@@ -12,6 +12,7 @@ Avant de pouvoir manipuler ce projet, il est nécessaire d'installer [Symfony](h
 git clone https://github.com/InFinity54/CESI_ProjetWeb.git cesi_projetweb
 cd cesi_projetweb
 composer install
+npm install
 yarn install
 ```
 
@@ -33,6 +34,7 @@ En cas d'erreur après l'installation, voir la section "Erreurs connues".
 git clone https://github.com/InFinity54/CESI_ProjetWeb.git cesi_projetweb
 cd cesi_projetweb
 composer install --no-dev --optimize-autoloader
+npm install
 yarn install
 yarn encore production
 ```
@@ -51,7 +53,8 @@ composer install
 ### The local web server is already running
 
 ```bash
-symfony local:server:stop
+cd cesi_projetweb
+symfony server:stop
 ```
 
 Cette commande doit être executée dans un invite de commande lancé en mode administrateur pour fonctionner.

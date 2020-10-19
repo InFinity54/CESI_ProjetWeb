@@ -51,7 +51,7 @@ class VehiclesController extends AbstractController
     }
 
     /**
-     * @Route("/vehicles/enable/{id}", name="vehicles_enable")
+     * @Route("/vehicles/enable/{id}", name="vehicles_enable", options={"expose"=true})
      */
     public function vehiclesEnable(string $id)
     {
@@ -72,7 +72,7 @@ class VehiclesController extends AbstractController
     }
 
     /**
-     * @Route("/vehicles/disable/{id}", name="vehicles_disable")
+     * @Route("/vehicles/disable/{id}", name="vehicles_disable", options={"expose"=true})
      */
     public function vehiclesDisable(string $id)
     {
@@ -200,7 +200,7 @@ class VehiclesController extends AbstractController
     }
 
     /**
-     * @Route("/vehicles/view/{id}", name="vehicles_view")
+     * @Route("/vehicles/view/{id}", name="vehicles_view", options={"expose"=true})
      */
     public function vehiclesView(string $id)
     {
@@ -220,7 +220,7 @@ class VehiclesController extends AbstractController
     }
 
     /**
-     * @Route("/vehicles/edit/{id}", name="vehicles_edit")
+     * @Route("/vehicles/edit/{id}", name="vehicles_edit", options={"expose"=true})
      */
     public function vehiclesEdit(string $id)
     {

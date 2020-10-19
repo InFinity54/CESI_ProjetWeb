@@ -4,7 +4,9 @@
 
 {% block css %}{% endblock %}
 
-{% block js %}{% endblock %}
+{% block js %}
+    {{ encore_entry_script_tags('vehicleEnabledList') }}
+{% endblock %}
 
 {% block body %}
     <div class="app-page-title">
@@ -88,40 +90,7 @@
                                     <th class="text-center">Actions</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                {% for vehicle in vehicles %}
-                                    <tr>
-                                        <td class="text-center">
-                                            {% if vehicle.photos|length > 0 %}
-                                                <img src="{{ asset("img/vehicles/" ~ vehicle.photos|first) }}" alt="" width="150px" height="auto" class="rounded-circle" />
-                                            {% else %}
-                                                Pas de photo
-                                            {% endif %}
-                                        </td>
-                                        <td class="text-center">{{ vehicle.numberplate }}</td>
-                                        <td class="text-center">{{ vehicle.brand }}</td>
-                                        <td class="text-center">{{ vehicle.model }}</td>
-                                        <td class="text-center">{{ vehicle.manufactureDate|date("d/m/Y") }}</td>
-                                        <td class="text-center">{{ vehicle.height}} m</td>
-                                        <td class="text-center">{{ vehicle.width}} m</td>
-                                        <td class="text-center">{{ vehicle.weight }} tonnes</td>
-                                        <td class="text-center">{{ vehicle.power }} ch</td>
-                                        <td class="text-center">{{ vehicle.getAgence().getNomAg() }}</td>
-                                        <td class="text-center"><span class="badge badge-{{ vehicle.status.color }}">{{ vehicle.status.name }}</span></td>
-                                        <td class="text-center">
-                                            <a href="{{ path("vehicles_view", {id: vehicle.numberplate}) }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="{{ path("vehicles_edit", {id: vehicle.numberplate}) }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ path("vehicles_disable", {id: vehicle.numberplate}) }}" class="btn btn-danger btn-sm rounded-circle" title="Désactiver ce véhicule">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
+                                <tbody id="vehiclesenabledlist"></tbody>
                             </table>
                         </div>
                     {% else %}

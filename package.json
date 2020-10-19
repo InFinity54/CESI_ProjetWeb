@@ -1,7 +1,12 @@
 {
     "devDependencies": {
+        "@babel/preset-react": "7.0.0",
         "@symfony/webpack-encore": "^0.30.0",
+        "babel-preset-react": "^6.24.1",
         "core-js": "^3.0.0",
+        "prop-types": "^15.7.2",
+        "react": "^16.14.0",
+        "react-dom": "^16.14.0",
         "regenerator-runtime": "^0.13.2",
         "webpack-notifier": "^1.8.0"
     },
