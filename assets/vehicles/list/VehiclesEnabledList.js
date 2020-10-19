@@ -34,8 +34,10 @@ class VehiclesEnabledList extends React.Component {
     }
 
     render() {
-        const component = this.state.vehicles.map((item, index) => {
-            if (item.isActivated) {
+        $("#vehiclesenabledlistloading").remove();
+
+        if (this.state.vehicles.filter(vehicle => vehicle.isActivated).length > 0) {
+            return this.state.vehicles.map((item, index) => {
                 const viewLink = Routing.generate('vehicles_view', { id: item.numberplate }, true);
                 const editLink = Routing.generate('vehicles_edit', { id: item.numberplate }, true);
                 const disableLink = Routing.generate('vehicles_disable', { id: item.numberplate }, true);
@@ -93,12 +95,15 @@ class VehiclesEnabledList extends React.Component {
                 }, /*#__PURE__*/React.createElement("i", {
                     className: "fas fa-times"
                 }))));
-            } else {
-                return "";
-            }
-        });
-        $("#vehiclesenabledlistloading").remove();
-        return component;
+            });
+        } else {
+            return React.createElement("tr", {
+                key: 1
+            }, React.createElement("td", {
+                className: "text-center",
+                colspan: 12
+            }, "Aucun véhicule n'est actuellement actif."));
+        }
     }
 }
 

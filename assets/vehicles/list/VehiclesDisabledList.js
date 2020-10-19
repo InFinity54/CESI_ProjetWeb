@@ -35,8 +35,9 @@ class VehiclesDisabledList extends React.Component {
 
     render() {
         $("#vehiclesdisabledlistloading").remove();
-        return this.state.vehicles.map((item, index) => {
-            if (!item.isActivated) {
+
+        if (this.state.vehicles.filter(vehicle => !vehicle.isActivated).length > 0) {
+            return this.state.vehicles.map((item, index) => {
                 const viewLink = Routing.generate('vehicles_view', { id: item.numberplate }, true);
                 const editLink = Routing.generate('vehicles_edit', { id: item.numberplate }, true);
                 const enableLink = Routing.generate('vehicles_enable', { id: item.numberplate }, true);
@@ -89,15 +90,20 @@ class VehiclesDisabledList extends React.Component {
                     className: "fas fa-edit"
                 })), /*#__PURE__*/React.createElement("a", {
                     href: enableLink,
-                    className: "btn btn-danger btn-sm rounded-circle",
+                    className: "btn btn-success btn-sm rounded-circle",
                     title: "Activer ce v\xE9hicule"
                 }, /*#__PURE__*/React.createElement("i", {
-                    className: "fas fa-times"
+                    className: "fas fa-check"
                 }))));
-            } else {
-                return "";
-            }
-        });
+            });
+        } else {
+            return React.createElement("tr", {
+                key: 1
+            }, React.createElement("td", {
+                className: "text-center",
+                colspan: 12
+            }, "Aucun véhicule n'est actuellement désactivé."));
+        }
     }
 }
 

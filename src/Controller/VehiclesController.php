@@ -18,11 +18,9 @@ class VehiclesController extends AbstractController
     public function vehiclesList()
     {
         $manager = $this->getDoctrine()->getManager();
-        $vehicles = $manager->getRepository(Vehicle::class)->findBy(["isActivated" => true]);
         $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
 
         return $this->render('content/vehicles/index.html.twig', [
-            "vehicles" => $vehicles,
             "agences" => $agences
         ]);
     }
@@ -33,11 +31,9 @@ class VehiclesController extends AbstractController
     public function vehiclesListDisabled()
     {
         $manager = $this->getDoctrine()->getManager();
-        $vehicles = $manager->getRepository(Vehicle::class)->findBy(["isActivated" => false]);
         $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
 
         return $this->render('content/vehicles/disabled.html.twig', [
-            "vehicles" => $vehicles,
             "agences" => $agences
         ]);
     }
