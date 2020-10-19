@@ -7,6 +7,7 @@ use App\Repository\AgenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AgenceRepository::class)
@@ -18,11 +19,13 @@ class Agence
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("vehicle-agence")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("vehicle-agence")
      */
     private $nom_ag;
 

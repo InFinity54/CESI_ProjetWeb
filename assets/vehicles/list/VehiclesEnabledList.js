@@ -70,11 +70,18 @@ class VehiclesEnabledList extends React.Component {
             const viewLink = Routing.generate('vehicles_view', { id: item.numberplate }, true);
             const editLink = Routing.generate('vehicles_edit', { id: item.numberplate }, true);
             const disableLink = Routing.generate('vehicles_disable', { id: item.numberplate }, true);
+            const vehiclePhotos = (item.photos + '').split(",");
+            const vehicleManufactureDate = item.manufacture_date.substring(8, 10) + "/" + item.manufacture_date.substring(5, 7) + "/" + item.manufacture_date.substring(0, 4);
             
-            return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
-                className: "text-center",
-                key: index
-            }, item.photos), /*#__PURE__*/React.createElement("td", {
+            return /*#__PURE__*/React.createElement("tr", { key: index }, /*#__PURE__*/React.createElement("td", {
+                className: "text-center"
+            }, React.createElement("img", {
+                src: "/img/vehicles/" + vehiclePhotos[0],
+                alt: "",
+                width: "150px",
+                height: "auto",
+                className: "rounded-circle"
+            })), /*#__PURE__*/React.createElement("td", {
                 className: "text-center"
             }, item.numberplate), /*#__PURE__*/React.createElement("td", {
                 className: "text-center"
@@ -82,17 +89,17 @@ class VehiclesEnabledList extends React.Component {
                 className: "text-center"
             }, item.model), /*#__PURE__*/React.createElement("td", {
                 className: "text-center"
-            }, item.manufactureDate), /*#__PURE__*/React.createElement("td", {
+            }, vehicleManufactureDate), /*#__PURE__*/React.createElement("td", {
                 className: "text-center"
-            }, item.height, "} m"), /*#__PURE__*/React.createElement("td", {
+            }, item.height, " m"), /*#__PURE__*/React.createElement("td", {
                 className: "text-center"
-            }, item.width, "} m"), /*#__PURE__*/React.createElement("td", {
+            }, item.width, " m"), /*#__PURE__*/React.createElement("td", {
                 className: "text-center"
             }, item.weight, " tonnes"), /*#__PURE__*/React.createElement("td", {
                 className: "text-center"
             }, item.power, " ch"), /*#__PURE__*/React.createElement("td", {
                 className: "text-center"
-            }, item.agence), /*#__PURE__*/React.createElement("td", {
+            }, item.agence.nom_ag), /*#__PURE__*/React.createElement("td", {
                 className: "text-center"
             }, /*#__PURE__*/React.createElement("span", {
                 className: 'badge badge-' + item.status.color
