@@ -75,22 +75,28 @@
                         <div class="table-responsive">
                             <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                                 <thead>
-                                <tr>
-                                    <th class="text-center">Photo</th>
-                                    <th class="text-center">Immatriculation</th>
-                                    <th class="text-center">Marque</th>
-                                    <th class="text-center">Modèle</th>
-                                    <th class="text-center">Date de fabrication</th>
-                                    <th class="text-center">Hauteur</th>
-                                    <th class="text-center">Largeur</th>
-                                    <th class="text-center">Poids</th>
-                                    <th class="text-center">Puissance</th>
-                                    <th class="text-center">Agence</th>
-                                    <th class="text-center">Statut</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
+                                    <tr>
+                                        <th class="text-center">Photo</th>
+                                        <th class="text-center">Immatriculation</th>
+                                        <th class="text-center">Marque</th>
+                                        <th class="text-center">Modèle</th>
+                                        <th class="text-center">Date de fabrication</th>
+                                        <th class="text-center">Hauteur</th>
+                                        <th class="text-center">Largeur</th>
+                                        <th class="text-center">Poids</th>
+                                        <th class="text-center">Puissance</th>
+                                        <th class="text-center">Agence</th>
+                                        <th class="text-center">Statut</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
                                 </thead>
-                                <tbody id="vehiclesenabledlist"></tbody>
+                                <tbody id="vehiclesenabledlist">
+                                    <tr id="vehiclesenabledlistloading" class="text-center">
+                                        <td colspan="12" class="text-center">
+                                            <img src="{{ asset("img/VGest_Loading.svg") }}" alt="Chargement..." width="150px" height="auto" />
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     {% else %}
