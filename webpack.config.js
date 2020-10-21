@@ -30,6 +30,8 @@ Encore
     .addEntry('vehicleDisabledList', './assets/vehicles/VehiclesDisabledList.js')
     .addEntry('agencesList', './assets/AgencesList.js')
     .addEntry('statutsList', './assets/StatutsList.js')
+    .addEntry('agentsEnabledList', './assets/agents/AgentsEnabledList.js')
+    .addEntry('agentsDisabledList', './assets/agents/AgentsDisabledList.js')
     //.addEntry('page1', './assets/page1.js')
     //.addEntry('page2', './assets/page2.js')
 
