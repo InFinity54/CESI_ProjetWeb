@@ -11,30 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=StatusRepository::class)
- * @ApiResource(
- *     collectionOperations={
- *          "GET"={
- *              "path"="/status"
- *          },
- *          "POST"={
- *              "path"="/status"
- *          }
- *     },
- *     itemOperations={
- *          "GET"={
- *              "path"="/status/{id}"
- *          },
- *          "PUT"={
- *              "path"="/status/{id}"
- *          },
- *          "DELETE"={
- *              "path"="/status/{id}"
- *          },
- *          "PATCH"={
- *              "path"="/status/{id}"
- *          },
- *     }
- * )
+ * @ApiResource
  */
 class Status
 {

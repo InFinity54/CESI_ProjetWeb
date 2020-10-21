@@ -26,7 +26,7 @@ class StatusController extends AbstractController
     }
 
     /**
-     * @Route("/status/remove/{id}", name="status_remove")
+     * @Route("/status/remove/{id}", name="status_remove", options={"expose"=true})
      */
     public function statusRemove(int $id)
     {
