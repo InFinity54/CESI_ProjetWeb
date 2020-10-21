@@ -5,7 +5,7 @@ var ReactDOM = require("react-dom");
 
 const e = React.createElement;
 
-class VehiclesEnabledList extends React.Component {
+class VehiclesDisabledList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,13 +34,13 @@ class VehiclesEnabledList extends React.Component {
     }
 
     render() {
-        $("#vehiclesenabledlistloading").remove();
+        $("#vehiclesdisabledlistloading").remove();
 
-        if (this.state.vehicles.filter(vehicle => vehicle.isActivated).length > 0) {
+        if (this.state.vehicles.filter(vehicle => !vehicle.isActivated).length > 0) {
             return this.state.vehicles.map((item, index) => {
                 const viewLink = Routing.generate('vehicles_view', { id: item.numberplate }, true);
                 const editLink = Routing.generate('vehicles_edit', { id: item.numberplate }, true);
-                const disableLink = Routing.generate('vehicles_disable', { id: item.numberplate }, true);
+                const enableLink = Routing.generate('vehicles_enable', { id: item.numberplate }, true);
                 const vehiclePhotos = (item.photos + '').split(",");
                 const vehicleManufactureDate = item.manufacture_date.substring(8, 10) + "/" + item.manufacture_date.substring(5, 7) + "/" + item.manufacture_date.substring(0, 4);
 
@@ -89,11 +89,11 @@ class VehiclesEnabledList extends React.Component {
                 }, /*#__PURE__*/React.createElement("i", {
                     className: "fas fa-edit"
                 })), /*#__PURE__*/React.createElement("a", {
-                    href: disableLink,
-                    className: "btn btn-danger btn-sm rounded-circle",
-                    title: "D\xE9sactiver ce v\xE9hicule"
+                    href: enableLink,
+                    className: "btn btn-success btn-sm rounded-circle",
+                    title: "Activer ce v\xE9hicule"
                 }, /*#__PURE__*/React.createElement("i", {
-                    className: "fas fa-times"
+                    className: "fas fa-check"
                 }))));
             });
         } else {
@@ -101,11 +101,11 @@ class VehiclesEnabledList extends React.Component {
                 key: 1
             }, React.createElement("td", {
                 className: "text-center",
-                colspan: 12
-            }, "Aucun véhicule n'est actuellement actif."));
+                colSpan: 12
+            }, "Aucun véhicule n'est actuellement désactivé."));
         }
     }
 }
 
-const domContainer = document.querySelector('#vehiclesenabledlist');
-ReactDOM.render(e(VehiclesEnabledList), domContainer);
+const domContainer = document.querySelector('#vehiclesdisabledlist');
+ReactDOM.render(e(VehiclesDisabledList), domContainer);
