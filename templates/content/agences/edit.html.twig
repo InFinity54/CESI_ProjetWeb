@@ -4,19 +4,15 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/dropify.min.css") }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/intlTelInput.min.css") }}" />
 {% endblock %}
 
 {% block js %}
+    <script type="text/javascript" src="{{ asset('vendors/js/intlTelInput.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendors/js/dropify.min.js') }}"></script>
-    <script>
-        $('.dropify').dropify({
-            messages: {
-                'default': 'Déposez une photo ou cliquez ici pour en sélectionner une',
-                'replace': 'Déposez une photo ou cliquez ici pour remplacer la photo',
-                'error':   'Une erreur est survenue. Veuillz réessayer plus tard.'
-            }
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('vendors/js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset("js/global_validation.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/pages/agences_form.js") }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -32,7 +28,7 @@
             </div>
         </div>
     </div>
-    <form method="post" action="{{ path("agences_edit_submit", {id: agence.id}) }}" enctype="multipart/form-data">
+    <form method="post" action="{{ path("agences_edit_submit", {id: agence.id}) }}" enctype="multipart/form-data" id="agence-form">
         <div class="row">
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
@@ -90,19 +86,13 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="tel" class="">Numéro de téléphone</label>
-                                    <div class="input-group">
-                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="tel" name="tel" value="{{ agence.getNumero() }}" />
-                                    </div>
+                                    <input type="tel" id="tel" name="tel" value="{{ agence.getNumero() }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="fax" class="">Numéro de fax</label>
-                                    <div class="input-group">
-                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" value="{{ agence.getFaxAg() }}" />
-                                    </div>
+                                    <input type="tel" id="fax" name="fax" value="{{ agence.getFaxAg() }}" />
                                 </div>
                             </div>
                         </div>
