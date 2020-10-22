@@ -4,7 +4,10 @@
 
 {% block css %}{% endblock %}
 
-{% block js %}{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{{ asset('vendors/js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset("js/pages/status_form.js") }}"></script>
+{% endblock %}
 
 {% block body %}
     <div class="app-page-title">
@@ -12,7 +15,7 @@
             <div class="page-title-heading"><div>Ajout d'un nouveau statut</div></div>
         </div>
     </div>
-    <form method="post" action="{{ path("status_add_submit") }}">
+    <form method="post" action="{{ path("status_add_submit") }}" id="status-form">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-3">
