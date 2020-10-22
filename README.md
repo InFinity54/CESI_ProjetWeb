@@ -13,6 +13,7 @@ git clone https://github.com/InFinity54/CESI_ProjetWeb.git cesi_projetweb
 cd cesi_projetweb
 composer install
 yarn install
+yarn encore dev
 ```
 
 Voir la section "Mise en production" pour une installation sur un serveur de production. En cas d'erreur après l'installation, voir la section "Erreurs connues".
