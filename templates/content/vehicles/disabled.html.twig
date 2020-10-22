@@ -21,41 +21,8 @@
                     Filtrer la liste des véhicules
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-3">
-                                <div class="position-relative form-group">
-                                    <select type="select" id="marque" name="marque" class="custom-select" required>
-                                        <option value="" hidden>Marque</option>
-                                        <option value="Audi">Audi</option>
-                                        <option value="Ford">Ford</option>
-                                        <option value="Peugeot">Peugeot</option>
-                                        <option value="Renault">Renault</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-3">
-                                <div class="position-relative form-group">
-                                    <select type="select" id="agence" name="agence" class="custom-select" required>
-                                        <option value="" hidden>Agence</option>
-                                        {% for agence in agences %}
-                                            <option value="{{ agence.getId() }}">{{ agence.getNomAg() }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-4">
-                                <div class="position-relative form-group form-inline">
-                                    <label for="puissance">Puissance</label>
-                                    <input type="range" min="90" max="540" value="90" class="form-control-range" id="puissance" name="puissance" />
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-2">
-                                <div class="position-relative form-group">
-                                    <a href="{{ path("vehicles_list_search") }}" class="btn btn-block btn-primary">Filtrer</a>
-                                </div>
-                            </div>
-                        </div>
+                    <form method="post" action="{{ path("vehicles_list_disabled_search") }}">
+                        {% include "content/vehicles/includes/filters.html.twig" %}
                     </form>
                 </div>
             </div>

@@ -65,12 +65,12 @@ class Agent implements UserInterface
     private $mobile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $fax;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $fixe;
 
