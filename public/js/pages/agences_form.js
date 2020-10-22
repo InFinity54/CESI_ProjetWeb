@@ -44,7 +44,7 @@ $(document).ready(function() {
                 isValidPhoneNumber: true
             },
             fax: {
-                required: true,
+                required: false,
                 isValidPhoneNumber: true
             }
         },
@@ -66,7 +66,6 @@ $(document).ready(function() {
                 isValidPhoneNumber: "Veuillez entrer un numéro de téléphone valide."
             },
             fax: {
-                required: "Ce champ est obligatoire.",
                 isValidPhoneNumber: "Veuillez entrer un numéro de fax valide."
             }
         },

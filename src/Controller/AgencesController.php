@@ -44,17 +44,20 @@ class AgencesController extends AbstractController
         $this->getdoctrine()->getmanager()->persist($agence);
         $this->getdoctrine()->getmanager()->flush();
 
-        $agenceimage = $imageUploader->upload($request->files->get("photo"), $agence->getId());
+        if ($request->files->get("photo"))
+        {
+            $agenceimage = $imageUploader->upload($request->files->get("photo"), $agence->getId());
 
-        if ($agenceimage)
-        {
-            $agence->setImageAg($agenceimage);
-            $this->getdoctrine()->getmanager()->persist($agence);
-            $this->getdoctrine()->getmanager()->flush();
-        }
-        else
-        {
-            $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agence.");
+            if ($agenceimage)
+            {
+                $agence->setImageAg($agenceimage);
+                $this->getdoctrine()->getmanager()->persist($agence);
+                $this->getdoctrine()->getmanager()->flush();
+            }
+            else
+            {
+                $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agence.");
+            }
         }
         
         $this->addFlash("success", "L'agence a bien été ajoutée.");
@@ -91,27 +94,30 @@ class AgencesController extends AbstractController
 
         if ($agence)
         {
-            $agenceimage = $imageUploader->upload($request->files->get("photo"), $id);
-
-            $agence->setImageAg($agenceimage);
             $agence->setNomAg($request->request->get('nom'));
             $agence->setAdresseAg($request->request->get('adresse'));
             $agence->setComplementAg($request->request->get('adressecomp'));
             $agence->setCodepostalAg($request->request->get('codepostal'));
             $agence->setVilleAg($request->request->get('ville'));
-            $agence->setNumero($request->request->get('telFixe'));
-            $agence->setFaxAg($request->request->get('faxFixe'));
+            $agence->setNumero($request->request->get('telFull'));
+            $agence->setFaxAg($request->request->get('telFull'));
 
-            if ($agenceimage)
+            if ($request->files->get("photo"))
             {
-                $agence->setImageAg($agenceimage);
-                $this->getdoctrine()->getmanager()->persist($agence);
-                $this->getdoctrine()->getmanager()->flush();
+                $agenceimage = $imageUploader->upload($request->files->get("photo"), $id);
+
+                if ($agenceimage)
+                {
+                    $agence->setImageAg($agenceimage);
+                }
+                else
+                {
+                    $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agence.");
+                }
             }
-            else
-            {
-                $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agence.");
-            }
+
+            $this->getdoctrine()->getmanager()->persist($agence);
+            $this->getdoctrine()->getmanager()->flush();
 
             $this->addFlash("success", "L'agence a bien été modifiée.");
             return $this->redirectToRoute("agences_view", ['id' => $id]);

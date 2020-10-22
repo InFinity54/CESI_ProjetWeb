@@ -36,16 +36,16 @@ $(document).ready(function() {
             prenom: {
                 required: true
             },
-            fixe: {
-                required: true,
-                isValidPhoneNumber: true
-            },
             mobile: {
                 required: true,
                 isValidPhoneNumber: true
             },
+            fixe: {
+                required: false,
+                isValidPhoneNumber: true
+            },
             fax: {
-                required: true,
+                required: false,
                 isValidPhoneNumber: true
             },
             email: {
@@ -60,16 +60,14 @@ $(document).ready(function() {
             prenom: {
                 required: "Ce champ est obligatoire."
             },
-            fixe: {
-                required: "Ce champ est obligatoire.",
-                isValidPhoneNumber: "Veuillez saisir un numéro de téléphone valide."
-            },
             mobile: {
                 required: "Ce champ est obligatoire.",
                 isValidPhoneNumber: "Veuillez saisir un numéro de téléphone valide."
             },
+            fixe: {
+                isValidPhoneNumber: "Veuillez saisir un numéro de téléphone valide."
+            },
             fax: {
-                required: "Ce champ est obligatoire.",
                 isValidPhoneNumber: "Veuillez saisir un numéro de fax valide."
             },
             email: {
