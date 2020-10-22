@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-sm-12 col-md-3">
+        <div class="position-relative form-group">
+            <select type="select" id="brand" name="brand" class="custom-select">
+                <option value="" hidden>Marque</option>
+                {% for brand in brands %}
+                    <option value="{{ brand.brand }}">{{ brand.brand }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-3">
+        <div class="position-relative form-group">
+            <select type="select" id="model" name="model" class="custom-select">
+                <option value="" hidden>Modèle</option>
+                {% for model in models %}
+                    <option value="{{ model.model }}" data-brand="{{ model.brand }}" hidden>{{ model.model }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-3">
+        <div class="position-relative form-group">
+            <select type="select" id="agence" name="agence" class="custom-select">
+                <option value="" hidden>Agence</option>
+                {% for agence in agences %}
+                    <option value="{{ agence.getId() }}">{{ agence.getNomAg() }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-2">
+        <div class="position-relative form-group">
+            <button type="submit" class="btn btn-block btn-primary">Filtrer</button>
+        </div>
+    </div>
+</div>
+<div class="row d-none" id="morefilters">
+    <div class="col-sm-12 col-md-4">
+        <div class="position-relative form-group form-inline">
+            <label for="manufactureDateStart">Véhicule fabriquée entre les deux dates suivantes :</label>
+            <div class="w-100">
+                <input class="form-control" id="manufactureDateStart" name="manufactureDateStart" type="date" min="{{ oldest_manufacture_date|date("Y-m-d") }}" max="{{ "now"|date("Y-m-d") }}" /> et <input class="form-control" id="manufactureDateEnd" name="manufactureDateEnd" type="date" min="{{ oldest_manufacture_date|date("Y-m-d") }}" max="{{ "now"|date("Y-m-d") }}" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="position-relative form-group form-inline">
+            <label for="height">Hauteur</label>
+            <div class="w-100">
+                <div class="input-group">
+                    <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="height" name="height" />
+                    <div class="input-group-append"><span class="input-group-text">mètre(s)</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="position-relative form-group form-inline">
+            <label for="width">Largeur</label>
+            <div class="w-100">
+                <div class="input-group">
+                    <input placeholder="1,00" type="number" min="1" step="0.01" class="form-control" id="width" name="width" />
+                    <div class="input-group-append"><span class="input-group-text">mètre(s)</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="position-relative form-group form-inline">
+            <label for="weight">Poids</label>
+            <div class="w-100">
+                <b class="mr-3">{{ weight.min }}</b> <input id="weight" name="weight" type="text" class="span2" value="" data-slider-min="{{ weight.min }}" data-slider-max="{{ weight.max }}" data-slider-step="1" data-slider-value="[{{ weight.min }},{{ weight.max }}]" /> <b class="ml-3">{{ weight.max }}</b>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="position-relative form-group form-inline">
+            <label for="power">Puissance</label>
+            <div class="w-100">
+                <b class="mr-3">{{ power.min }}</b> <input id="power" name="power" type="text" class="span2" value="" data-slider-min="{{ power.min }}" data-slider-max="{{ power.max }}" data-slider-step="1" data-slider-value="[{{ power.min }},{{ power.max }}]" /> <b class="ml-3">{{ power.max }}</b>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="position-relative form-group">
+            <select type="select" id="status" name="status" class="custom-select">
+                <option value="" hidden>Statut</option>
+                {% for state in status %}
+                    <option value="{{ state.id }}">{{ state.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
