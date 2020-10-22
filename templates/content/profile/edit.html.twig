@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
-                                    <label for="photo" class="">Photo</label>
+                                    <label for="photo">Photo</label>
                                     <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" data-default-file="{{ asset("img/agents/" ~ profile.photo) }}" />
                                 </div>
                             </div>
@@ -48,13 +48,13 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
-                                    <label for="nom" class="">Nom</label>
+                                    <label for="nom">Nom</label>
                                     <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" value="{{ profile.lastname }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
-                                    <label for="prenom" class="">Prénom</label>
+                                    <label for="prenom">Prénom</label>
                                     <input name="prenom" id="prenom" placeholder="Prénom" type="text" class="form-control" value="{{ profile.firstname }}" />
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-4">
                                 <div class="position-relative form-group">
-                                    <label for="telfixe" class="">Numéro de téléphone fixe</label>
+                                    <label for="telfixe">Numéro de téléphone fixe</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
                                         <input placeholder="601234578" type="number" class="form-control" id="fixe" name="fixe" value="{{ profile.fixe }}" />
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="position-relative form-group">
-                                    <label for="tel" class="">Numéro de téléphone portable</label>
+                                    <label for="tel">Numéro de téléphone portable</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
                                         <input placeholder="601234578" type="number" class="form-control" id="mobile" name="mobile" value="{{ profile.mobile }}" />
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="position-relative form-group">
-                                    <label for="fax" class="">Numéro de fax</label>
+                                    <label for="fax">Numéro de fax</label>
                                     <div class="input-group">
                                         <div class="input-group-append"><span class="input-group-text">+33</span></div>
                                         <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" value="{{ profile.fax }}" />
@@ -102,13 +102,13 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
-                                    <label for="identifiant" class="">Identifiant de connexion</label>
+                                    <label for="identifiant">Identifiant de connexion</label>
                                     <input name="identifiant" id="identifiant" placeholder="Identifiant" type="text" class="form-control" value="{{ profile.username }}" readonly/>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
-                                    <label for="email" class="">Adresse e-mail</label>
+                                    <label for="email">Adresse e-mail</label>
                                     <input name="email" id="email" placeholder="adresse@email.fr" type="email" class="form-control" value="{{ profile.email }}" />
                                 </div>
                             </div>

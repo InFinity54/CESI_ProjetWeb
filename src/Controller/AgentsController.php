@@ -89,9 +89,9 @@ class AgentsController extends AbstractController
         $agent = new Agent();
         $agent->setLastname($request->request->get("nom"));
         $agent->setFirstname($request->request->get("prenom"));
-        $agent->setFixe($request->request->get("fixe"));
-        $agent->setMobile($request->request->get("mobile"));
-        $agent->setFax($request->request->get("fax"));
+        $agent->setFixe($request->request->get("fixeFull"));
+        $agent->setMobile($request->request->get("mobileFull"));
+        $agent->setFax($request->request->get("faxFull"));
         $agent->setUsername($username);
         $agent->setPassword($password);
         $agent->setRoles(["ROLE_USER"]);
