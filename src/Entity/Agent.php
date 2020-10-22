@@ -8,7 +8,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=AgentRepository::class)
- * @ApiResource
+ * @ApiResource(
+ *     attributes={
+ *          "pagination_enabled"=false,
+ *          "order": {"lastname": "asc", "firstname": "asc"}
+ *     },
+ * )
  */
 class Agent implements UserInterface
 {

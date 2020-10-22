@@ -67,7 +67,7 @@ class AgencesController extends AbstractController
     }
 
     /**
-     * @Route("/agences/view/{id}", name="agences_view")
+     * @Route("/agences/view/{id}", name="agences_view", options={"expose"=true})
      */
     public function agencesView(int $id)
     {
@@ -77,7 +77,7 @@ class AgencesController extends AbstractController
     }
 
     /**
-     * @Route("/agences/edit/{id}", name="agences_edit")
+     * @Route("/agences/edit/{id}", name="agences_edit", options={"expose"=true})
      */
     public function agencesEdit(int $id)
     {

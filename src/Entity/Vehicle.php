@@ -1,76 +1,103 @@
 <?php
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Repository\VehicleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VehicleRepository::class)
- * @ApiResource
+ * @ApiResource(
+ *     attributes={
+ *          "pagination_enabled"=false,
+ *          "order": {"numberplate": "asc"}
+ *     },
+ *     normalizationContext={"groups"={"vehicle","vehicle-agence","vehicle-status"}}
+ * )
  */
 class Vehicle
 {
     /**
      * @ORM\Id()
      * @ORM\Column(type="string", length=9)
+     * @Groups("vehicle")
      */
     private $numberplate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("vehicle")
      */
     private $brand;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("vehicle")
      */
     private $model;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups("vehicle")
+     * @ApiProperty(attributes={
+     *     "normalization_context"={
+     *         "datetime_format"="Y-m-d|",
+     *     },
+     * })
      */
     private $manufacture_date;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("vehicle")
      */
     private $height;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("vehicle")
      */
     private $width;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("vehicle")
      */
     private $weight;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("vehicle")
      */
     private $power;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("vehicle")
      */
     private $isActivated;
 
     /**
      * @ORM\ManyToOne(targetEntity=Agence::class, inversedBy="vehicles")
      * @ORM\JoinColumn(nullable=false)
+     * @ApiSubresource
+     * @Groups("vehicle-agence")
      */
     private $agence;
 
     /**
      * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="vehicles")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("vehicle-status")
      */
     private $status;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("vehicle")
      */
     private $photos;
 

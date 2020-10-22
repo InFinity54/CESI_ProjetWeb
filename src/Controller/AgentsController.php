@@ -34,7 +34,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/agents/enable/{id}", name="agents_enable")
+     * @Route("/agents/enable/{id}", name="agents_enable", options={"expose"=true})
      */
     public function agentsEnable(int $id)
     {
@@ -47,7 +47,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/agents/disable/{id}", name="agents_disable")
+     * @Route("/agents/disable/{id}", name="agents_disable", options={"expose"=true})
      */
     public function agentsDisable(int $id)
     {
@@ -140,7 +140,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/agents/view/{id}", name="agents_view")
+     * @Route("/agents/view/{id}", name="agents_view", options={"expose"=true})
      */
     public function agentsView(int $id)
     {
@@ -151,7 +151,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/agents/edit/{id}", name="agents_edit")
+     * @Route("/agents/edit/{id}", name="agents_edit", options={"expose"=true})
      */
     public function agentsEdit(int $id)
     {
