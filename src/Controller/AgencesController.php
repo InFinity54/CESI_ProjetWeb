@@ -38,8 +38,8 @@ class AgencesController extends AbstractController
         $agence->setComplementAg($request->request->get('adressecomp'));
         $agence->setCodepostalAg($request->request->get('codepostal'));
         $agence->setVilleAg($request->request->get('ville'));
-        $agence->setNumero($request->request->get('tel'));
-        $agence->setFaxAg($request->request->get('fax'));
+        $agence->setNumero($request->request->get('telFull'));
+        $agence->setFaxAg($request->request->get('faxFull'));
 
         $this->getdoctrine()->getmanager()->persist($agence);
         $this->getdoctrine()->getmanager()->flush();
@@ -99,8 +99,8 @@ class AgencesController extends AbstractController
             $agence->setComplementAg($request->request->get('adressecomp'));
             $agence->setCodepostalAg($request->request->get('codepostal'));
             $agence->setVilleAg($request->request->get('ville'));
-            $agence->setNumero($request->request->get('tel'));
-            $agence->setFaxAg($request->request->get('fax'));
+            $agence->setNumero($request->request->get('telFixe'));
+            $agence->setFaxAg($request->request->get('faxFixe'));
 
             if ($agenceimage)
             {
