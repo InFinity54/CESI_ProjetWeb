@@ -25,7 +25,7 @@ $(document).ready(function() {
         utilsScript: "/vendors/js/utils.js"
     });
 
-    $("#agent-form").validate({
+    $("#profile-form").validate({
         rules: {
             photo: {
                 required: false

@@ -4,19 +4,15 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/dropify.min.css") }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/intlTelInput.min.css") }}" />
 {% endblock %}
 
 {% block js %}
+    <script type="text/javascript" src="{{ asset('vendors/js/intlTelInput.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendors/js/dropify.min.js') }}"></script>
-    <script>
-        $('.dropify').dropify({
-            messages: {
-                'default': 'Déposez une photo ou cliquez ici pour en sélectionner une',
-                'replace': 'Déposez une photo ou cliquez ici pour remplacer la photo',
-                'error':   'Une erreur est survenue. Veuillz réessayer plus tard.'
-            }
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('vendors/js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset("js/global_validation.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/pages/profile_form.js") }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -29,7 +25,7 @@
             </div>
         </div>
     </div>
-    <form method="post" action="{{ path("profile_edit_submit") }}" enctype="multipart/form-data">
+    <form method="post" action="{{ path("profile_edit_submit") }}" enctype="multipart/form-data" id="profile-form">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-3">
@@ -62,29 +58,20 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-4">
                                 <div class="position-relative form-group">
-                                    <label for="telfixe">Numéro de téléphone fixe</label>
-                                    <div class="input-group">
-                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="fixe" name="fixe" value="{{ profile.fixe }}" />
-                                    </div>
+                                    <label for="mobile">Numéro de téléphone portable</label>
+                                    <input type="tel" id="mobile" name="mobile" value="{{ profile.mobile }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="position-relative form-group">
-                                    <label for="tel">Numéro de téléphone portable</label>
-                                    <div class="input-group">
-                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="mobile" name="mobile" value="{{ profile.mobile }}" />
-                                    </div>
+                                    <label for="fixe">Numéro de téléphone fixe</label>
+                                    <input type="tel" id="fixe" name="fixe" value="{{ profile.fixe }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div class="position-relative form-group">
                                     <label for="fax">Numéro de fax</label>
-                                    <div class="input-group">
-                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" value="{{ profile.fax }}" />
-                                    </div>
+                                    <input type="tel" id="fax" name="fax" value="{{ profile.fax }}" />
                                 </div>
                             </div>
                         </div>
@@ -103,7 +90,7 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="identifiant">Identifiant de connexion</label>
-                                    <input name="identifiant" id="identifiant" placeholder="Identifiant" type="text" class="form-control" value="{{ profile.username }}" readonly/>
+                                    <input name="identifiant" id="identifiant" placeholder="Identifiant" type="text" class="form-control" value="{{ profile.username }}" readonly />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
