@@ -8,15 +8,9 @@
 
 {% block js %}
     <script type="text/javascript" src="{{ asset('vendors/js/dropify.min.js') }}"></script>
-    <script>
-        $('.dropify').dropify({
-            messages: {
-                'default': 'Déposez une photo ou cliquez ici pour en sélectionner une',
-                'replace': 'Déposez une photo ou cliquez ici pour remplacer la photo',
-                'error':   'Une erreur est survenue. Veuillz réessayer plus tard.'
-            }
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('vendors/js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset("js/global_validation.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/pages/vehicles_form.js") }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -32,7 +26,7 @@
             </div>
         </div>
     </div>
-    <form method="post" action="{{ path("vehicles_edit_submit", { id: vehicle.numberplate }) }}" enctype="multipart/form-data">
+    <form method="post" action="{{ path("vehicles_edit_submit", { id: vehicle.numberplate }) }}" enctype="multipart/form-data" id="vehicle-form">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-3">
@@ -81,10 +75,9 @@
                                 <div class="position-relative form-group">
                                     <label for="agence">Agence gérant le véhicule</label>
                                     <div class="position-relative form-group">
-                                        <select type="select" id="agence" name="agence" class="custom-select" required>
-                                            <option value="" hidden>{{ vehicle.getAgence().getNomAg() }}</option>
+                                        <select type="select" id="agence" name="agence" class="custom-select">
                                             {%for agence in agences %}
-                                                <option value="{{ agence.getId() }}">{{ agence.getNomAg() }}</option>
+                                                <option value="{{ agence.getId() }}" {% if vehicle.agence.id is same as(agence.id) %}selected{% endif %}>{{ agence.getNomAg() }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -96,7 +89,7 @@
                                 <div class="position-relative form-group">
                                     <label for="statut">Statut actuel du véhicule</label>
                                     <div class="position-relative form-group">
-                                        <select type="select" id="statut" name="statut" class="custom-select" required>
+                                        <select type="select" id="statut" name="statut" class="custom-select">
                                             {% for state in status %}
                                                 <option value="{{ state.id }}" {% if vehicle.status.id is same as(state.id) %}selected{% endif %}>{{ state.name }}</option>
                                             {% endfor %}

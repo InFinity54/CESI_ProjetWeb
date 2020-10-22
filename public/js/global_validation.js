@@ -15,5 +15,5 @@ $.validator.addMethod("cityname", function(value, element) {
 }, "Veuillez saisir un nom de ville valide.");
 
 $.validator.addMethod("validmail", function(value, element) {
-    return this.optional(element) || /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i.test(value);
+    return this.optional(element) || /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/s.test(value);
 }, "Veuillez saisir une adresse e-mail valide.");

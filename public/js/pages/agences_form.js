@@ -37,7 +37,8 @@ $(document).ready(function() {
                 required: true
             },
             ville: {
-                required: true
+                required: true,
+                cityname: true
             },
             tel: {
                 required: true,
@@ -59,7 +60,8 @@ $(document).ready(function() {
                 required: "Ce champ est obligatoire."
             },
             ville: {
-                required: "Ce champ est obligatoire."
+                required: "Ce champ est obligatoire.",
+                cityname: "Veuillez saisir un nom de ville valide."
             },
             tel: {
                 required: "Ce champ est obligatoire.",
