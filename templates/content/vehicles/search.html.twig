@@ -21,9 +21,41 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <span class="badge badge-dark mr-2">Marque : Peugeot</span>
-                            <span class="badge badge-dark mr-2">Agence : Nancy</span>
-                            <span class="badge badge-dark mr-2">Puissance : environ 112 ch</span>
+                            {% if filters.brand is not null and filters.brand is not same as("") %}
+                                <span class="badge badge-dark mr-2">Marque : {{ filters.brand }}</span>
+                            {% endif %}
+
+                            {% if filters.model is not null and filters.model is not same as("") %}
+                                <span class="badge badge-dark mr-2">Modèle : {{ filters.model }}</span>
+                            {% endif %}
+
+                            {% if filters.agence is not null and filters.agence is not same as("") %}
+                                <span class="badge badge-dark mr-2">Agence : {{ filtersDetails.agence.nomAg }}</span>
+                            {% endif %}
+
+                            {% if filters.manufactureDateStart is not null and filters.manufactureDateStart is not same as("") and filters.manufactureDateEnd is not null and filters.manufactureDateEnd is not same as("") %}
+                                <span class="badge badge-dark mr-2">Véhicule fabriqué entre le {{ filters.manufactureDateStart|date("d/m/Y") }} et le {{ filters.manufactureDateEnd|date("d/m/Y") }}</span>
+                            {% endif %}
+
+                            {% if filters.height is not null and filters.height is not same as("") %}
+                                <span class="badge badge-dark mr-2">Hauteur : {{ filters.height }} mètre(s)</span>
+                            {% endif %}
+
+                            {% if filters.width is not null and filters.width is not same as("") %}
+                                <span class="badge badge-dark mr-2">Largeur : {{ filters.width }} mètre(s)</span>
+                            {% endif %}
+
+                            {% if filters.weight[0] is not null and filters.weight[0] is not same as("") and filters.weight[1] is not null and filters.weight[1] is not same as("") and filters.weight[0] is not same as(filters.weight[1]) %}
+                                <span class="badge badge-dark mr-2">Poids entre {{ filters.weight[0] }} et {{ filters.weight[1] }} tonne(s)</span>
+                            {% endif %}
+
+                            {% if filters.power[0] is not null and filters.power[0] is not same as("") and filters.power[1] is not null and filters.power[1] is not same as("") and filters.power[0] is not same as(filters.power[1]) %}
+                                <span class="badge badge-dark mr-2">Puissance entre {{ filters.power[0] }} et {{ filters.power[1] }} ch</span>
+                            {% endif %}
+
+                            {% if filters.status is not null and filters.status is not same as("")  %}
+                                <span class="badge badge-dark mr-2">Statut : {{ filtersDetails.status.name }}</span>
+                            {% endif %}
                             <a href="{{ path("vehicles_list") }}" class="btn btn-primary">Supprimer les filtres</a>
                         </div>
                     </div>
@@ -38,10 +70,12 @@
                     Véhicules correspondants à la recherche
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-                            <thead>
+                    {% if vehicles|length > 0 %}
+                        <div class="table-responsive">
+                            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                <thead>
                                 <tr>
+                                    <th class="text-center">Photo</th>
                                     <th class="text-center">Immatriculation</th>
                                     <th class="text-center">Marque</th>
                                     <th class="text-center">Modèle</th>
@@ -54,31 +88,46 @@
                                     <th class="text-center">Statut</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">FS-483-AH</td>
-                                    <td class="text-center">Peugeot</td>
-                                    <td class="text-center">207</td>
-                                    <td class="text-center">12/08/2007</td>
-                                    <td class="text-center">1,47 m</td>
-                                    <td class="text-center">1,75 m</td>
-                                    <td class="text-center">1,156 tonnes</td>
-                                    <td class="text-center">112 ch</td>
-                                    <td class="text-center">Nancy</td>
-                                    <td class="text-center"><span class="badge badge-{{ vehicle.status.color }}">{{ vehicle.status.name }}</span></td>
-                                    <td class="text-center">
-                                        <a href="{{ path("vehicles_view") }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ path("vehicles_edit") }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer ce véhicule">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                {% for vehicle in vehicles %}
+                                    <tr>
+                                        <td class="text-center">
+                                            {% if vehicle.photos|length > 0 %}
+                                                <img src="{{ asset("img/vehicles/" ~ vehicle.photos|first) }}" alt="" width="150px" height="auto" class="rounded-circle" />
+                                            {% else %}
+                                                Pas de photo
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">{{ vehicle.numberplate }}</td>
+                                        <td class="text-center">{{ vehicle.brand }}</td>
+                                        <td class="text-center">{{ vehicle.model }}</td>
+                                        <td class="text-center">{{ vehicle.manufactureDate|date("d/m/Y") }}</td>
+                                        <td class="text-center">{{ vehicle.height}} m</td>
+                                        <td class="text-center">{{ vehicle.width}} m</td>
+                                        <td class="text-center">{{ vehicle.weight }} tonnes</td>
+                                        <td class="text-center">{{ vehicle.power }} ch</td>
+                                        <td class="text-center">{{ vehicle.getAgence().getNomAg() }}</td>
+                                        <td class="text-center"><span class="badge badge-{{ vehicle.status.color }}">{{ vehicle.status.name }}</span></td>
+                                        <td class="text-center">
+                                            <a href="{{ path("vehicles_view", {id: vehicle.numberplate}) }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ path("vehicles_edit", {id: vehicle.numberplate}) }}" class="btn btn-primary btn-sm rounded-circle" title="Éditer de ce véhicule">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{{ path("vehicles_disable", {id: vehicle.numberplate}) }}" class="btn btn-danger btn-sm rounded-circle" title="Désactiver ce véhicule">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-center">Aucun véhicule n'est actuellement activé.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -4,19 +4,15 @@
 
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/dropify.min.css") }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/intlTelInput.min.css") }}" />
 {% endblock %}
 
 {% block js %}
+    <script type="text/javascript" src="{{ asset('vendors/js/intlTelInput.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendors/js/dropify.min.js') }}"></script>
-    <script>
-        $('.dropify').dropify({
-            messages: {
-                'default': 'Déposez une photo ou cliquez ici pour en sélectionner une',
-                'replace': 'Déposez une photo ou cliquez ici pour remplacer la photo',
-                'error':   'Une erreur est survenue. Veuillz réessayer plus tard.'
-            }
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('vendors/js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset("js/global_validation.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("js/pages/agences_form.js") }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -32,7 +28,7 @@
             </div>
         </div>
     </div>
-    <form method="post" action="{{ path("agences_edit_submit", {id: agence.id}) }}" enctype="multipart/form-data">
+    <form method="post" action="{{ path("agences_edit_submit", {id: agence.id}) }}" enctype="multipart/form-data" id="agence-form">
         <div class="row">
             <div class="col-md-12">
                 <div class="main-card mb-3 card">
@@ -43,7 +39,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
-                                    <label for="photo" class="">Photo de l'agence</label>
+                                    <label for="photo">Photo de l'agence</label>
                                     <input type="file" name="photo" id="photo" class="dropify" data-height="250" data-show-remove="false" data-default-file="{{ asset("img/agences/" ~ agence.imageAg) }}" />
                                 </div>
                             </div>
@@ -51,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
-                                    <label for="nom" class="">Nom de l'agence</label>
+                                    <label for="nom">Nom de l'agence</label>
                                     <input name="nom" id="nom" placeholder="Nom" type="text" class="form-control" value="{{ agence.getNomAg() }}" />
                                 </div>
                             </div>
@@ -59,7 +55,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
-                                    <label for="adresse" class="">Adresse</label>
+                                    <label for="adresse">Adresse</label>
                                     <input name="adresse" id="adresse" placeholder="Rue, Avenue, Boulevard..." type="text" class="form-control" value="{{ agence.getAdresseAg() }}" />
                                 </div>
                             </div>
@@ -67,7 +63,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="position-relative form-group">
-                                    <label for="adressecomp" class="">Complément d'adresse</label>
+                                    <label for="adressecomp">Complément d'adresse</label>
                                     <input name="adressecomp" id="adressecomp" placeholder="Étage, Immeuble..." type="text" class="form-control" value="{{ agence.getComplementAg() }}" />
                                 </div>
                             </div>
@@ -75,13 +71,13 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
-                                    <label for="codepostal" class="">Code postal</label>
+                                    <label for="codepostal">Code postal</label>
                                     <input name="codepostal" id="codepostal" placeholder="54000" type="number" min="1" class="form-control" value="{{ agence.getCodepostalAg() }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
-                                    <label for="ville" class="">Ville</label>
+                                    <label for="ville">Ville</label>
                                     <input name="ville" id="ville" placeholder="Nancy" type="text" class="form-control" value="{{ agence.getVilleAg() }}" />
                                 </div>
                             </div>
@@ -89,20 +85,14 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
-                                    <label for="tel" class="">Numéro de téléphone</label>
-                                    <div class="input-group">
-                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="tel" name="tel" value="{{ agence.getNumero() }}" />
-                                    </div>
+                                    <label for="tel">Numéro de téléphone</label>
+                                    <input type="tel" id="tel" name="tel" value="{{ agence.getNumero() }}" />
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div class="position-relative form-group">
-                                    <label for="fax" class="">Numéro de fax</label>
-                                    <div class="input-group">
-                                        <div class="input-group-append"><span class="input-group-text">+33</span></div>
-                                        <input placeholder="601234578" type="number" class="form-control" id="fax" name="fax" value="{{ agence.getFaxAg() }}" />
-                                    </div>
+                                    <label for="fax">Numéro de fax</label>
+                                    <input type="tel" id="fax" name="fax" value="{{ agence.getFaxAg() }}" />
                                 </div>
                             </div>
                         </div>

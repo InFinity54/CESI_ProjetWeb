@@ -34,7 +34,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/agents/enable/{id}", name="agents_enable")
+     * @Route("/agents/enable/{id}", name="agents_enable", options={"expose"=true})
      */
     public function agentsEnable(int $id)
     {
@@ -47,7 +47,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/agents/disable/{id}", name="agents_disable")
+     * @Route("/agents/disable/{id}", name="agents_disable", options={"expose"=true})
      */
     public function agentsDisable(int $id)
     {
@@ -89,9 +89,9 @@ class AgentsController extends AbstractController
         $agent = new Agent();
         $agent->setLastname($request->request->get("nom"));
         $agent->setFirstname($request->request->get("prenom"));
-        $agent->setFixe($request->request->get("fixe"));
-        $agent->setMobile($request->request->get("mobile"));
-        $agent->setFax($request->request->get("fax"));
+        $agent->setFixe($request->request->get("fixeFull"));
+        $agent->setMobile($request->request->get("mobileFull"));
+        $agent->setFax($request->request->get("faxFull"));
         $agent->setUsername($username);
         $agent->setPassword($password);
         $agent->setRoles(["ROLE_USER"]);
@@ -99,19 +99,22 @@ class AgentsController extends AbstractController
         $agent->setIsActivated(true);
         $agent->setDateInscription(new DateTime("now"));
 
+        if ($request->files->get("photo"))
+        {
+            $agentphoto = $imageUploader->upload($request->files->get("photo"), $agent->getId());
+
+            if ($agentphoto)
+            {
+                $agent->setPhoto($agentphoto);
+            }
+            else
+            {
+                $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agent.");
+            }
+        }
+
         $this->getDoctrine()->getManager()->persist($agent);
         $this->getDoctrine()->getManager()->flush();
-
-        $agentphoto = $imageUploader->upload($request->files->get("photo"), $agent->getId());
-
-        if ($agentphoto)
-        {
-            $agent->setPhoto($agentphoto);
-        }
-        else
-        {
-            $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agent.");
-        }
 
         $email = (new Swift_Message())
             ->setFrom(["noreply@projetweb.infinity54.fr" => "VGest"])
@@ -137,7 +140,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/agents/view/{id}", name="agents_view")
+     * @Route("/agents/view/{id}", name="agents_view", options={"expose"=true})
      */
     public function agentsView(int $id)
     {
@@ -148,7 +151,7 @@ class AgentsController extends AbstractController
     }
 
     /**
-     * @Route("/agents/edit/{id}", name="agents_edit")
+     * @Route("/agents/edit/{id}", name="agents_edit", options={"expose"=true})
      */
     public function agentsEdit(int $id)
     {
@@ -164,24 +167,28 @@ class AgentsController extends AbstractController
     public function agentsEditSubmit(Request $request, int $id, AgentPictureUploader $imageUploader)
     {
         $agent = $this->getDoctrine()->getRepository(Agent::class)->find($id);
-        $agentphoto = $imageUploader->upload($request->files->get("photo"), $id);
 
         if ($agent)
         {
             $agent->setLastname($request->request->get("nom"));
             $agent->setFirstname($request->request->get("prenom"));
-            $agent->setFixe($request->request->get("fixe"));
-            $agent->setMobile($request->request->get("mobile"));
-            $agent->setFax($request->request->get("fax"));
+            $agent->setFixe($request->request->get("fixeFull"));
+            $agent->setMobile($request->request->get("mobileFull"));
+            $agent->setFax($request->request->get("faxFull"));
             $agent->setEmail($request->request->get("email"));
 
-            if ($agentphoto)
+            if (($request->files->get("photo")))
             {
-                $agent->setPhoto($agentphoto);
-            }
-            else
-            {
-                $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agence.");
+                $agentphoto = $imageUploader->upload($request->files->get("photo"), $id);
+
+                if ($agentphoto)
+                {
+                    $agent->setPhoto($agentphoto);
+                }
+                else
+                {
+                    $this->addFlash("warning", "Une erreur est survenue durant l'envoi de la photo de l'agent.");
+                }
             }
 
             $this->getDoctrine()->getManager()->persist($agent);

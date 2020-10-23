@@ -19,12 +19,56 @@ class VehiclesController extends AbstractController
     public function vehiclesList()
     {
         $manager = $this->getDoctrine()->getManager();
-        $vehicles = $manager->getRepository(Vehicle::class)->findBy(["isActivated" => true]);
         $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
+        $brands = $manager->getRepository(Vehicle::class)->getBrands();
+        $models = $manager->getRepository(Vehicle::class)->getModels();
+        $minmanufacturedate = $manager->getRepository(Vehicle::class)->getOldestManufactureDate();
+        $minweight = $manager->getRepository(Vehicle::class)->getLowestWeight();
+        $maxweight = $manager->getRepository(Vehicle::class)->getHighestWeight();
+        $minpower = $manager->getRepository(Vehicle::class)->getLowestPower();
+        $maxpower = $manager->getRepository(Vehicle::class)->getHighestPower();
+        $agences = $this->getDoctrine()->getRepository(Agence::class)->findBy([], ["nom_ag" => "ASC"]);
+        $status = $this->getDoctrine()->getRepository(Status::class)->findBy([], ["name" => "ASC"]);
 
         return $this->render('content/vehicles/index.html.twig', [
+            "agences" => $agences,
+            "brands" => $brands,
+            "models" => $models,
+            "agences" => $agences,
+            "oldest_manufacture_date" => $minmanufacturedate,
+            "weight" => [
+                "min" => $minweight,
+                "max" => $maxweight
+            ],
+            "power" => [
+                "min" => $minpower,
+                "max" => $maxpower
+            ],
+            "status" => $status
+        ]);
+    }
+
+    /**
+     * @Route("/vehicles/search", name="vehicles_list_search")
+     */
+    public function vehiclesListSearch(Request $request)
+    {
+        $filters = $request->request->all();
+        $filters["weight"] = explode(",", $filters["weight"]);
+        $filters["power"] = explode(",", $filters["power"]);
+
+        $manager = $this->getDoctrine()->getManager();
+        $vehicles = $manager->getRepository(Vehicle::class)->findVehicles($filters, true);
+        $filter_agence = $manager->getRepository(Agence::class)->find($filters["agence"]);
+        $filter_status = $manager->getRepository(Status::class)->find($filters["status"]);
+
+        return $this->render('content/vehicles/search.html.twig', [
             "vehicles" => $vehicles,
-            "agences" => $agences
+            "filters" => $filters,
+            "filtersDetails" => [
+                "agence" => $filter_agence,
+                "status" => $filter_status
+            ]
         ]);
     }
 
@@ -34,25 +78,61 @@ class VehiclesController extends AbstractController
     public function vehiclesListDisabled()
     {
         $manager = $this->getDoctrine()->getManager();
-        $vehicles = $manager->getRepository(Vehicle::class)->findBy(["isActivated" => false]);
         $agences = $this->getDoctrine()->getRepository(Agence::class)->findAll();
+        $brands = $manager->getRepository(Vehicle::class)->getBrands();
+        $models = $manager->getRepository(Vehicle::class)->getModels();
+        $minmanufacturedate = $manager->getRepository(Vehicle::class)->getOldestManufactureDate();
+        $minweight = $manager->getRepository(Vehicle::class)->getLowestWeight();
+        $maxweight = $manager->getRepository(Vehicle::class)->getHighestWeight();
+        $minpower = $manager->getRepository(Vehicle::class)->getLowestPower();
+        $maxpower = $manager->getRepository(Vehicle::class)->getHighestPower();
+        $agences = $this->getDoctrine()->getRepository(Agence::class)->findBy([], ["nom_ag" => "ASC"]);
+        $status = $this->getDoctrine()->getRepository(Status::class)->findBy([], ["name" => "ASC"]);
 
-        return $this->render('content/vehicles/disabled.html.twig', [
-            "vehicles" => $vehicles,
-            "agences" => $agences
+        return $this->render('content/vehicles/index.html.twig', [
+            "agences" => $agences,
+            "brands" => $brands,
+            "models" => $models,
+            "agences" => $agences,
+            "oldest_manufacture_date" => $minmanufacturedate,
+            "weight" => [
+                "min" => $minweight,
+                "max" => $maxweight
+            ],
+            "power" => [
+                "min" => $minpower,
+                "max" => $maxpower
+            ],
+            "status" => $status
         ]);
     }
 
     /**
-     * @Route("/vehicles/search", name="vehicles_list_search")
+     * @Route("/vehicles/search", name="vehicles_list_disabled_search")
      */
-    public function vehiclesListSearch()
+    public function vehiclesListDisabledSearch(Request $request)
     {
-        return $this->render('content/vehicles/search.html.twig', []);
+        $filters = $request->request->all();
+        $filters["weight"] = explode(",", $filters["weight"]);
+        $filters["power"] = explode(",", $filters["power"]);
+
+        $manager = $this->getDoctrine()->getManager();
+        $vehicles = $manager->getRepository(Vehicle::class)->findVehicles($filters, false);
+        $filter_agence = $manager->getRepository(Agence::class)->find($filters["agence"]);
+        $filter_status = $manager->getRepository(Status::class)->find($filters["status"]);
+
+        return $this->render('content/vehicles/search.html.twig', [
+            "vehicles" => $vehicles,
+            "filters" => $filters,
+            "filtersDetails" => [
+                "agence" => $filter_agence,
+                "status" => $filter_status
+            ]
+        ]);
     }
 
     /**
-     * @Route("/vehicles/enable/{id}", name="vehicles_enable")
+     * @Route("/vehicles/enable/{id}", name="vehicles_enable", options={"expose"=true})
      */
     public function vehiclesEnable(string $id)
     {
@@ -86,7 +166,7 @@ class VehiclesController extends AbstractController
     }
 
     /**
-     * @Route("/vehicles/disable/{id}", name="vehicles_disable")
+     * @Route("/vehicles/disable/{id}", name="vehicles_disable", options={"expose"=true})
      */
     public function vehiclesDisable(string $id)
     {
@@ -247,7 +327,7 @@ class VehiclesController extends AbstractController
     }
 
     /**
-     * @Route("/vehicles/view/{id}", name="vehicles_view")
+     * @Route("/vehicles/view/{id}", name="vehicles_view", options={"expose"=true})
      */
     public function vehiclesView(string $id)
     {
@@ -267,7 +347,7 @@ class VehiclesController extends AbstractController
     }
 
     /**
-     * @Route("/vehicles/edit/{id}", name="vehicles_edit")
+     * @Route("/vehicles/edit/{id}", name="vehicles_edit", options={"expose"=true})
      */
     public function vehiclesEdit(string $id)
     {
