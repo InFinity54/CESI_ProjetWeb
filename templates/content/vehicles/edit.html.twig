@@ -84,7 +84,7 @@
                                         <select type="select" id="agence" name="agence" class="custom-select" required>
                                             <option value="" hidden>{{ vehicle.getAgence().getNomAg() }}</option>
                                             {%for agence in agences %}
-                                                <option value="{{ agence.getId() }}">{{ agence.getNomAg() }}</option>
+                                                <option value="{{ agence.getId() }}"{% if vehicle.getAgence().getId() is same as(agence.id) %}selected{% endif %}>{{ agence.getNomAg() }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>

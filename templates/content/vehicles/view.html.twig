@@ -3,7 +3,8 @@
 {% block title %}Véhicules > Détail du véhicule immatriculé FS-483-AH{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/fotorama.css") }}" />
+   
+
 {% endblock %}
 
 {% block js %}
@@ -17,7 +18,7 @@
                 <div>
                     Détail d'un véhicule
                     <div class="page-title-subheading">
-                        Peugeot 207 | Immatriculation : {{ vehicle.numberplate }}
+                        {{ vehicle.brand }} {{ vehicle.model }} | Immatriculation : {{ vehicle.numberplate }}
                     </div>
                 </div>
             </div>
@@ -83,6 +84,47 @@
                                 <br />
                                 Puissance : {{ vehicle.power }} ch
                             </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Historique du véhicule
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Modifié par</th>
+                                    <th class="text-center">Date et heure modification</th>
+                                    <th class="text-center">Nature modification</th>
+                                    <th class="text-center">Avant modification</th>
+                                    <th class="text-center">Après modification</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for historique in vehicle.historiques %}
+                                    <tr>
+                                        <td class="text-center">{{ historique.agent.username }}</td>
+                                        <td class="text-center">{{ historique.dateheureModif|date("d/m/Y H:i") }}</td>
+                                        <td class="text-center">{{ historique.natureModif }}</td>
+                                        <td class="text-center">{{ historique.ancienneValeur }}</td>
+                                        <td class="text-center">{{ historique.nouvelleValeur}}</td>
+                                        <td class="text-center">
+                                            <a href="{{ path("vehicles_historique", {id: historique.id}) }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

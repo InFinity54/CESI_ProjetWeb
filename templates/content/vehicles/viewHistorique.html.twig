@@ -1,0 +1,83 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Véhicules > Historique du véhicule {{ historique.getVehicle().numberplate }}{% endblock %}
+
+{% block css %}
+   
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset("vendors/js/fotorama.js") }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    Détails de l'historique n°{{ historique.id }}
+                    <div class="page-title-subheading">
+                        {{ historique.getVehicle().brand }} {{ historique.getVehicle().model }} | Immatriculation : {{ historique.getVehicle().numberplate }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Information 
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 mb-0">
+                            <p>
+                                Modifié par l'agent : {{ historique.agent.username }}
+                                <br />
+                                Date et heure de modification : {{ historique.dateheureModif|date("d/m/Y H:i") }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Modification 
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <p>
+                                Nature de la modification : {{ historique.natureModif }}
+                                <br />
+                                Ancienne valeur : {{ historique.ancienneValeur }}
+                                <br />
+                                Nouvelle valeur : {{ historique.nouvelleValeur }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Description 
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <p>
+                                {{ historique.descriptionModif }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
