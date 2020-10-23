@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Status;
 use App\Entity\Agence;
 use App\Entity\Vehicle;
+use App\Entity\Historique;
 use App\Service\VehiclePictureUploader;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -140,7 +141,20 @@ class VehiclesController extends AbstractController
 
         if ($vehicle)
         {
+            $historique = new Historique();
+            $historique->setAgent($this->getUser());
+            $historique->setVehicle($vehicle);
+            $historique->setDateheureModif(new \DateTime('now'));
+            $historique->setNatureModif("Activation du véhicule");
+            $historique->setDescriptionModif("Le véhicule peut être louer, préter ou en démonstration.");
+            $historique->setAncienneValeur("Désactivé");
+            $historique->setNouvelleValeur("Activé");
+            
+            $manager->persist($historique);
+            $manager->flush();
+
             $vehicle->setIsActivated(true);
+
             $manager->persist($vehicle);
             $manager->flush();
             $this->addFlash("success", "Le véhicule a été activé.");
@@ -161,6 +175,19 @@ class VehiclesController extends AbstractController
 
         if ($vehicle)
         {
+            $historique = new Historique();
+            $historique->setAgent($this->getUser());
+            $historique->setVehicle($vehicle);
+            $historique->setDateheureModif(new \DateTime('now'));
+            $historique->setNatureModif("Désactivation du véhicule");
+            $historique->setDescriptionModif("Le véhicule ne peut plus être louer, préter ou en démonstration.");
+            $historique->setAncienneValeur("Activé");
+            $historique->setNouvelleValeur("Désactivé");
+            
+            $manager->persist($historique);
+            $manager->flush();
+
+
             $vehicle->setIsActivated(false);
             $manager->persist($vehicle);
             $manager->flush();
@@ -228,6 +255,16 @@ class VehiclesController extends AbstractController
             }
         }
 
+        $historique = new Historique();
+        $historique->setAgent($this->getUser());
+        $historique->setVehicle($vehicle);
+        $historique->setDateheureModif(new \DateTime('now'));
+        $historique->setNatureModif("Ajout du véhicule");
+        $historique->setDescriptionModif("Le véhicule a été ajouté. Il peut être louer, préter ou en démonstration.");
+            
+        $manager->persist($historique);
+        $manager->flush();
+
         $this->addFlash("success", "Le véhicule a bien été ajouté.");
         return $this->redirectToRoute("vehicles_view", [
             "id" => $vehicle->getNumberplate()
@@ -260,6 +297,16 @@ class VehiclesController extends AbstractController
 
                 if ($vehiclephoto)
                 {
+                    $historique = new Historique();
+                    $historique->setAgent($this->getUser());
+                    $historique->setVehicle($vehicle);
+                    $historique->setDateheureModif(new \DateTime('now'));
+                    $historique->setNatureModif("Ajout de photo du véhicule");
+                    $historique->setDescriptionModif("Une photo du véhicule a été ajoutée.");      
+
+                    $manager->persist($historique);
+                    $manager->flush();
+
                     $photos = $vehicle->getPhotos();
                     $photos[] = $vehiclephoto;
                     $vehicle->setPhotos($photos);
@@ -333,15 +380,157 @@ class VehiclesController extends AbstractController
 
         if ($vehicle)
         {
-            $vehicle->setBrand($request->request->get("marque"));
-            $vehicle->setModel($request->request->get("modele"));
-            $vehicle->setManufactureDate(new DateTime($request->request->get("datefabrication")));
-            $vehicle->setHeight($request->request->get("hauteur"));
-            $vehicle->setWidth($request->request->get("largeur"));
-            $vehicle->setWeight($request->request->get("poids"));
-            $vehicle->setPower($request->request->get("puissance"));
-            $vehicle->setStatus($manager->getRepository(Status::class)->find($request->request->get("statut")));
-            $vehicle->setAgence($manager->getRepository(Agence::class)->find($request->request->get("agence")));
+
+            if ($request->request->get("marque") != $vehicle->getBrand())
+            {
+                $historique = new Historique();
+                $historique->setAgent($this->getUser());
+                $historique->setVehicle($vehicle);
+                $historique->setDateheureModif(new \DateTime('now'));
+                $historique->setNatureModif("Modification");
+                $historique->setDescriptionModif("La marque de la voiture a été modifié.");
+                $historique->setAncienneValeur($vehicle->getBrand());
+                $historique->setNouvelleValeur($request->request->get("marque"));          
+    
+                $manager->persist($historique);
+                $manager->flush();
+
+                $vehicle->setBrand($request->request->get("marque"));
+            }
+            if ($request->request->get("modele") != $vehicle->getModel())
+            {
+                $historique = new Historique();
+                $historique->setAgent($this->getUser());
+                $historique->setVehicle($vehicle);
+                $historique->setDateheureModif(new \DateTime('now'));
+                $historique->setNatureModif("Modification");
+                $historique->setDescriptionModif("Le modèle de la voiture a été modifié.");
+                $historique->setAncienneValeur($vehicle->getModel());
+                $historique->setNouvelleValeur($request->request->get("modele"));          
+    
+                $manager->persist($historique);
+                $manager->flush();
+
+                $vehicle->setModel($request->request->get("modele"));
+            }
+            if ($request->request->get("datefabrication") != $vehicle->getManufactureDate())
+            {
+                $historique = new Historique();
+                $historique->setAgent($this->getUser());
+                $historique->setVehicle($vehicle);
+                $historique->setDateheureModif(new \DateTime('now'));
+                $historique->setNatureModif("Modification");
+                $historique->setDescriptionModif("La date de fabrication a été modifié.");
+                $historique->setAncienneValeur($vehicle->getManufactureDate()->format("Y-m-d"));
+                $historique->setNouvelleValeur($request->request->get("datefabrication"));          
+    
+                $manager->persist($historique);
+                $manager->flush();
+
+                $vehicle->setManufactureDate(new DateTime($request->request->get("datefabrication")));
+            }
+            if ($request->request->get("hauteur") != $vehicle->getHeight())
+            {
+                $historique = new Historique();
+                $historique->setAgent($this->getUser());
+                $historique->setVehicle($vehicle);
+                $historique->setDateheureModif(new \DateTime('now'));
+                $historique->setNatureModif("Modification");
+                $historique->setDescriptionModif("La hauteur du véhicule a été modifié.");
+                $historique->setAncienneValeur($vehicle->getHeight());
+                $historique->setNouvelleValeur($request->request->get("hauteur"));          
+    
+                $manager->persist($historique);
+                $manager->flush();
+
+                $vehicle->setHeight($request->request->get("hauteur"));
+            }
+            if ($request->request->get("largeur") != $vehicle->getWidth())
+            {
+                $historique = new Historique();
+                $historique->setAgent($this->getUser());
+                $historique->setVehicle($vehicle);
+                $historique->setDateheureModif(new \DateTime('now'));
+                $historique->setNatureModif("Modification");
+                $historique->setDescriptionModif("La largeur du véhicule a été modifié.");
+                $historique->setAncienneValeur($vehicle->getWidth());
+                $historique->setNouvelleValeur($request->request->get("largeur"));          
+    
+                $manager->persist($historique);
+                $manager->flush();
+
+                $vehicle->setWidth($request->request->get("largeur"));
+            }
+            if ($request->request->get("poids") != $vehicle->getWeight())
+            {
+                $historique = new Historique();
+                $historique->setAgent($this->getUser());
+                $historique->setVehicle($vehicle);
+                $historique->setDateheureModif(new \DateTime('now'));
+                $historique->setNatureModif("Modification");
+                $historique->setDescriptionModif("Le poids du véhicule a été modifié.");
+                $historique->setAncienneValeur($vehicle->getWeight());
+                $historique->setNouvelleValeur($request->request->get("poids"));          
+    
+                $manager->persist($historique);
+                $manager->flush();
+
+                $vehicle->setWeight($request->request->get("poids"));
+            }
+            if ($request->request->get("puissance") != $vehicle->getPower())
+            {
+                $historique = new Historique();
+                $historique->setAgent($this->getUser());
+                $historique->setVehicle($vehicle);
+                $historique->setDateheureModif(new \DateTime('now'));
+                $historique->setNatureModif("Modification");
+                $historique->setDescriptionModif("La puissance du véhicule a été modifié.");
+                $historique->setAncienneValeur($vehicle->getPower());
+                $historique->setNouvelleValeur($request->request->get("puissance"));          
+    
+                $manager->persist($historique);
+                $manager->flush();
+
+                $vehicle->setPower($request->request->get("puissance"));
+            }
+            if ($request->request->get("statut") != $vehicle->getStatus()->getId())
+            {
+                $statut = $manager->getRepository(Status::class)->find($request->request->get("statut"));
+
+                $historique = new Historique();
+                $historique->setAgent($this->getUser());
+                $historique->setVehicle($vehicle);
+                $historique->setDateheureModif(new \DateTime('now'));
+                $historique->setNatureModif("Modification");
+                $historique->setDescriptionModif("Le statut du véhicule a été modifié.");
+                $historique->setAncienneValeur($vehicle->getStatus()->getName());
+                $historique->setNouvelleValeur($statut->getName());          
+    
+                $manager->persist($historique);
+                $manager->flush();
+
+                $vehicle->setStatus($manager->getRepository(Status::class)->find($request->request->get("statut")));
+            }
+            if ($request->request->get("agence") != $vehicle->getAgence()->getId())
+            {
+                $agencehisto = $manager->getRepository(Agence::class)->find($request->request->get("agence"));
+
+                $historique = new Historique();
+                $historique->setAgent($this->getUser());
+                $historique->setVehicle($vehicle);
+                $historique->setDateheureModif(new \DateTime('now'));
+                $historique->setNatureModif("Modification");
+                $historique->setDescriptionModif("L'agence où se situer le véhicule a été modifié.");
+                $historique->setAncienneValeur($vehicle->getAgence()->getNomAg());
+                $historique->setNouvelleValeur($agencehisto->getNomAg());          
+    
+                $manager->persist($historique);
+                $manager->flush();
+ 
+                $vehicle->setAgence($manager->getRepository(Agence::class)->find($request->request->get("agence")));
+            }
+
+
 
             if ($request->files->get("photo") !== null)
             {
@@ -349,6 +538,15 @@ class VehiclesController extends AbstractController
 
                 if ($vehiclephoto)
                 {
+                    $historique = new Historique();
+                    $historique->setAgent($this->getUser());
+                    $historique->setVehicle($vehicle);
+                    $historique->setDateheureModif(new \DateTime('now'));
+                    $historique->setNatureModif("Modification des photos du véhicule");
+                    $historique->setDescriptionModif("Les photos concernant le véhicule ont été modifiées.");      
+
+                    $manager->persist($historique);
+                    $manager->flush();
                     $photos = $vehicle->getPhotos();
                     $photos[] = $vehiclephoto;
                     $vehicle->setPhotos($photos);
@@ -371,6 +569,25 @@ class VehiclesController extends AbstractController
         }
 
         $this->addFlash("danger", "Le véhicule n'a pas été trouvé. Édition impossible.");
+        return $this->redirectToRoute("vehicles_list");
+    }
+
+    /**
+     * @Route("/vehicles/view/historique/{id}", name="vehicles_historique")
+     */
+    public function vehiclesHistorique(string $id)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $historique = $manager->getRepository(Historique::class)->find($id);
+
+        if ($historique)
+        {
+            return $this->render('content/vehicles/viewHistorique.html.twig', [
+                "historique" => $historique
+            ]);
+        }
+
+        $this->addFlash("danger", "L'historique du véhicule n'a pas été trouvé. Affichage impossible.");
         return $this->redirectToRoute("vehicles_list");
     }
 }
