@@ -3,8 +3,7 @@
 {% block title %}Véhicules > Détail du véhicule immatriculé FS-483-AH{% endblock %}
 
 {% block css %}
-   
-
+    <link rel="stylesheet" type="text/css" href="{{ asset("vendors/css/fotorama.css") }}" />
 {% endblock %}
 
 {% block js %}
@@ -33,7 +32,7 @@
                 <div class="card-body">
                     <div class="fotorama w-100" data-width="100%" data-height="{% if vehicle.photos|length > 1 %}300{% else %}200{% endif %}" data-allowfullscreen="true" data-nav="thumbs">
                         {% for photo in vehicle.photos %}
-                            <img src="{{ asset("img/vehicles/" ~ photo) }}" alt="" />
+                            <img src="{{ asset("img/vehicles/" ~ photo) }}" alt="" width="100%" height="auto" />
                         {% endfor %}
                     </div>
                     <a href="{{ path("vehicles_addphoto", {id: vehicle.numberplate}) }}" class="btn btn-block btn-primary">Ajouter une photo</a>
