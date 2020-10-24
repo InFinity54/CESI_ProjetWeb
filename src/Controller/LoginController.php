@@ -13,10 +13,9 @@ class LoginController extends AbstractController
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser())
-        {
+        if ($this->getUser()) {
             $this->addFlash("warning", "Vous êtes déjà connecté(e).");
             return $this->redirectToRoute('homepage');
         }
@@ -33,7 +32,7 @@ class LoginController extends AbstractController
     /**
      * @Route("/logout", name="logout")
      */
-    public function logout()
+    public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
