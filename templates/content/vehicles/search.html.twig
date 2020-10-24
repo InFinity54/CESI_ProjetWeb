@@ -108,7 +108,17 @@
                                         <td class="text-center">{{ vehicle.weight }} tonnes</td>
                                         <td class="text-center">{{ vehicle.power }} ch</td>
                                         <td class="text-center">{{ vehicle.getAgence().getNomAg() }}</td>
-                                        <td class="text-center"><span class="badge badge-{{ vehicle.status.color }}">{{ vehicle.status.name }}</span></td>
+                                        <td class="text-center">
+                                            {% if vehicle.status.id is not same as(1) %}
+                                                <span class="badge badge-{{ vehicle.status.color }}">{{ vehicle.status.name }}</span>
+                                            {% else %}
+                                                {% if vehicle.isActivated %}
+                                                    <span class="badge badge-{{ vehicle.status.color }}">{{ vehicle.status.name }}</span>
+                                                {% else %}
+                                                    <span class="badge badge-dark">Indisponible</span>
+                                                {% endif %}
+                                            {% endif %}
+                                        </td>
                                         <td class="text-center">
                                             <a href="{{ path("vehicles_view", {id: vehicle.numberplate}) }}" class="btn btn-primary btn-sm rounded-circle" title="Voir le détail de ce véhicule">
                                                 <i class="fas fa-eye"></i>

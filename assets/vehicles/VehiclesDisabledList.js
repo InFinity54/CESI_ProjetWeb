@@ -44,6 +44,21 @@ class VehiclesDisabledList extends React.Component {
                     const enableLink = Routing.generate('vehicles_enable', { id: item.numberplate }, true);
                     const vehiclePhotos = (item.photos + '').split(",");
                     const vehicleManufactureDate = item.manufacture_date.substring(8, 10) + "/" + item.manufacture_date.substring(5, 7) + "/" + item.manufacture_date.substring(0, 4);
+                    let statusColor = "";
+                    let statusText = "";
+
+                    if (item.status.id !== "1") {
+                        statusColor = item.status.color;
+                        statusText = item.status.name;
+                    } else {
+                        if (item.isActivated) {
+                            statusColor = item.status.color;
+                            statusText = item.status.name;
+                        } else {
+                            statusColor = "dark";
+                            statusText = "Indisponible";
+                        }
+                    }
 
                     return /*#__PURE__*/React.createElement("tr", { key: index }, /*#__PURE__*/React.createElement("td", {
                         className: "text-center"
@@ -74,8 +89,8 @@ class VehiclesDisabledList extends React.Component {
                     }, item.agence.nom_ag), /*#__PURE__*/React.createElement("td", {
                         className: "text-center"
                     }, /*#__PURE__*/React.createElement("span", {
-                        className: 'badge badge-' + item.status.color
-                    }, item.status.name)), /*#__PURE__*/React.createElement("td", {
+                        className: 'badge badge-' + statusColor
+                    }, statusText)), /*#__PURE__*/React.createElement("td", {
                         className: "text-center"
                     }, /*#__PURE__*/React.createElement("a", {
                         href: viewLink,
