@@ -37,6 +37,23 @@ class ProfileController extends AbstractController
     }
 
     /**
+     * @Route("/profile/edit", name="profile_edit")
+     */
+    public function profileEdit(): Response
+    {
+        if (!$this->getUser()) {
+            $this->addFlash("warning", "Vous n'êtes pas authentifié.");
+            return $this->redirectToRoute("login");
+        }
+
+        $user = $this->getDoctrine()->getRepository(Agent::class)->findBy(["username" => $this->getUser()->getUsername()])[0];
+
+        return $this->render('content/profile/edit.html.twig', [
+            "profile" => $user
+        ]);
+    }
+
+    /**
      * @Route("/profile/edit/submit", name="profile_edit_submit")
      * @param Request $request
      * @param AgentPictureUploader $imageUploader
