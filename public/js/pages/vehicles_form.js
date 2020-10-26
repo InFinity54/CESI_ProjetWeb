@@ -8,7 +8,7 @@ $(document).ready(function() {
     });
 
     $.validator.addMethod("validnumberplate", function(value, element) {
-        return this.optional(element) || /^([A-Z]{2})-([0-9]{3})-([A-Z]{2})\s]+$/i.test(value);
+        return this.optional(element) || /^([A-Z]{2})-([0-9]{3})-([A-Z]{2})/g.test(value);
     }, "Veuillez saisir un numéro d'immatriculation valide.");
 
     $("#vehicle-form").validate({
