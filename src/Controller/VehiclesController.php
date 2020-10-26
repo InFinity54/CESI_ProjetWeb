@@ -493,7 +493,7 @@ class VehiclesController extends AbstractController
                 $vehicle->setModel($request->request->get("modele"));
             }
 
-            if ($request->request->get("datefabrication") != $vehicle->getManufactureDate()) {
+            if ($request->request->get("datefabrication") != $vehicle->getManufactureDate()->format("Y-m-d")) {
                 $historique = new Historique();
                 $historique->setAgent($this->getUser());
                 $historique->setVehicle($vehicle);
@@ -599,7 +599,7 @@ class VehiclesController extends AbstractController
                 $historique->setVehicle($vehicle);
                 $historique->setDateheureModif(new \DateTime('now'));
                 $historique->setNatureModif("Modification");
-                $historique->setDescriptionModif("L'agence où se situer le véhicule a été modifié.");
+                $historique->setDescriptionModif("L'agence où se situe le véhicule a été modifié.");
                 $historique->setAncienneValeur($vehicle->getAgence()->getNomAg());
                 $historique->setNouvelleValeur($agencehisto->getNomAg());
 
